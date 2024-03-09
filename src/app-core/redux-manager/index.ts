@@ -3,7 +3,7 @@ import storage from 'redux-persist/lib/storage';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { persistReducer } from 'redux-persist';
 import rootReducer from './rootReducer';
-import { fetchCollection } from '../services';
+import { fetchMiddleware } from '../../services';
 
 const persistConfig = {
     key: 'root',
@@ -17,7 +17,7 @@ const store = configureStore({
     reducer: persistedReducer,
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(
-            fetchCollection.map(item => item.middleware)),
+            fetchMiddleware.map(item => item.middleware)),
     devTools: true,
 });
 setupListeners(store.dispatch);

@@ -1,4 +1,8 @@
-import { exampleApi } from "./example";
-export const fetchCollection = [
-    exampleApi
+import { authenApi } from "./authen";
+
+export const fetchReducer = {
+    [authenApi.reducerPath]: authenApi.reducer
+}
+export const fetchMiddleware = [
+    authenApi
 ]
