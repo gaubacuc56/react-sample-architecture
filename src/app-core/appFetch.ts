@@ -10,44 +10,44 @@ import {
   QueryDefinition,
   createApi,
   fetchBaseQuery,
-  ApiEndpointQuery,
-  EndpointDefinition,
 } from "@reduxjs/toolkit/query/react";
 import { HttpProtocol, HttpProtocolType } from "./http";
 import { baseUrl } from "../constant/baseUrl";
-type EndpointType<T, R> =
-   QueryDefinition<
-      T,
-      BaseQueryFn<
-        string | FetchArgs,
-        unknown,
-        FetchBaseQueryError,
-        {},
-        FetchBaseQueryMeta
-      >,
-      never,
-      R,
-      string
-    >
-  | MutationDefinition<
-      T,
-      BaseQueryFn<
-        string | FetchArgs,
-        unknown,
-        FetchBaseQueryError,
-        {},
-        FetchBaseQueryMeta
-      >,
-      never,
-      R,
-      string
-    >;
+
+type IQuery<T, R> = QueryDefinition<
+  T,
+  BaseQueryFn<
+    string | FetchArgs,
+    unknown,
+    FetchBaseQueryError,
+    {},
+    FetchBaseQueryMeta
+  >,
+  never,
+  R,
+  string
+>;
+{
+}
+type IMutation<T, R> = MutationDefinition<
+  T,
+  BaseQueryFn<
+    string | FetchArgs,
+    unknown,
+    FetchBaseQueryError,
+    {},
+    FetchBaseQueryMeta
+  >,
+  never,
+  R,
+  string
+>;
 export interface RequestOptions<T = unknown, R = unknown> {
   customBaseUrl?: string;
   url: string;
   method: HttpProtocolType;
   body?: T;
-  responseType: R
+  responseType: R;
 }
 
 type RequestConfig = Record<string, (data?: any) => RequestOptions>;
@@ -58,20 +58,26 @@ export const appFetch = (
   customBaseQuery?: string
 ) => {
   const url = customBaseQuery ?? baseUrl;
-  const api = createApi({
+  return createApi({
     reducerPath: reducerPath,
     baseQuery: fetchBaseQuery({ baseUrl: url }),
-    endpoints: (builder) =>  {
-   /*    const endpoints: Record<string, EndpointDefinition<any, any, any, any>>= {};
+    endpoints: (builder) => {
+      const endpoints: Record<string, IQuery<any, any> | IMutation<any, any>> =
+        {};
       for (const [endpointName, requestFn] of Object.entries(request)) {
         const { url, method, body, responseType } = requestFn();
         if (method === HttpProtocol.get) {
-          endpoints[endpointName] =  builder.query({
+          endpoints[endpointName] = builder.query<
+            typeof responseType,
+            typeof body
+          >({
             query: () => `${reducerPath}/${url}`,
           });
-
         } else {
-          endpoints[endpointName] = builder.mutation({
+          endpoints[endpointName] = builder.mutation<
+            typeof responseType,
+            typeof body
+          >({
             query: (data) => ({
               url: `${reducerPath}/${url}`,
               method,
@@ -80,7 +86,7 @@ export const appFetch = (
           });
         }
       }
-      return endpoints */
+      return endpoints;
     },
   });
 };
