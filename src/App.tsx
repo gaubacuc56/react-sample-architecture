@@ -1,22 +1,20 @@
 import { useEffect } from "react";
-import { loginService, useGetUserQuery } from "./services/authen";
-
+import {  useGetUserQuery, useLoginMutation, ILoginResponse, IUserResponse } from "./services/authen";
 const user = { username: "kminchelle", password: "0lelplR" };
-interface IUserResponse {
-  token: string
-}
-function App() {
-  const [login, {data}] = loginService<IUserResponse>();
-  const {data: userData} = useGetUserQuery<IUserResponse>(user);
 
+function App() {
+  const [login, {data: loginData}] = useLoginMutation<ILoginResponse>();  
+  
+  const { data: userData } = useGetUserQuery<IUserResponse>(user);
 
   useEffect(() => {
      login(user)
-  }, []);
+  }, [login]);
 
   useEffect(() => {
-    console.log('data:', data)
-  }, [data])
+    console.log('data:', userData)
+    console.log('loginData:', loginData)
+  }, [loginData, userData])
 
   return (
     <>

@@ -1,27 +1,34 @@
-import { appFetch } from "../app-core/appFetch";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {  appFetch } from "../app-core/appFetch";
+// import { HttpProtocol } from "../app-core/http";
 
-interface IUser {
-  username: string,
-  password: string
+// interface IUser {
+//   username: string,
+//   password: string
+// }
+export interface IUserResponse {
+  token: string
+}
+export interface ILoginResponse {
+  token: string
 }
 
-export const authenApi = appFetch(
-  'auth', 
-  {
-    login: (data: IUser) => ({
-      url: 'login',
-      method: "POST",
-      body: data
-    }),
-    getUser: () => ({
-      url: 'getUser',
-      method: 'GET',
-    }),
-  }
-);
 
-// Destructure the generated hooks
-export const { useLoginMutation, useGetUserQuery } = authenApi;
-// Export the hooks
-export const loginService = useLoginMutation;
-export const getUserService = useGetUserQuery;
+export const authApi = appFetch('auth', {
+  login: (data: string)    => ({
+    url: 'login',
+    method: 'POST',
+    body: data,
+    responseType: {} as ILoginResponse
+  }),
+  getUser: () => ({
+    url: 'getUser',
+    method: 'GET',
+    responseType: {} as IUserResponse
+  }),
+});
+export const {useLoginMutation, useGetUserQuery} = authApi;
+/*
+request: RequestConfig<T, R>
+request: (data?: T) => 
+*/
