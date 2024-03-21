@@ -3,7 +3,7 @@
  * @example
  * import exampleReducer from "example/example.slices"
  */
-import authReducer from "./features/auth/auth.slice"
+import authReducer from "./auth/auth.slice"
 
 export const storeCollection = {
     authReducer: authReducer

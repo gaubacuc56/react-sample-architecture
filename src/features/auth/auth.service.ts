@@ -1,8 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQuery } from '../../services';
+import { baseQuery } from '../../app-core/redux-manager/baseQuery';
 
 import { ILoginRequest } from '../../dtos/request/auth.request';
 import { ILoginResponse } from '../../dtos/response/auth.response';
+import { HttpProtocol } from '../../app-core/http';
 
 export const authService = createApi({
     reducerPath: 'authService',
@@ -11,7 +12,7 @@ export const authService = createApi({
         login: builder.mutation<ILoginResponse, ILoginRequest>({
             query: (data: ILoginRequest) => ({
                 url: `auth/login`,
-                method: 'POST',
+                method: HttpProtocol.POST,
                 body: data
             }),
         }),

@@ -4,7 +4,7 @@ function App() {
   const [login, {data: loginData}] = useLoginMutation();  
   
   useEffect(() => {
-     login({username: '', password: ''})
+     login({username: 'kminchelle', password: '0lelplR'})
   }, [login]);
 
   useEffect(() => {

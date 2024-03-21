@@ -59,12 +59,10 @@ export enum HttpStatus {
   LOOP_DETECTED = 508,
   NETWORK_AUTHENTICATION_REQUIRED = 511,
 }
-export type HttpProtocolType = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
-
-export const HttpProtocol = {
-  get: "GET",
-  post: "POST",
-  put: "PUT",
-  patch: "PATCH",
-  delete: "DELETE",
-} as const;
+export enum HttpProtocol {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  PATCH = "PATCH",
+  DELETE = "DELETE",
+}

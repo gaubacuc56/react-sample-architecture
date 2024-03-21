@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
-import { fetchReducer } from '../../services';
+import { fetchReducer } from '../../features/services';
 
-import { storeCollection } from '../../store';
+import { storeCollection } from '../../features/store';
 
 const reducerConfiguration = {
     ...storeCollection,
