@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 export enum HttpStatus {
   CONTINUE = 100,
   SWITCHING_PROTOCOLS = 101,
@@ -59,6 +61,7 @@ export enum HttpStatus {
   LOOP_DETECTED = 508,
   NETWORK_AUTHENTICATION_REQUIRED = 511,
 }
+
 export enum HttpProtocol {
   GET = "GET",
   POST = "POST",
@@ -66,3 +69,28 @@ export enum HttpProtocol {
   PATCH = "PATCH",
   DELETE = "DELETE",
 }
+
+/**
+ * HTTP response object
+ */
+export interface HttpResponse<T> {
+  succeeded: boolean;
+  data: T;
+  code: HttpStatus;
+  exception?: any;
+  messages?: string[];
+  currentPage?: number;
+  totalPages?: number;
+  totalCount?: number;
+  pageSize?: number;
+  hasPreviousPage?: boolean;
+  hasNextPage?: boolean;
+}
+
+/**
+ * Authentication token
+ */
+export type AuthenticationToken = {
+  accessToken: string;
+  refreshToken: string;
+};

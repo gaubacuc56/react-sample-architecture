@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLoginMutation } from "./features/auth/auth.service";
 function App() {
-  const [login, {data: loginData}] = useLoginMutation();  
+  const [login, {data: loginData }] = useLoginMutation();  
   
   useEffect(() => {
      login({username: 'kminchelle', password: '0lelplR'})

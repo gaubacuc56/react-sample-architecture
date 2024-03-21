@@ -3,8 +3,9 @@ import { fetchReducer } from '../../features/services';
 
 import { storeCollection } from '../../features/store';
 
-const reducerConfiguration = {
+const rootReducer = combineReducers({
     ...storeCollection,
     ...fetchReducer
-}
-export default combineReducers(reducerConfiguration);
+})
+export default rootReducer;
+export type RootState = ReturnType<typeof rootReducer>;
