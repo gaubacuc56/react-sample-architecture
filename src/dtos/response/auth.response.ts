@@ -1,4 +1,7 @@
 export interface ILoginResponse {
+  token: string
+}
+export interface IGetUserResponse {
   id: number,
   username: string,
   email: string,
@@ -6,5 +9,4 @@ export interface ILoginResponse {
   lastName: string,
   gender: string,
   image: string,
-  token: string
 }

@@ -1,27 +1,31 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../app-core/redux-manager/rootReducer';
+import { RootState } from '@/app-core/redux-manager/rootReducer';
 
-const name = 'login';
-
-const initialState = {
-    token: '',
+// define state
+interface IAuthState {
+    token : string
+}
+const initialState: IAuthState = {
+   token: '',
 };
+
+// define slice
 const authStore = createSlice({
-    name,
+    name:'login',
     initialState,
     reducers: {
-        login: (state, action: PayloadAction<string>) => {
+        setAppToken: (state, action: PayloadAction<string>) => {
             state.token = action.payload;
         },
+        logout : (state) => {
+            state.token = ""
+        }
     },
 });
 
+// export state
 export const authToken = (state: RootState) => state.authReducer.token;
 
-// const currentUser = createSelector(selector, ({ user }) => user);
-// const currentToken = createSelector(selector, ({ token }) => token);
-
-//export const loginSelector = { currentUser, currentToken };
-
-export const { login } = authStore.actions;
+// export action
+export const { setAppToken, logout } = authStore.actions;
 export default authStore.reducer;

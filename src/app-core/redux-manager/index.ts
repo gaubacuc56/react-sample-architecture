@@ -2,8 +2,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { persistReducer } from 'redux-persist';
+
 import rootReducer from './rootReducer';
-import { fetchMiddleware } from '../../features/services';
+import { fetchMiddleware } from '@/features/services';
 
 const persistConfig = {
     key: 'root',
