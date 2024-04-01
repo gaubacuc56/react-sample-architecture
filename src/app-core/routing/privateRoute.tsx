@@ -3,7 +3,7 @@ import { Navigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { logout } from "@/features/auth/auth.slice";
-import { useAuthentication } from "@/features/auth";
+import { useAuthentication } from "@/hooks/useAuthentication";
 
 interface IPrivateRouteWrapper {
   children: ReactNode;

@@ -4,7 +4,9 @@
  * import exampleReducer from "example/example.slices"
  */
 import authReducer from "./auth/auth.slice"
+import themeReducer from "./theme/theme.slice"
 
 export const storeCollection = {
-    authReducer: authReducer
+    authReducer: authReducer,
+    themeReducer: themeReducer
 }
