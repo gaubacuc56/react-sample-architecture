@@ -1,7 +1,11 @@
-import React from 'react'
+import { AllRoutes } from "@/app-core/routing";
 
-export const HomeLayout = () => {
+const HomeLayout = () => {
   return (
-    <div>HomeLayout</div>
-  )
-}
+    <div>
+      <h1>HomeLayout Layout</h1>
+      <AllRoutes />
+    </div>
+  );
+};
+export default HomeLayout

@@ -5,8 +5,10 @@
  */
 import authReducer from "./auth/auth.slice"
 import themeReducer from "./theme/theme.slice"
+import localeReducer from "./locale/locale.slice"
 
 export const storeCollection = {
     authReducer: authReducer,
-    themeReducer: themeReducer
+    themeReducer: themeReducer,
+    localeReducer: localeReducer
 }

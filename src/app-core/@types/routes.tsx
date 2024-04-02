@@ -1,12 +1,6 @@
 import { LayoutType } from './theme'
 import type { LazyExoticComponent, ReactNode } from 'react'
 
-export interface IRoute {
-    path: string,
-    element: React.ReactNode,
-    children?: IRoute[],
-}
-
 export interface Meta {
     pageContainerType?: 'default' | 'gutterless' | 'contained'
     header?: string | ReactNode
@@ -16,12 +10,10 @@ export interface Meta {
     layout?: LayoutType
 }
 
-export type Route = {
+export type IRoute = {
     key: string
     path: string
     component: LazyExoticComponent<<T extends Meta>(props: T) => JSX.Element>
     authority: string[]
     meta?: Meta
 }
-
-export type Routes = Route[]

@@ -1,15 +1,11 @@
-import React, { ReactNode, useEffect } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Navigate, useLocation, Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { logout } from "@/features/auth/auth.slice";
 import { useAuthentication } from "@/hooks/useAuthentication";
 
-interface IPrivateRouteWrapper {
-  children: ReactNode;
-}
-
-const PrivateRouteWrapper: React.FC<IPrivateRouteWrapper> = ({ children }) => {
+const PrivateRoute = () => {
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -22,10 +18,10 @@ const PrivateRouteWrapper: React.FC<IPrivateRouteWrapper> = ({ children }) => {
   }, [dispatch, isAuthenticated]);
 
   return isAuthenticated ? (
-    children
+    <Outlet />
   ) : (
     <Navigate to={`/auth/signin?url=${location.pathname}`}></Navigate>
   );
 };
 
-export default PrivateRouteWrapper;
+export default PrivateRoute;

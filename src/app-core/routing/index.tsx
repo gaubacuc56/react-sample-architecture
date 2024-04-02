@@ -1,83 +1,73 @@
-import { Suspense } from 'react'
-import Loading from '@/components/shared/Loading'
-import { protectedRoutes, publicRoutes } from '@/configs/routes.config'
-import appConfig from '@/configs/app.config'
-import PageContainer from '@/components/template/PageContainer'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import { useAppSelector } from '@/store'
-import ProtectedRoute from '@/components/route/ProtectedRoute'
-import PublicRoute from '@/components/route/PublicRoute'
-import AppRoute from '@/components/route/AppRoute'
+import { Suspense } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { ProgressSpinner } from 'primereact/progressspinner';
 
-import { LayoutType } from '../@types/theme'
-import AuthorityGuard from './AuthorityGuard'
+import AuthorityGuard from "./AuthorityGuard";
+import AppRoute from "./AppRoute";
+import PrivateRoute from "./PrivateRoute";
 
-interface ViewsProps {
-    pageContainerType?: 'default' | 'gutterless' | 'contained'
-    layout?: LayoutType
-}
+import { privateRoutes } from "@/route/private";
+import { publicRoutes } from "@/route/public";
 
-type AllRoutesProps = ViewsProps
+import { userAuthority } from "@/features/auth/auth.slice";
 
-const { authenticatedEntryPath } = appConfig
+// import { LayoutType } from '../@types/theme'
 
-const AllRoutes = (props: AllRoutesProps) => {
-    const userAuthority = useAppSelector((state) => state.auth.user.authority)
+// import { AUTHENTICATED_ENTRY_PATH } from '../config'
+// interface ViewsProps {
+//     pageContainerType?: 'default' | 'gutterless' | 'contained'
+//     layout?: LayoutType
+// }
 
-    return (
-        <Routes>
-            <Route path="/" element={<ProtectedRoute />}>
-                <Route
+// type AllRoutesProps = ViewsProps
+
+export const AllRoutes = (/* props: AllRoutesProps */) => {
+  const authorities = useSelector(userAuthority);
+  return (
+    <Suspense fallback={<ProgressSpinner/>}>
+      <Routes>
+        <Route path="/" element={<PrivateRoute />}>
+          {/* <Route
                     path="/"
                     element={<Navigate replace to={authenticatedEntryPath} />}
-                />
-                {protectedRoutes.map((route, index) => (
-                    <Route
-                        key={route.key + index}
-                        path={route.path}
-                        element={
-                            <AuthorityGuard
-                                userAuthority={userAuthority}
-                                authority={route.authority}
-                            >
-                                <PageContainer {...props} {...route.meta}>
-                                    <AppRoute
-                                        routeKey={route.key}
-                                        component={route.component}
-                                        {...route.meta}
-                                    />
-                                </PageContainer>
-                            </AuthorityGuard>
-                        }
-                    />
-                ))}
-                <Route path="*" element={<Navigate replace to="/" />} />
-            </Route>
-            <Route path="/" element={<PublicRoute />}>
-                {publicRoutes.map((route) => (
-                    <Route
-                        key={route.path}
-                        path={route.path}
-                        element={
-                            <AppRoute
-                                routeKey={route.key}
-                                component={route.component}
-                                {...route.meta}
-                            />
-                        }
-                    />
-                ))}
-            </Route>
-        </Routes>
-    )
-}
-
-const Views = (props: ViewsProps) => {
-    return (
-        <Suspense fallback={<Loading loading={true} />}>
-            <AllRoutes {...props} />
-        </Suspense>
-    )
-}
-
-export default Views
+                /> */}
+          {privateRoutes.map((route, index) => (
+            <Route
+              key={route.key + index}
+              path={route.path}
+              element={
+                <AuthorityGuard
+                  userAuthority={authorities}
+                  authority={route.authority}
+                >
+                  {/* <PageContainer {...props} {...route.meta}> */}
+                  <AppRoute
+                    routeKey={route.key}
+                    component={route.component}
+                    {...route.meta}
+                  />
+                  {/* </PageContainer> */}
+                </AuthorityGuard>
+              }
+            />
+          ))}
+          <Route path="*" element={<Navigate replace to="/" />} />
+        </Route>
+        {publicRoutes.map((route) => (
+          <Route
+            key={route.path}
+            path={route.path}
+            element={
+              <AppRoute
+                routeKey={route.key}
+                component={route.component}
+                {...route.meta}
+              />
+            }
+          />
+        ))}
+      </Routes>
+    </Suspense>
+  );
+};

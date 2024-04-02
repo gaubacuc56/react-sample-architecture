@@ -32,7 +32,7 @@ const initialNavMode = () => {
     return themeConfig.navMode
 }
 
-export type ThemeState = {
+interface IThemeState  {
     themeColor: string
     direction: Direction
     mode: Mode
@@ -47,7 +47,7 @@ export type ThemeState = {
     }
 }
 
-const initialState: ThemeState = {
+const initialState: IThemeState = {
     themeColor: themeConfig.themeColor,
     direction: themeConfig.direction,
     mode: themeConfig.mode,

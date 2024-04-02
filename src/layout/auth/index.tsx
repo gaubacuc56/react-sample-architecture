@@ -1,7 +1,11 @@
-import React from 'react'
+import { AllRoutes } from '@/app-core/routing'
 
-export const AuthLayout = () => {
+const AuthLayout = () => {
   return (
-    <div>AuthLayout</div>
+    <div>
+      <h1>Auth Layout</h1>
+      <AllRoutes/>
+    </div>
   )
 }
+export default AuthLayout;

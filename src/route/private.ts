@@ -1,5 +1,5 @@
-import { IRoute } from "../app-core/routing/interface";
+import { IRoute } from "@/app-core/@types/routes";
 
-export const PrivateRoute: IRoute[] = [
+export const privateRoutes: IRoute[] = [
  
 ];
