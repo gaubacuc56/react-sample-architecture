@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { LayoutType } from './theme'
-import type { LazyExoticComponent, ReactNode } from 'react'
+import type { ComponentType, LazyExoticComponent, ReactNode } from 'react'
 
 export interface Meta {
     pageContainerType?: 'default' | 'gutterless' | 'contained'
@@ -13,7 +14,13 @@ export interface Meta {
 export type IRoute = {
     key: string
     path: string
-    component: LazyExoticComponent<<T extends Meta>(props: T) => JSX.Element>
+    component: LazyExoticComponent<ComponentType<any>>
     authority: string[]
     meta?: Meta
+}
+
+export type IRouteLayout  = {
+    prefix: string,
+    layout: JSX.Element,
+    children: IRoute[]
 }

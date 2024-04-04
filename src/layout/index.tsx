@@ -12,6 +12,7 @@ import { layout } from '@/features/theme/theme.slice'
 import { LayoutType } from '@/app-core/@types/theme'
 import useLocale from '@/hooks/useLocale'
 import useDirection from '@/hooks/useDirection'
+import { useAuthentication } from '@/hooks/useAuthentication'
 
 const layouts :  Record<LayoutType, LazyExoticComponent<() => JSX.Element>>  = {
     [LAYOUT_TYPE_CLASSIC]: lazy(() => import('./home')),
@@ -26,13 +27,18 @@ const layouts :  Record<LayoutType, LazyExoticComponent<() => JSX.Element>>  = {
 const Layout = () => {
 
     const layoutType = useSelector(layout).type;
+
+    const authenticated = useAuthentication();
     
     useDirection()
     useLocale()
 
     const AppLayout = useMemo(() => {
-        return layouts[layoutType]
-    }, [layoutType])
+        if (authenticated) {
+            return layouts[layoutType]
+        }
+        return lazy(() => import('./auth'))
+    }, [layoutType, authenticated])
 
     return (
         <Suspense

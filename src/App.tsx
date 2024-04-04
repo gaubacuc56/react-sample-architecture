@@ -1,13 +1,12 @@
-import { useRoutes } from 'react-router-dom';
-
-import { AppRoutes } from '@/app-core/routing';
-
+import { Suspense } from "react";
+import { RouterProvider } from "react-router-dom";
+import { ProgressSpinner } from "primereact/progressspinner";
+import { router } from "@/app-core/routing";
 function App() {
-	const router = useRoutes(AppRoutes());
   return (
-    <>
-      {router}
-    </>
+    <Suspense fallback={<ProgressSpinner />}>
+      <RouterProvider router={router} fallbackElement={<ProgressSpinner />} />
+    </Suspense>
   );
 }
 

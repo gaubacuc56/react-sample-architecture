@@ -1,18 +1,41 @@
-import { PropsWithChildren } from 'react'
-import { Navigate } from 'react-router-dom'
-import useAuthority from '@/hooks/useAuthority'
+import { PropsWithChildren } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+
+import useAuthority from "@/hooks/useAuthority";
+import { userAuthority } from "@/features/auth/auth.slice";
+
+import {
+  UNAUTHORIZED_ENTRY_PATH,
+  RETURN_URL_QUERY,
+} from "@/constant/route.constant";
 
 type AuthorityGuardProps = PropsWithChildren<{
-    userAuthority?: string[]
-    authority?: string[]
-}>
+  userAuthority?: string[];
+  authority?: string[];
+}>;
 
 const AuthorityGuard = (props: AuthorityGuardProps) => {
-    const { userAuthority = [], authority = [], children } = props
+  const { authority = [], children } = props;
 
-    const roleMatched = useAuthority(userAuthority, authority)
+  const { pathname } = useLocation();
 
-    return <>{roleMatched ? children : <Navigate to="/access-denied" />}</>
-}
+  const _userAuthority = useSelector(userAuthority);
 
-export default AuthorityGuard
+  const roleMatched = useAuthority(_userAuthority, authority);
+
+  return (
+    <>
+      {roleMatched ? (
+        children
+      ) : (
+        <Navigate
+          to={`${UNAUTHORIZED_ENTRY_PATH}?${RETURN_URL_QUERY}=${pathname}`}
+          replace
+        />
+      )}
+    </>
+  );
+};
+
+export default AuthorityGuard;

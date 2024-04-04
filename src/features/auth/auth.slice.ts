@@ -4,7 +4,7 @@ import { RootState } from '@/app-core/redux-manager/rootReducer';
 // define state
 interface IAuthState {
     token : string,
-    authority?: string[]
+    authority: string[]
 }
 const initialState: IAuthState = {
    token: '',
@@ -21,6 +21,7 @@ const authStore = createSlice({
         },
         logout : (state) => {
             state.token = ""
+            state.authority = []
         }
     },
 });
