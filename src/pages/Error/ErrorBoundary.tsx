@@ -1,5 +1,5 @@
 export default function ErrorBoundary() {
   return (
-    <div>ErrorBoundary</div>
+    <div>ErrorBoundary page</div>
   )
 }

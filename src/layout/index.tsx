@@ -6,7 +6,7 @@ import {
     LAYOUT_TYPE_STACKED_SIDE,
     LAYOUT_TYPE_DECKED,
     LAYOUT_TYPE_BLANK,
-} from '@/app-core/theme/constant'
+} from '@/constant/theme.constant'
 import { useSelector } from 'react-redux'
 import { layout } from '@/features/theme/theme.slice'
 import { LayoutType } from '@/app-core/@types/theme'

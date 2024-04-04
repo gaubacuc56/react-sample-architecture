@@ -31,7 +31,6 @@ export const router = createBrowserRouter(
             <Route
               key={child.key}
               path={child.path}
-              errorElement={<ErrorBoundary />}
               element={
                 <AuthorityGuard authority={child.authority}>
                   <AppRoute

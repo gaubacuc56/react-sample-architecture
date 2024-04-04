@@ -1,4 +1,4 @@
-import { THEME_ENUM } from './constant'
+import { THEME_ENUM } from '../../constant/theme.constant'
 import {
     Direction,
     Mode,

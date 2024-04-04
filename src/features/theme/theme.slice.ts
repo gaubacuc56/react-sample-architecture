@@ -11,7 +11,7 @@ import {
     MODE_DARK,
     MODE_LIGHT,
     LAYOUT_TYPE_DECKED,
-} from '@/app-core/theme/constant'
+} from '@/constant/theme.constant'
 import type {
     LayoutType,
     Mode,
