@@ -2,8 +2,8 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQuery } from '@/app-core/redux-manager/baseQuery';
 import { HttpProtocol } from '@/app-core/@types/http';
 
-import { ILoginRequest } from '@/dtos/request/auth.request';
-import { IGetUserResponse, ILoginResponse } from '@/dtos/response/auth.response';
+import { ILoginRequest } from '@/libs/dtos/request/auth.request';
+import { IGetUserResponse, ILoginResponse } from '@/libs/dtos/response/auth.response';
 
 export const authService = createApi({
     reducerPath: 'authService',

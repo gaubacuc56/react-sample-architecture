@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 
-import { fetchReducer } from '@/features/services';
-import { storeCollection } from '@/features/store';
+import { fetchReducer } from '@/libs/features/services';
+import { storeCollection } from '@/libs/features/store';
 
 const rootReducer = combineReducers({
     ...storeCollection,

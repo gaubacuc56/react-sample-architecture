@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 import { LocaleType, dateLocales } from "@/app-core/locale";
 
-import { appLanguage } from "@/features/locale/locale.slice";
+import { appLanguage } from "@/libs/features/locale/locale.slice";
 
 function useLocale(language?: LocaleType) {
 

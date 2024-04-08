@@ -4,7 +4,7 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { persistReducer } from 'redux-persist';
 
 import rootReducer from './rootReducer';
-import { fetchMiddleware } from '@/features/services';
+import { fetchMiddleware } from '@/libs/features/services';
 
 const persistConfig = {
     key: 'root',

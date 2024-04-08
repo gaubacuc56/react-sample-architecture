@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import type { Mode } from '@/app-core/@types/theme'
 import { THEME_ENUM } from '@/constant/theme.constant'
 
-import {mode as AppMode, setMode } from '@/features/theme/theme.slice'
+import {mode as AppMode, setMode } from '@/libs/features/theme/theme.slice'
 
 function useDarkMode(): [
     isEnabled: boolean,

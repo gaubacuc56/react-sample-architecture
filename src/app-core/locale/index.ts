@@ -1,8 +1,8 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import enJSON from '@/translation/en';
-import vnJSON from '@/translation/vn';
+import enJSON from '@/libs/translation/en';
+import vnJSON from '@/libs/translation/vn';
 
 export enum Locales  {
     ENGLISH = 'en',
