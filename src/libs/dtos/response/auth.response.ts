@@ -10,3 +10,4 @@ export interface IGetUserResponse {
   gender: string,
   image: string,
 }
+export interface IRefreshTokenResponse extends ILoginResponse{}

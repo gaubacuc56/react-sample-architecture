@@ -7,7 +7,7 @@ import {
 
 import AuthorityGuard from "./AuthorityGuard";
 
-import ErrorBoundary from "@/pages/Error/ErrorBoundary";
+import ErrorBoundary from "@pages/Error/ErrorBoundary";
 import AppRoute from "./AppRoute";
 import { publicRoutes } from "@/route/public";
 import { privateRoutes } from "@/route/private";

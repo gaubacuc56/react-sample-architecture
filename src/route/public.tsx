@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { IRouteLayout } from "@/app-core/@types/routes";
+import { IRouteLayout } from "@app-core/@types/routes";
 import {
   AUTH_ROUTE_PREFIX,
   ERROR_ROUTE_PREFIX,
@@ -15,7 +15,7 @@ export const publicRoutes: IRouteLayout[] = [
       {
         key: "sign-in",
         path: "sign-in",
-        component: lazy(() => import("@/pages/SignIn")),
+        component: lazy(() => import("@pages/SignIn")),
         authority: [],
       },
     ],
@@ -27,7 +27,7 @@ export const publicRoutes: IRouteLayout[] = [
       {
         key: "forbidden",
         path: "forbidden",
-        component: lazy(() => import("@/pages/Error/Forbidden")),
+        component: lazy(() => import("@pages/Error/Forbidden")),
         authority: [],
       },
     ],

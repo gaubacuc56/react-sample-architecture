@@ -6,7 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { PrimeReactProvider } from "primereact/api";
 
 import App from "./App";
-import SuspenseLoading from "@/libs/components/SuspenseLoading";
+import SuspenseLoading from "@libs/components/SuspenseLoading";
 import store from "./app-core/redux-manager";
 import "./index.css";
 

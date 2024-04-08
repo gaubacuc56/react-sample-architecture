@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { themeConfig } from '@/app-core/theme/config'
+import { themeConfig } from '@app-core/theme/config'
 import {
     LAYOUT_TYPE_MODERN,
     LAYOUT_TYPE_CLASSIC,
@@ -18,8 +18,8 @@ import type {
     NavMode,
     ColorLevel,
     Direction,
-} from '@/app-core/@types/theme'
-import { RootState } from '@/app-core/redux-manager/rootReducer'
+} from '@app-core/@types/theme'
+import { RootState } from '@app-core/redux-manager/rootReducer'
 
 const initialNavMode = () => {
     if (

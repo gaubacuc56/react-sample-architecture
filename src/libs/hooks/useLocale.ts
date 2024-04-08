@@ -3,9 +3,9 @@ import i18n from "i18next";
 import dayjs from "dayjs";
 import { useSelector } from "react-redux";
 
-import { LocaleType, dateLocales } from "@/app-core/locale";
+import { LocaleType, dateLocales } from "@app-core/locale";
 
-import { appLanguage } from "@/libs/features/locale/locale.slice";
+import { appLanguage } from "@libs/features/locale/locale.slice";
 
 function useLocale(language?: LocaleType) {
 

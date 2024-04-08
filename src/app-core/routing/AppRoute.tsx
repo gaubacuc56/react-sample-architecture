@@ -8,7 +8,7 @@ import {
     setLayout,
     setPreviousLayout,
     layout
-} from '@/libs/features/theme/theme.slice'
+} from '@libs/features/theme/theme.slice'
 import { LayoutType } from '../@types/theme'
 
 export type AppRouteProps<T> = {

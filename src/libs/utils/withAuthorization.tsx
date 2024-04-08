@@ -1,8 +1,8 @@
 import { ComponentType, ForwardedRef, forwardRef } from "react";
 import { useSelector } from "react-redux";
 
-import useAuthority from "@/libs/hooks/useAuthority";
-import { userAuthority } from "@/libs/features/auth/auth.slice";
+import useAuthority from "@libs/hooks/useAuthority";
+import { userAuthority } from "@libs/features/auth/auth.slice";
 
 interface WithAuthorizationProps {
   authorities: [];

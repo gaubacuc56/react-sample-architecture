@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import type { Direction } from '@/app-core/@types/theme'
-import { direction as SidebarDirection , setDirection} from '@/libs/features/theme/theme.slice'
+import type { Direction } from '@app-core/@types/theme'
+import { direction as SidebarDirection , setDirection} from '@libs/features/theme/theme.slice'
 
 function useDirection(): [
     direction: Direction,

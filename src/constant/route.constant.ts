@@ -1,4 +1,5 @@
 export const APP_ROUTE_PREFIX = "app";
+export const DEFAULT_URL_QUERY = "app";
 export const AUTH_ROUTE_PREFIX = "auth";
 export const ERROR_ROUTE_PREFIX = "error";
 export const RETURN_URL_QUERY = "returnUrl";

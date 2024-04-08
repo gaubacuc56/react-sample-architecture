@@ -2,8 +2,8 @@ import { PropsWithChildren } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import useAuthority from "@/libs/hooks/useAuthority";
-import { userAuthority } from "@/libs/features/auth/auth.slice";
+import useAuthority from "@libs/hooks/useAuthority";
+import { userAuthority } from "@libs/features/auth/auth.slice";
 
 import {
   UNAUTHORIZED_ENTRY_PATH,

@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '@/app-core/redux-manager/rootReducer';
+import { RootState } from '@app-core/redux-manager/rootReducer';
 
 // define state
 interface IAuthState {

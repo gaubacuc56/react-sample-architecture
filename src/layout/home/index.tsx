@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { Navigate, useLocation, Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { logout } from "@/libs/features/auth/auth.slice";
-import { useAuthentication } from "@/libs/hooks/useAuthentication";
+import { logout } from "@libs/features/auth/auth.slice";
+import { useAuthentication } from "@libs/hooks/useAuthentication";
 import { RETURN_URL_QUERY, UNAUTHENTICATED_ENTRY_PATH } from "@/constant/route.constant";
 
 const HomeLayout = () => {

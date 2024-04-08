@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '@/app-core/redux-manager/rootReducer';
-import { Locales, LocaleType } from '@/app-core/locale';
+import { RootState } from '@app-core/redux-manager/rootReducer';
+import { Locales, LocaleType } from '@app-core/locale';
 
 // define state
 interface ILocaleState {

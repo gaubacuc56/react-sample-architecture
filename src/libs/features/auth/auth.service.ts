@@ -1,9 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { baseQuery } from '@/app-core/redux-manager/baseQuery';
-import { HttpProtocol } from '@/app-core/@types/http';
+import { baseQuery } from '@app-core/redux-manager/baseQuery';
+import { HttpProtocol } from '@app-core/@types/http';
 
-import { ILoginRequest } from '@/libs/dtos/request/auth.request';
-import { IGetUserResponse, ILoginResponse } from '@/libs/dtos/response/auth.response';
+import { ILoginRequest } from '@libs/dtos/request/auth.request';
+import { IGetUserResponse, ILoginResponse, IRefreshTokenResponse } from '@libs/dtos/response/auth.response';
 
 export const authService = createApi({
     reducerPath: 'authService',
@@ -20,6 +20,12 @@ export const authService = createApi({
             query: () => ({
                 url: `auth/me`,
                 method: HttpProtocol.GET,
+            }),
+        }),
+        refreshToken: builder.mutation<IRefreshTokenResponse, void>({
+            query: () => ({
+                url: `auth/refresh`,
+                method: HttpProtocol.POST,
             }),
         }),
     }),

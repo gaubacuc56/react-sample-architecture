@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { IRouteLayout } from "@/app-core/@types/routes";
+import { IRouteLayout } from "@app-core/@types/routes";
 import HomeLayout from "@/layout/home";
 import { APP_ROUTE_PREFIX } from "@/constant/route.constant";
 
@@ -9,15 +9,15 @@ export const privateRoutes: IRouteLayout[] = [
     layout: <HomeLayout />,
     children: [
       {
-        key: "welcome",
+        key: "",
         path: "",
-        component: lazy(() => import("@/pages/Welcome")),
+        component: lazy(() => import("@pages/Welcome")),
         authority: [],
       },
       {
         key: "dashboard",
         path: "dashboard",
-        component: lazy(() => import("@/pages/Dashboard")),
+        component: lazy(() => import("@pages/Dashboard")),
         authority: [],
       },
     ],

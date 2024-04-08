@@ -6,7 +6,7 @@ import {
     NavMode,
     ControlSize,
     LayoutType,
-} from '@/app-core/@types/theme'
+} from '@app-core/@types/theme'
 
 export type ThemeConfig = {
     themeColor: string
