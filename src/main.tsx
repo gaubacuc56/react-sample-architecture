@@ -8,6 +8,7 @@ import { PrimeReactProvider } from "primereact/api";
 import App from "./App";
 import SuspenseLoading from "@libs/components/SuspenseLoading";
 import store from "./app-core/redux-manager";
+
 import "./index.css";
 
 const persistor = persistStore(store);
@@ -17,7 +18,7 @@ root.render(
   <Provider store={store}>
     <PersistGate persistor={persistor}>
         <Suspense fallback={<SuspenseLoading />}>
-          <PrimeReactProvider>
+          <PrimeReactProvider value={{ unstyled: false }}>
             <App />
           </PrimeReactProvider>
         </Suspense>
