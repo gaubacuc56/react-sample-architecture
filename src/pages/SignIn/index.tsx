@@ -19,7 +19,8 @@ export default function SignIn() {
       username: "kminchelle",
       password: "0lelplR",
     });
-  }, [login]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (isLoginSuccess) {

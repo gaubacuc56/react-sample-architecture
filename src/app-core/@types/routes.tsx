@@ -22,5 +22,6 @@ export type IRoute = {
 export type IRouteLayout  = {
     prefix: string,
     layout: JSX.Element,
-    children: IRoute[]
+    children: IRoute[],
+    isPrivate?: boolean
 }

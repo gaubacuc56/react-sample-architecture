@@ -5,27 +5,33 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-import AuthorityGuard from "./AuthorityGuard";
-
 import ErrorBoundary from "@pages/Error/ErrorBoundary";
-import AppRoute from "./AppRoute";
-import { publicRoutes } from "@/route/public";
-import { privateRoutes } from "@/route/private";
-import { APP_ROUTE_PREFIX } from "@/constant/route.constant";
-import { IRouteLayout } from "../@types/routes";
+import { routes } from "@/routes";
+import { APP_ROUTE_PREFIX } from "@constant/route.constant";
 
-const appRoutes: IRouteLayout[] = [...publicRoutes, ...privateRoutes];
+import AppRoute from "./AppRoute";
+import AuthorityGuard from "./AuthorityGuard";
+import AuthenticationGuard from "./AuthenticationGuard";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="*" errorElement={<ErrorBoundary />}>
-      <Route path="*" element={<Navigate to={APP_ROUTE_PREFIX} replace />} errorElement={<ErrorBoundary />}  />
-      {appRoutes.map((item) => (
+      <Route
+        path="*"
+        element={<Navigate to={APP_ROUTE_PREFIX} replace />}
+        errorElement={<ErrorBoundary />}
+      />
+      {routes.map((item) => (
         <Route
           key={item.prefix}
           path={item.prefix}
-          element={item.layout}
+          // element={item.layout}
           errorElement={<ErrorBoundary />}
+          element={
+            <AuthenticationGuard ignore={!item.isPrivate}>
+              {item.layout}
+            </AuthenticationGuard>
+          }
         >
           {item.children.map((child) => (
             <Route

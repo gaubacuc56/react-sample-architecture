@@ -25,6 +25,8 @@
       "@app-core/*": ["./src/app-core/*"],
       "@pages/*": ["./src/pages/*"],
       "@assets/*": ["./src/assets/*"],
+      "@layout/*": ["./src/layout/*"],
+      "@constant/*": ["./src/constant/*"],
     }
   },
   "include": ["src"],
