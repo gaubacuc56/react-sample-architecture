@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate} from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import useAuthority from "@libs/hooks/useAuthority";
@@ -7,7 +7,6 @@ import { userAuthority } from "@libs/features/auth/auth.slice";
 
 import {
   UNAUTHORIZED_ENTRY_PATH,
-  RETURN_URL_QUERY,
 } from "@/constant/route.constant";
 
 type AuthorityGuardProps = PropsWithChildren<{
@@ -17,8 +16,6 @@ type AuthorityGuardProps = PropsWithChildren<{
 
 const AuthorityGuard = (props: AuthorityGuardProps) => {
   const { authority = [], children } = props;
-
-  const { pathname } = useLocation();
 
   const _userAuthority = useSelector(userAuthority);
 
@@ -30,7 +27,7 @@ const AuthorityGuard = (props: AuthorityGuardProps) => {
         children
       ) : (
         <Navigate
-          to={`${UNAUTHORIZED_ENTRY_PATH}?${RETURN_URL_QUERY}=${pathname}`}
+          to={UNAUTHORIZED_ENTRY_PATH}
           replace
         />
       )}

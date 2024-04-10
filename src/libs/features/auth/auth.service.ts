@@ -8,6 +8,7 @@ import { IGetUserResponse, ILoginResponse } from '@libs/dtos/response/auth.respo
 export const authService = createApi({
     reducerPath: 'authService',
     baseQuery: baseQuery,
+   // refetchOnMountOrArgChange: true, // Set to true for refetch on mount
     endpoints: builder => ({
         login: builder.mutation<ILoginResponse, ILoginRequest>({
             query: (data: ILoginRequest) => ({

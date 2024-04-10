@@ -9,7 +9,7 @@ import App from "./App";
 import SuspenseLoading from "@libs/components/SuspenseLoading";
 import store from "./app-core/redux-manager";
 
-import "./index.css";
+import "@assets/index.css";
 
 const persistor = persistStore(store);
 

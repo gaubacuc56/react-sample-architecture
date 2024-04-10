@@ -1,91 +1,109 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Controller, useForm } from "react-hook-form";
 
 import { setAppToken } from "@libs/features/auth/auth.slice";
 import { useLoginMutation } from "@libs/features/auth/auth.service";
 
 import { DEFAULT_URL_QUERY, RETURN_URL_QUERY } from "@/constant/route.constant";
 import Input from "@libs/components/Input";
-import { Button } from "primereact/button";
+import Button from "@libs/components/Button";
+import appLogo from "@assets/img/logo.png";
+import { ILoginRequest } from "@libs/dtos/request/auth.request";
+import { FormError, FormLabel } from "@libs/components/FormElement";
 
 export default function SignIn() {
-  const [login, { data: loginResponse, isSuccess: isLoginSuccess }] =
-    useLoginMutation();
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<ILoginRequest>();
+  const [
+    login,
+    { data: loginResponse, isSuccess: isLoginSuccess, isLoading, error },
+  ] = useLoginMutation();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleFormSubmit = useCallback(
+    async (data: ILoginRequest) => {
+      await login(data);
+    },
+    [login]
+  );
 
   useEffect(() => {
     if (isLoginSuccess) {
       dispatch(setAppToken(loginResponse.token));
       // Get last url where user is logged out
-      const returnUrl = new URLSearchParams(window.location.search).get(
-        RETURN_URL_QUERY
-      );
-      navigate(returnUrl ?? DEFAULT_URL_QUERY);
+      const returnUrl =
+        new URLSearchParams(window.location.search).get(RETURN_URL_QUERY) ??
+        DEFAULT_URL_QUERY;
+      navigate(returnUrl);
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoginSuccess, loginResponse]);
+  }, [isLoginSuccess, loginResponse, error, dispatch, navigate]);
 
   return (
-    <div className="mb-8">
-      <h3 className="mb-1 text-white text-center">Welcome back!</h3>
-      <p className="text-white">Please enter your credentials to sign in!</p>
-      <form>
-        <div>
-          <label htmlFor="username">User Name</label>
-          <Input id="username" />
+    <>
+      <div className="w-full flex justify-center">
+        <img className="w-11" src={appLogo} />
+      </div>
+      <h3 className="m-2 text-black dark:text-white text-center text-2xl font-medium">
+        Welcome back!
+      </h3>
+      <p className="text-gray-500 text-center">
+        Please enter your credentials to sign in!
+      </p>
+      <form
+        className="mt-4 flex flex-col"
+        onSubmit={handleSubmit(handleFormSubmit)}
+      >
+        <div className="h-[7rem]">
+          <FormLabel htmlFor="username">Email</FormLabel>
+          <Controller
+            control={control}
+            name="username"
+            rules={{
+              required: "Username is required",
+              // pattern: {
+              //   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              //   message: "Invalid email address",
+              // },
+            }}
+            render={({ field: { onChange } }) => (
+              <>
+                <Input id="username" onChange={onChange} />
+                <FormError>{errors.username?.message ?? ""}</FormError>
+              </>
+            )}
+          />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <Input id="password" type="password" />
+        <div className="h-[7rem]">
+          <FormLabel htmlFor="password">Password</FormLabel>
+          <Controller
+            control={control}
+            name="password"
+            rules={{
+              required: "Password is required",
+            }}
+            render={({ field: { onChange } }) => (
+              <>
+                <Input id="password" type="password" onChange={onChange} />
+                <FormError>{errors.password?.message ?? ""}</FormError>
+              </>
+            )}
+          />
         </div>
-        <Button label="Sign In" className="bg-emerald-600 w-full py-3 text-white font-medium mt-3"  />
+        <Button
+          className="w-full h-10 mt-3"
+          variant="solid"
+          loading={isLoading}
+        >
+          Sign In
+        </Button>
       </form>
-      {/* <Form>
-        <FormContainer>
-          <FormItem
-            label="User Name"
-            invalid={(errors.userName && touched.userName) as boolean}
-            errorMessage={errors.userName}
-          >
-            <Field
-              type="text"
-              autoComplete="off"
-              name="userName"
-              placeholder="User Name"
-              component={Input}
-            />
-          </FormItem>
-          <FormItem
-            label="Password"
-            invalid={(errors.password && touched.password) as boolean}
-            errorMessage={errors.password}
-          >
-            <Field
-              autoComplete="off"
-              name="password"
-              placeholder="Password"
-              component={PasswordInput}
-            />
-          </FormItem>
-          <div className="flex justify-between mb-6">
-            <Field className="mb-0" name="rememberMe" component={Checkbox}>
-              Remember Me
-            </Field>
-            <ActionLink to={forgotPasswordUrl}>Forgot Password?</ActionLink>
-          </div>
-          <Button block loading={isSubmitting} variant="solid" type="submit">
-            {isSubmitting ? "Signing in..." : "Sign In"}
-          </Button>
-          <div className="mt-4 text-center">
-            <span>{`Don't have an account yet?`} </span>
-            <ActionLink to={signUpUrl}>Sign up</ActionLink>
-          </div>
-        </FormContainer>
-      </Form> */}
-    </div>
+    </>
   );
 }

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CSSProperties, forwardRef, useMemo } from "react";
+import { CSSProperties, forwardRef, useMemo, memo } from "react";
 
 interface InputProps {
   id?: string;
@@ -29,7 +29,7 @@ interface InputProps {
   readOnly?: boolean;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+const Input = memo(forwardRef<HTMLInputElement, InputProps>(
   (props: InputProps, ref) => {
     const {
       id,
@@ -110,6 +110,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       </div>
     );
   }
-);
+));
 
 export default Input;

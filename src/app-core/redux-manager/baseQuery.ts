@@ -10,7 +10,7 @@ export const baseQuery = fetchBaseQuery({
         // You can add or modify headers here based on your needs
         const token = (getState() as RootState).authReducer.token;
         if (token) {
-          headers.set('Authorization', `${APP_AUTHORIZATION_HEADER} ${token}`);
+          headers.set('Authorization', `${APP_AUTHORIZATION_HEADER}${token}`);
         }
         headers.set('Content-Type', 'application/json');
         return headers;

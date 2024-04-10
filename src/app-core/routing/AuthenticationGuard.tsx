@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -7,34 +7,33 @@ import {
   RETURN_URL_QUERY,
   UNAUTHENTICATED_ENTRY_PATH,
 } from "@constant/route.constant";
-import { useAuthentication } from "@/libs/hooks/useAuthentication";
+import { useGetUserQuery } from "@libs/features/auth/auth.service";
 
-type AuthenticationGuardProps = PropsWithChildren<{
-  ignore?: boolean;
-}>;
+const AuthenticationGuard = (props: PropsWithChildren) => {
+  const { children } = props;
+  const { data, isError, isSuccess } = useGetUserQuery();
 
-const AuthenticationGuard = (props: AuthenticationGuardProps) => {
-  const { ignore = true, children } = props;
+  const [isAuthenticated, setIsAuthenticated] = useState<null | boolean>(null);
 
   const dispatch = useDispatch();
-  const location = useLocation();
-
-  const isAuthenticated = useAuthentication();
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    // User could already login, but there's token expired.
-    // Force log out, navigate back to log in screen
-    if (!isAuthenticated && !ignore) {
+    if (!isError && data !== undefined) setIsAuthenticated(true);
+    else if (isError) {
       dispatch(logout());
-    }
-  }, [dispatch, isAuthenticated, ignore]);
+      setIsAuthenticated(false);
+    } else setIsAuthenticated(null);
+  }, [data, dispatch, isError, isSuccess]);
 
-  if (ignore || isAuthenticated) {
+  if (isAuthenticated !== null && isAuthenticated) {
     return <>{children}</>;
   }
+
+  else if (isAuthenticated !== null && !isAuthenticated)
   return (
     <Navigate
-      to={`${UNAUTHENTICATED_ENTRY_PATH}?${RETURN_URL_QUERY}=${location.pathname}`}
+      to={`${UNAUTHENTICATED_ENTRY_PATH}?${RETURN_URL_QUERY}=${pathname}`}
     />
   );
 };

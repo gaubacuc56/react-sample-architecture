@@ -25,12 +25,13 @@ export const router = createBrowserRouter(
         <Route
           key={item.prefix}
           path={item.prefix}
-          // element={item.layout}
           errorElement={<ErrorBoundary />}
           element={
-            <AuthenticationGuard ignore={!item.isPrivate}>
+            item.isPrivate ? 
+            <AuthenticationGuard>
               {item.layout}
             </AuthenticationGuard>
+            :  item.layout
           }
         >
           {item.children.map((child) => (

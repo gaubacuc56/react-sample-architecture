@@ -1,11 +1,11 @@
-import { useMemo } from "react";
+import { useMemo, memo } from "react";
 import classNames from "classnames";
 
 import { CommonProps } from "@app-core/@types/common";
 
 interface ICardProps extends CommonProps {}
 
-export default function Card(props: ICardProps) {
+const Card = memo((props: ICardProps) => {
   const { className, children } = props;
 
   const _cls = useMemo(() => {
@@ -15,4 +15,6 @@ export default function Card(props: ICardProps) {
   }, [className]);
 
   return <div className={_cls}>{children}</div>;
-}
+})
+
+export default Card;
