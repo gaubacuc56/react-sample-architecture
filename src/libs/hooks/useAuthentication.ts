@@ -1,7 +1,18 @@
 import { useGetUserQuery } from "@libs/features/auth/auth.service";
+import { useEffect, useState } from "react";
 
 export const useAuthentication = () => {
-    const {data, isSuccess} = useGetUserQuery();
-    console.log(data)
-    return isSuccess;
-}
+    const { data, isError } = useGetUserQuery();
+    const [isAuthenticated, setIsAuthenticated] = useState<null | boolean>(
+        null
+    );
+
+    useEffect(() => {
+        if (!isError && data !== undefined) setIsAuthenticated(true);
+        else if (isError) {
+            setIsAuthenticated(false);
+        } else setIsAuthenticated(null);
+    }, [data, isError]);
+
+    return { isAuthenticated };
+};

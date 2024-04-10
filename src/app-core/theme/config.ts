@@ -1,21 +1,21 @@
-import { THEME_COLOR, THEME_ENUM } from '@constant/theme.constant'
+import { THEME_COLOR, THEME_ENUM } from "@constant/theme.constant";
 import {
     Direction,
     Mode,
     ColorLevel,
     LayoutType,
-} from '@app-core/@types/theme'
+} from "@app-core/@types/theme";
 
 export type ThemeConfig = {
-    themeColor: string
-    direction: Direction
-    mode: Mode
-    primaryColorLevel: ColorLevel
+    themeColor: string;
+    direction: Direction;
+    mode: Mode;
+    primaryColorLevel: ColorLevel;
     layout: {
-        type: LayoutType
-        sideNavCollapse: boolean
-    }
-}
+        type: LayoutType;
+        sideNavCollapse: boolean;
+    };
+};
 
 export const themeConfig: ThemeConfig = {
     themeColor: THEME_COLOR.TEAL,
@@ -26,4 +26,4 @@ export const themeConfig: ThemeConfig = {
         type: THEME_ENUM.LAYOUT_TYPE_MODERN,
         sideNavCollapse: false,
     },
-}
+};
