@@ -2,7 +2,7 @@ import { CommonProps } from '@app-core/@types/common'
 
 export const FormError = (props: CommonProps ) => {
   return (
-    <p className='text-sm text-red-500 mt-2 font-medium'>{props.children}</p>
+    <p className='text-sm text-red-500 mt-1 font-medium'>{props.children}</p>
   )
 }
 

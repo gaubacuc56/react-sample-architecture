@@ -1,11 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 
 import { DEFAULT_URL_QUERY, RETURN_URL_QUERY } from "@constant/route.constant";
 
-import { setAppToken } from "@libs/features/auth/auth.slice";
+import {
+  savedAccount,
+  setAppToken,
+  setSavedAccount,
+} from "@libs/features/auth/auth.slice";
 import { useLoginMutation } from "@libs/features/auth/auth.service";
 import Input from "@libs/components/Input";
 import Button from "@libs/components/Button";
@@ -16,13 +20,24 @@ import appLogo from "@assets/img/logo.png";
 import { useFetchError } from "@libs/hooks/useFetchError";
 import Alert from "@libs/components/Alert";
 import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
+import Checkbox from "@/libs/components/Checkbox";
+import ActionLink from "@/libs/components/ActionLink";
 
 export default function SignIn() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const {
     handleSubmit,
     control,
+    getValues,
     formState: { errors },
-  } = useForm<ILoginRequest>();
+  } = useForm<ILoginRequest>({
+    defaultValues: {
+      username: useSelector(savedAccount)?.username,
+      password: useSelector(savedAccount)?.password,
+    },
+  });
   const [
     login,
     { data: loginResponse, isSuccess: isLoginSuccess, isLoading, error },
@@ -30,10 +45,18 @@ export default function SignIn() {
 
   const { errMsg } = useFetchError(error);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const [isRememberAccount, setIsRememberAccount] = useState(
+    useSelector(savedAccount) !== undefined
+  );
+
+  const handleShowPassword = useCallback((show: boolean) => {
+    setIsShowPassword(show);
+  }, []);
+
+  const handleRememberAccount = useCallback(() => {
+    setIsRememberAccount(!isRememberAccount);
+  }, [isRememberAccount]);
 
   const handleFormSubmit = useCallback(
     async (data: ILoginRequest) => {
@@ -42,20 +65,32 @@ export default function SignIn() {
     [login]
   );
 
-  const handleShowPassword = useCallback((show: boolean) => {
-    setIsShowPassword(show);
-  }, []);
-
   useEffect(() => {
     if (isLoginSuccess) {
+      console.log("ischecked", isRememberAccount);
       dispatch(setAppToken(loginResponse.token));
+      if (isRememberAccount) {
+        dispatch(
+          setSavedAccount({
+            username: getValues("username"),
+            password: getValues("password"),
+          })
+        );
+      } else dispatch(setSavedAccount(undefined));
       // Get last url where user is logged out
       const returnUrl =
         new URLSearchParams(window.location.search).get(RETURN_URL_QUERY) ??
         DEFAULT_URL_QUERY;
       navigate(returnUrl);
     }
-  }, [isLoginSuccess, loginResponse, dispatch, navigate]);
+  }, [
+    isLoginSuccess,
+    loginResponse,
+    dispatch,
+    navigate,
+    isRememberAccount,
+    getValues,
+  ]);
 
   return (
     <>
@@ -92,12 +127,13 @@ export default function SignIn() {
               //   message: "Invalid email address",
               // },
             }}
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <>
                 <Input
                   id="username"
                   onChange={onChange}
                   state={errors.username?.message ? "error" : ""}
+                  value={value}
                 />
                 <FormError>{errors.username?.message ?? ""}</FormError>
               </>
@@ -112,11 +148,12 @@ export default function SignIn() {
             rules={{
               required: "Password is required",
             }}
-            render={({ field: { onChange } }) => (
+            render={({ field: { onChange, value } }) => (
               <>
                 <Input
+                  value={value}
                   id="password"
-                  type={!isShowPassword ? "password" : 'text'}
+                  type={!isShowPassword ? "password" : "text"}
                   onChange={onChange}
                   state={errors.password?.message ? "error" : ""}
                   rightIcon={
@@ -134,13 +171,33 @@ export default function SignIn() {
             )}
           />
         </div>
+        <div className="flex justify-between mb-6 items-center">
+          <div className="flex gap-2">
+            <Checkbox
+              children={
+                <span className="text-sm text-gray-400">Remember Me</span>
+              }
+              defaultChecked={isRememberAccount}
+              onChange={handleRememberAccount}
+            />
+          </div>
+          <ActionLink className="text-sm" to="">
+            Forgot Password?
+          </ActionLink>
+        </div>
         <Button
-          className="w-full h-10 mt-2"
+          className="w-full h-10 my-1"
           variant="solid"
           loading={isLoading}
         >
           Sign In
         </Button>
+        <div className="mt-4 text-center">
+          <span className="text-sm mr-1">Don't have an account yet?</span>
+          <ActionLink className="text-sm" to="">
+            Sign up
+          </ActionLink>
+        </div>
       </form>
     </>
   );
