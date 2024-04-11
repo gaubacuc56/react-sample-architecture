@@ -347,19 +347,19 @@ export default {
     safelist: [
         {
             pattern:
-                /bg-(slate| gray| navy|red| orange| amber| yellow|lime|green|teal| cyan|blue| indigo| purple |pink| brand|)-(100|200|300|400|500|600|700|800|900)/,
+                /bg-(slate| gray| navy|red| orange| amber| yellow|lime|green|teal| cyan|blue| indigo| purple |pink| brand|)-(50|100|200|300|400|500|600|700|800|900)/,
         },
         {
             pattern:
-                /!bg-(slate| gray| navy|red| orange| amber| yellow|lime|green|teal| cyan|blue| indigo| purple |pink| brand|)-(100|200|300|400|500|600|700|800|900)/,
+                /!bg-(slate| gray| navy|red| orange| amber| yellow|lime|green|teal| cyan|blue| indigo| purple |pink| brand|)-(50|100|200|300|400|500|600|700|800|900)/,
         },
         {
             pattern:
-                /text-(slate| gray| navy|red| orange| amber| yellow|lime|green|teal| cyan|blue| indigo| purple |pink| brand|)-(100|200|300|400|500|600|700|800|900)/,
+                /text-(slate| gray| navy|red| orange| amber| yellow|lime|green|teal| cyan|blue| indigo| purple |pink| brand|)-(50|100|200|300|400|500|600|700|800|900)/,
         },
         {
             pattern:
-                /!text-(slate| gray| navy|red| orange| amber| yellow|lime|green|teal| cyan|blue| indigo| purple |pink| brand|)-(100|200|300|400|500|600|700|800|900)/,
+                /!text-(slate| gray| navy|red| orange| amber| yellow|lime|green|teal| cyan|blue| indigo| purple |pink| brand|)-(50|100|200|300|400|500|600|700|800|900)/,
         },
     ],
 };

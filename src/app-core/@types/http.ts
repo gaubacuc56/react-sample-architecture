@@ -72,6 +72,7 @@ export enum HttpProtocol {
 
 /**
  * HTTP response object
+ * Will be modified base on each project needs
  */
 export interface HttpResponse<T> {
   succeeded: boolean;
@@ -87,10 +88,6 @@ export interface HttpResponse<T> {
   hasNextPage?: boolean;
 }
 
-/**
- * Authentication token
- */
-export type AuthenticationToken = {
-  accessToken: string;
-  refreshToken: string;
-};
+export interface HttpErrorMessage {
+  message: string;
+}

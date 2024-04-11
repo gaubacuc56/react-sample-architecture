@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CSSProperties, forwardRef, useMemo, memo } from "react";
 
-interface InputProps {
+export interface IInputProps {
   id?: string;
   extra?: string;
   placeholder?: string;
@@ -29,8 +29,8 @@ interface InputProps {
   readOnly?: boolean;
 }
 
-const Input = memo(forwardRef<HTMLInputElement, InputProps>(
-  (props: InputProps, ref) => {
+const Input = memo(forwardRef<HTMLInputElement, IInputProps>(
+  (props: IInputProps, ref) => {
     const {
       id,
       extra,

@@ -14,6 +14,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.10",
+    "framer-motion": "^11.0.27",
     "i18next": "^23.10.1",
     "lodash": "^4.17.21",
     "primereact": "^10.6.2",
