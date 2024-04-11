@@ -101,7 +101,7 @@ export default function SignIn() {
         Welcome back!
       </h3>
 
-      <p className="text-gray-500 text-center">
+      <p className="text-gray-400 text-center text-sm">
         Please enter your credentials to sign in!
       </p>
 

@@ -17,7 +17,8 @@ interface IThemeState  {
         type: LayoutType
         sideNavCollapse: boolean
         previousType?: LayoutType
-    }
+    },
+    panelExpand: boolean
 }
 
 const initialState: IThemeState = {
@@ -26,6 +27,7 @@ const initialState: IThemeState = {
     mode: themeConfig.mode,
     primaryColorLevel: themeConfig.primaryColorLevel,
     layout: themeConfig.layout,
+    panelExpand: themeConfig.panelExpand,
 }
 
 export const themeStore = createSlice({
@@ -59,6 +61,9 @@ export const themeStore = createSlice({
         setThemeColorLevel: (state, action) => {
             state.primaryColorLevel = action.payload
         },
+        setPanelExpand: (state, action: PayloadAction<boolean>) => {
+            state.panelExpand = action.payload
+        },
     },
 })
 
@@ -68,6 +73,7 @@ export const direction = (state: RootState) => state.themeReducer.direction;
 export const mode = (state: RootState) => state.themeReducer.mode;
 export const primaryColorLevel = (state: RootState) => state.themeReducer.primaryColorLevel;
 export const layout = (state: RootState) => state.themeReducer.layout;
+export const panelExpand = (state: RootState) => state.themeReducer.panelExpand;
 
 // export action
 export const {
@@ -78,6 +84,7 @@ export const {
     setThemeColor,
     setThemeColorLevel,
     setPreviousLayout,
+    setPanelExpand,
 } = themeStore.actions
 
 export default themeStore.reducer

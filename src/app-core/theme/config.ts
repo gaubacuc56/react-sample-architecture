@@ -15,6 +15,7 @@ export type ThemeConfig = {
         type: LayoutType;
         sideNavCollapse: boolean;
     };
+    panelExpand: boolean
 };
 
 export const themeConfig: ThemeConfig = {
@@ -26,4 +27,5 @@ export const themeConfig: ThemeConfig = {
         type: THEME_ENUM.LAYOUT_TYPE_MODERN,
         sideNavCollapse: false,
     },
+    panelExpand: false,
 };
