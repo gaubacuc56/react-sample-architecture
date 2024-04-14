@@ -1,25 +1,24 @@
-import type { MouseEvent, ReactNode } from 'react'
-import classNames from 'classnames'
-import Modal from 'react-modal'
-import type ReactModal from 'react-modal'
-import { motion } from 'framer-motion'
+import type { MouseEvent, ReactNode } from "react";
+import classNames from "classnames";
+import Modal from "react-modal";
+import type ReactModal from "react-modal";
+import { motion } from "framer-motion";
 
-import CloseButton from '../CloseButton'
-import style from './drawer.module.css'
+import CloseButton from "../CloseButton";
 
 export interface DrawerProps extends ReactModal.Props {
-    bodyClass?: string
-    closable?: boolean
-    footer?: string | ReactNode
-    footerClass?: string
-    headerClass?: string
-    height?: string | number
-    lockScroll?: boolean
-    onClose?: (e: MouseEvent<HTMLSpanElement>) => void
-    placement?: 'top' | 'right' | 'bottom' | 'left'
-    showBackdrop?: boolean
-    title?: string | ReactNode
-    width?: string | number
+    bodyClass?: string;
+    closable?: boolean;
+    footer?: string | ReactNode;
+    footerClass?: string;
+    headerClass?: string;
+    height?: string | number;
+    lockScroll?: boolean;
+    onClose?: (e: MouseEvent<HTMLSpanElement>) => void;
+    placement?: "top" | "right" | "bottom" | "left";
+    showBackdrop?: boolean;
+    title?: string | ReactNode;
+    width?: string | number;
 }
 
 const Drawer = (props: DrawerProps) => {
@@ -38,81 +37,81 @@ const Drawer = (props: DrawerProps) => {
         lockScroll = true,
         onClose,
         overlayClassName,
-        placement = 'right',
+        placement = "right",
         portalClassName,
         showBackdrop = true,
         title,
         width = 400,
         ...rest
-    } = props
+    } = props;
 
     const onCloseClick = (e: MouseEvent<HTMLSpanElement>) => {
-        onClose?.(e)
-    }
+        onClose?.(e);
+    };
 
-    const renderCloseButton = <CloseButton onClick={onCloseClick} />
+    const renderCloseButton = <CloseButton onClick={onCloseClick} />;
 
     const getStyle = (): {
-        dimensionClass?: string
+        dimensionClass?: string;
         contentStyle?: {
-            width?: string | number
-            height?: string | number
-        }
+            width?: string | number;
+            height?: string | number;
+        };
         motionStyle: {
-            [x: string]: string
-        }
+            [x: string]: string;
+        };
     } => {
-        if (placement === 'left' || placement === 'right') {
+        if (placement === "left" || placement === "right") {
             return {
-                dimensionClass: 'vertical',
+                dimensionClass: "vertical",
                 contentStyle: { width },
                 motionStyle: {
                     [placement]: `-${width}${
-                        typeof width === 'number' && 'px'
+                        typeof width === "number" && "px"
                     }`,
                 },
-            }
+            };
         }
 
-        if (placement === 'top' || placement === 'bottom') {
+        if (placement === "top" || placement === "bottom") {
             return {
-                dimensionClass: 'horizontal',
+                dimensionClass: "horizontal",
                 contentStyle: { height },
                 motionStyle: {
                     [placement]: `-${height}${
-                        typeof height === 'number' && 'px'
+                        typeof height === "number" && "px"
                     }`,
                 },
-            }
+            };
         }
 
         return {
             motionStyle: {},
-        }
-    }
+        };
+    };
 
-    const { dimensionClass, contentStyle, motionStyle } = getStyle()
+    const { dimensionClass, contentStyle, motionStyle } = getStyle();
 
     return (
         <Modal
             className={{
-                base: classNames(style.drawer, className as string),
-                afterOpen: style['drawer-after-open'],
-                beforeClose: style['drawer-before-close'],
+                base: classNames("drawer", className as string),
+                afterOpen: "drawer-after-open",
+                beforeClose: "drawer-before-close",
             }}
             overlayClassName={{
                 base: classNames(
-                    style['drawer-overlay'],
+                    "drawer-overlay",
                     overlayClassName as string,
-                    !showBackdrop && 'bg-transparent'
+                    !showBackdrop && "bg-transparent"
                 ),
-                afterOpen:  style['drawer-overlay-after-open'],
-                beforeClose:  style['drawer-overlay-before-close'],
+                afterOpen: "drawer-overlay-after-open",
+                beforeClose: "drawer-overlay-before-close",
             }}
-            portalClassName={classNames('drawer-portal', portalClassName)}
+            portalClassName={classNames("drawer-portal", portalClassName)}
             bodyOpenClassName={classNames(
-                style['drawer-open'],
-                lockScroll && style['drawer-lock-scroll'],
+                "drawer-open",
+                lockScroll && "drawer-lock-scroll",
                 bodyOpenClassName
             )}
             ariaHideApp={false}
@@ -121,18 +120,18 @@ const Drawer = (props: DrawerProps) => {
             {...rest}
         >
             <motion.div
-                className={classNames( style['drawer-content'], dimensionClass)}
+                className={classNames("drawer-content", dimensionClass)}
                 style={contentStyle}
                 initial={motionStyle}
                 animate={{
-                    [placement as 'top' | 'right' | 'bottom' | 'left']: isOpen
+                    [placement as "top" | "right" | "bottom" | "left"]: isOpen
                         ? 0
                         : motionStyle[placement],
                 }}
             >
                 {title || closable ? (
-                    <div className={classNames( style['drawer-header'], headerClass)}>
-                        {typeof title === 'string' ? (
+                    <div className={classNames("drawer-header", headerClass)}>
+                        {typeof title === "string" ? (
                             <h4>{title}</h4>
                         ) : (
                             <span>{title}</span>
@@ -140,17 +139,17 @@ const Drawer = (props: DrawerProps) => {
                         {closable && renderCloseButton}
                     </div>
                 ) : null}
-                <div className={classNames( style['drawer-body'], bodyClass)}>
+                <div className={classNames("drawer-body", bodyClass)}>
                     {children}
                 </div>
                 {footer && (
-                    <div className={classNames( style['drawer-footer'], footerClass)}>
+                    <div className={classNames("drawer-footer", footerClass)}>
                         {footer}
                     </div>
                 )}
             </motion.div>
         </Modal>
-    )
-}
+    );
+};
 
-export default Drawer
+export default Drawer;

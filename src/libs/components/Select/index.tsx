@@ -1,13 +1,14 @@
 import { forwardRef, Ref, ForwardedRef } from "react";
 import classNames from "classnames";
 import ReactSelect, {
-  ControlProps,
-  Props as ReactSelectProps,
-  GroupBase,
+    ControlProps,
+    Props as ReactSelectProps,
+    GroupBase,
 } from "react-select";
 import CreatableSelect, { CreatableProps } from "react-select/creatable";
 import AsyncSelect, { AsyncProps } from "react-select/async";
 
+import tw, { theme } from "twin.macro";
 import isEmpty from "lodash/isEmpty";
 import get from "lodash/get";
 
@@ -17,217 +18,241 @@ import type { CommonProps } from "@app-core/@types/common";
 import { ControlSize } from "@app-core/@types/theme";
 
 import { useThemeConfig } from "@libs/hooks/useThemeConfig";
+import { CONTROL_SIZES } from "@constant/theme.constant";
 
 import Spinner from "../Spinner";
 
+// import { useForm } from "../Form/context";
+// import { useInputGroup } from "../InputGroup/context";
+
 interface DefaultOptionProps {
-  innerProps: JSX.IntrinsicElements["div"];
-  label: string;
-  selectProps: { themeColor?: string };
-  isSelected: boolean;
-  isDisabled: boolean;
-  isFocused: boolean;
+    innerProps: JSX.IntrinsicElements["div"];
+    label: string;
+    selectProps: { themeColor?: string };
+    isSelected: boolean;
+    isDisabled: boolean;
+    isFocused: boolean;
 }
 
 const DefaultOption = ({
-  innerProps,
-  label,
-  selectProps,
-  isSelected,
-  isDisabled,
-  isFocused,
+    innerProps,
+    label,
+    selectProps,
+    isSelected,
+    isDisabled,
+    isFocused,
 }: DefaultOptionProps) => {
-  const { themeColor } = selectProps;
-  return (
-    <div
-      className={classNames(
-        "select-option",
-        isSelected && "selected",
-        isDisabled && "disabled",
-        isFocused && "focused"
-      )}
-      {...innerProps}
-    >
-      <span className="ml-2">{label}</span>
-      {isSelected && (
-        <HiCheck className={`text-${themeColor} dark:text-white text-xl`} />
-      )}
-    </div>
-  );
+    const { themeColor } = selectProps;
+    return (
+        <div
+            className={classNames(
+                "select-option",
+                isSelected && "selected",
+                isDisabled && "disabled",
+                isFocused && "focused"
+            )}
+            {...innerProps}
+        >
+            <span className="ml-2">{label}</span>
+            {isSelected && (
+                <HiCheck
+                    className={`text-${themeColor} dark:text-white text-xl`}
+                />
+            )}
+        </div>
+    );
 };
 
 const DefaultDropdownIndicator = () => {
-  return (
-    <div className="select-dropdown-indicator">
-      <HiChevronDown />
-    </div>
-  );
+    return (
+        <div className="select-dropdown-indicator">
+            <HiChevronDown />
+        </div>
+    );
 };
 
 interface DefaultClearIndicatorProps {
-  innerProps: JSX.IntrinsicElements["div"];
-  ref: Ref<HTMLElement>;
+    innerProps: JSX.IntrinsicElements["div"];
+    ref: Ref<HTMLElement>;
 }
 
 const DefaultClearIndicator = ({
-  innerProps: { ref, ...restInnerProps },
+    innerProps: { ref, ...restInnerProps },
 }: DefaultClearIndicatorProps) => {
-  return (
-    <div {...restInnerProps} ref={ref}>
-      <div className="select-clear-indicator">
-        <HiX />
-      </div>
-    </div>
-  );
+    return (
+        <div {...restInnerProps} ref={ref}>
+            <div className="select-clear-indicator">
+                <HiX />
+            </div>
+        </div>
+    );
 };
 
 interface DefaultLoadingIndicatorProps {
-  selectProps: { themeColor?: string };
+    selectProps: { themeColor?: string };
 }
 
 const DefaultLoadingIndicator = ({
-  selectProps,
+    selectProps,
 }: DefaultLoadingIndicatorProps) => {
-  const { themeColor } = selectProps;
-  return <Spinner className={`select-loading-indicatior text-${themeColor}`} />;
+    const { themeColor } = selectProps;
+    return (
+        <Spinner className={`select-loading-indicatior text-${themeColor}`} />
+    );
 };
 
 export interface SelectProps<
-  Option,
-  IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+    Option,
+    IsMulti extends boolean = false,
+    Group extends GroupBase<Option> = GroupBase<Option>
 > extends CommonProps,
-    ReactSelectProps<Option, IsMulti, Group>,
-    AsyncProps<Option, IsMulti, Group>,
-    CreatableProps<Option, IsMulti, Group> {
-  size?: ControlSize;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  field?: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  form?: any;
-  componentAs?: ReactSelect | CreatableSelect | AsyncSelect;
+        ReactSelectProps<Option, IsMulti, Group>,
+        AsyncProps<Option, IsMulti, Group>,
+        CreatableProps<Option, IsMulti, Group> {
+    size?: ControlSize;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    field?: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    form?: any;
+    componentAs?: ReactSelect | CreatableSelect | AsyncSelect;
 }
 
 function _Select<
-  Option,
-  IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+    Option,
+    IsMulti extends boolean = false,
+    Group extends GroupBase<Option> = GroupBase<Option>
 >(
-  props: SelectProps<Option, IsMulti, Group>,
-  ref: ForwardedRef<ReactSelect | CreatableSelect | AsyncSelect>
+    props: SelectProps<Option, IsMulti, Group>,
+    ref: ForwardedRef<ReactSelect | CreatableSelect | AsyncSelect>
 ) {
-  const {
-    size = 'md',
-    style,
-    className,
-    form,
-    field,
-    components,
-    componentAs: Component = ReactSelect,
-    ...rest
-  } = props;
+    const {
+        size = "md",
+        style,
+        className,
+        form,
+        field,
+        components,
+        componentAs: Component = ReactSelect,
+        ...rest
+    } = props;
 
-  const { themeColor, primaryColorLevel, mode } = useThemeConfig();
+    const { themeColor, primaryColorLevel, mode } = useThemeConfig();
+    /*   const formControlSize = useForm()?.size;
+  const inputGroupSize = useInputGroup()?.size; */
 
-  let isInvalid = false;
+    const selectSize =
+        size; /* || inputGroupSize || formControlSize || controlSize */
 
-  if (!isEmpty(form)) {
-    const { touched, errors } = form;
+    const twColor: Record<string, string> = theme`colors`;
+    const twHeight = theme`height`;
 
-    const touchedField = get(touched, field.name);
-    const errorField = get(errors, field.name);
+    let isInvalid = false;
 
-    isInvalid = touchedField && errorField;
-  }
+    if (!isEmpty(form)) {
+        const { touched, errors } = form;
 
-  const getBoxShadow = (state: ControlProps<Option, IsMulti, Group>) => {
-    const shadaowBase = "0 0 0 1px ";
+        const touchedField = get(touched, field.name);
+        const errorField = get(errors, field.name);
 
-    if (isInvalid) {
-      return shadaowBase + 'border-red-500';
+        isInvalid = touchedField && errorField;
     }
 
-    if (state.isFocused) {
-      return shadaowBase + `border-${themeColor}-${primaryColorLevel}`;
-    }
+    const getBoxShadow = (state: ControlProps<Option, IsMulti, Group>) => {
+        const shadaowBase = "0 0 0 1px ";
 
-    return "none";
-  };
+        if (isInvalid) {
+            return shadaowBase + twColor.red["500"];
+        }
 
-  const selectClass = classNames("select", `select-${size}`, className);
+        if (state.isFocused) {
+            return shadaowBase + twColor[themeColor][primaryColorLevel];
+        }
 
-  return (
-    <Component<Option, IsMulti, Group>
-      ref={ref}
-      className={selectClass}
-      classNamePrefix={"select"}
-      styles={{
-        control: (provided, state) => {
-          return {
-            ...provided,
-            height: 'h-full',
-            minHeight: 'h-full',
-            "&:hover": {
-              boxShadow: getBoxShadow(state),
-              cursor: "pointer",
-            },
-            boxShadow: getBoxShadow(state),
-            borderRadius: 'rounded-md',
-            ...(isInvalid ? { borderColor: 'border-red-500' } : {}),
-          };
-        },
-        input: (css) => {
-          return {
-            ...css,
-            input: {
-              outline: "none",
-              outlineOffset: 0,
-              boxShadow: "none !important",
-            },
-          };
-        },
-        menu: (provided) => ({ ...provided, zIndex: 50 }),
-        ...style,
-      }}
-      theme={(theme) => ({
-        ...theme,
-        colors: {
-          ...theme.colors,
-          neutral20:
-            mode === "dark" ? 'text-gray-600' : 'text-gray-300',
-          neutral30:
-            mode === "dark" ? 'text-gray-600' : 'text-gray-300',
-          neutral80: 'text-gray-700',
-          neutral10:
-            mode === "dark" ? 'text-gray-600' : 'text-gray-300',
-          primary25: 'text-blue-50',
-          primary50: 'text-blue-100',
-          primary: `text-${themeColor}-${primaryColorLevel}`,
-        },
-      })}
-      themeColor={`${themeColor}-${primaryColorLevel}`}
-      components={{
-        IndicatorSeparator: () => null,
-        Option: DefaultOption,
-        LoadingIndicator: DefaultLoadingIndicator,
-        DropdownIndicator: DefaultDropdownIndicator,
-        ClearIndicator: DefaultClearIndicator,
-        ...components,
-      }}
-      {...field}
-      {...rest}
-    />
-  );
+        return "none";
+    };
+
+    const selectClass = classNames("select", `select-${selectSize}`, className);
+
+    return (
+        <Component<Option, IsMulti, Group>
+            ref={ref}
+            className={selectClass}
+            classNamePrefix={"select"}
+            styles={{
+                control: (provided, state) => {
+                    return {
+                        ...provided,
+                        height: twHeight[CONTROL_SIZES[selectSize]],
+                        minHeight: twHeight[CONTROL_SIZES[selectSize]],
+                        "&:hover": {
+                            boxShadow: getBoxShadow(state),
+                            cursor: "pointer",
+                        },
+                        boxShadow: getBoxShadow(state),
+                        borderRadius: tw`rounded-md`.borderRadius,
+                        ...(isInvalid
+                            ? { borderColor: twColor.red["500"] }
+                            : {}),
+                    };
+                },
+                input: (css) => {
+                    return {
+                        ...css,
+                        input: {
+                            outline: "none",
+                            outlineOffset: 0,
+                            boxShadow: "none !important",
+                        },
+                    };
+                },
+                menu: (provided) => ({ ...provided, zIndex: 50 }),
+                ...style,
+            }}
+            theme={(theme) => ({
+                ...theme,
+                colors: {
+                    ...theme.colors,
+                    neutral20:
+                        mode === "dark"
+                            ? twColor.gray["600"]
+                            : twColor.gray["300"],
+                    neutral30:
+                        mode === "dark"
+                            ? twColor.gray["600"]
+                            : twColor.gray["300"],
+                    neutral80: twColor.gray["700"],
+                    neutral10:
+                        mode === "dark"
+                            ? twColor.gray["600"]
+                            : twColor.gray["300"],
+                    primary25: twColor[themeColor]["50"],
+                    primary50: twColor[themeColor]["100"],
+                    primary: twColor[themeColor][primaryColorLevel],
+                },
+            })}
+            themeColor={`${themeColor}-${primaryColorLevel}`}
+            components={{
+                IndicatorSeparator: () => null,
+                Option: DefaultOption,
+                LoadingIndicator: DefaultLoadingIndicator,
+                DropdownIndicator: DefaultDropdownIndicator,
+                ClearIndicator: DefaultClearIndicator,
+                ...components,
+            }}
+            {...field}
+            {...rest}
+        />
+    );
 }
 
 const Select = forwardRef(_Select) as <
-  Option,
-  IsMulti extends boolean = false,
-  Group extends GroupBase<Option> = GroupBase<Option>
+    Option,
+    IsMulti extends boolean = false,
+    Group extends GroupBase<Option> = GroupBase<Option>
 >(
-  props: SelectProps<Option, IsMulti, Group> & {
-    ref?: ForwardedRef<ReactSelect | CreatableSelect | AsyncSelect>;
-  }
+    props: SelectProps<Option, IsMulti, Group> & {
+        ref?: ForwardedRef<ReactSelect | CreatableSelect | AsyncSelect>;
+    }
 ) => ReturnType<typeof _Select>;
 
 export default Select;

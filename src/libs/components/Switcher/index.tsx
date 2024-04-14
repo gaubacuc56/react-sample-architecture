@@ -1,27 +1,26 @@
-import { forwardRef, useState, useEffect, ReactNode, ChangeEvent } from 'react'
-import classNames from 'classnames'
+import { forwardRef, useState, useEffect, ReactNode, ChangeEvent } from "react";
+import classNames from "classnames";
 
-import type { CommonProps } from '@app-core/@types/common'
+import type { CommonProps } from "@app-core/@types/common";
 
-import { useThemeConfig } from '@libs/hooks/useThemeConfig'
+import { useThemeConfig } from "@libs/hooks/useThemeConfig";
 
-import Spinner from '../Spinner'
-
+import Spinner from "../Spinner";
 
 export interface SwitcherProps extends CommonProps {
-    checked?: boolean
-    checkedContent?: string | ReactNode
-    color?: string
-    defaultChecked?: boolean
-    disabled?: boolean
-    isLoading?: boolean
-    labelRef?: string
-    name?: string
-    onChange?: (checked: boolean, e: ChangeEvent<HTMLInputElement>) => void
-    readOnly?: boolean
-    unCheckedContent?: string | ReactNode
+    checked?: boolean;
+    checkedContent?: string | ReactNode;
+    color?: string;
+    defaultChecked?: boolean;
+    disabled?: boolean;
+    isLoading?: boolean;
+    labelRef?: string;
+    name?: string;
+    onChange?: (checked: boolean, e: ChangeEvent<HTMLInputElement>) => void;
+    readOnly?: boolean;
+    unCheckedContent?: string | ReactNode;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    field?: any
+    field?: any;
 }
 
 const Switcher = forwardRef<HTMLInputElement, SwitcherProps>((props, ref) => {
@@ -40,69 +39,69 @@ const Switcher = forwardRef<HTMLInputElement, SwitcherProps>((props, ref) => {
         unCheckedContent,
         field,
         ...rest
-    } = props
+    } = props;
 
-    const { themeColor, primaryColorLevel } = useThemeConfig()
+    const { themeColor, primaryColorLevel } = useThemeConfig();
 
     const [switcherChecked, setSwitcherChecked] = useState(
         defaultChecked || checked
-    )
+    );
 
     useEffect(() => {
-        if (typeof checked !== 'undefined') {
-            setSwitcherChecked(checked)
+        if (typeof checked !== "undefined") {
+            setSwitcherChecked(checked);
         }
-    }, [checked])
+    }, [checked]);
 
     const getControlProps = () => {
-        let checkedValue = switcherChecked
+        let checkedValue = switcherChecked;
 
         let checked: {
-            value?: boolean
-            defaultChecked?: boolean
-            checked?: boolean
+            value?: boolean;
+            defaultChecked?: boolean;
+            checked?: boolean;
         } = {
             value: checkedValue,
-        }
+        };
 
         if (field) {
             checkedValue =
-                typeof field.value === 'boolean' ? field.value : defaultChecked
-            checked = { value: checkedValue, checked: checkedValue }
+                typeof field.value === "boolean" ? field.value : defaultChecked;
+            checked = { value: checkedValue, checked: checkedValue };
         }
 
         if (defaultChecked) {
-            checked.defaultChecked = defaultChecked
+            checked.defaultChecked = defaultChecked;
         }
-        return checked
-    }
+        return checked;
+    };
 
-    const controlProps = getControlProps()
+    const controlProps = getControlProps();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const nextChecked = !switcherChecked
+        const nextChecked = !switcherChecked;
 
         if (disabled || readOnly || isLoading) {
-            return
+            return;
         }
 
-        if (typeof checked === 'undefined') {
-            setSwitcherChecked(nextChecked)
-            onChange?.(nextChecked, e)
+        if (typeof checked === "undefined") {
+            setSwitcherChecked(nextChecked);
+            onChange?.(nextChecked, e);
         } else {
-            onChange?.(switcherChecked as boolean, e)
+            onChange?.(switcherChecked as boolean, e);
         }
-    }
+    };
 
-    const switcherColor = color || `${themeColor}-${primaryColorLevel}`
+    const switcherColor = color || `${themeColor}-${primaryColorLevel}`;
 
     const switcherClass = classNames(
-        'switcher',
+        "switcher",
         (switcherChecked || controlProps.checked) &&
             `switcher-checked bg-${switcherColor} dark:bg-${switcherColor}`,
-        disabled && 'switcher-disabled',
+        disabled && "switcher-disabled",
         className
-    )
+    );
 
     return (
         <label ref={labelRef} className={switcherClass}>
@@ -120,10 +119,10 @@ const Switcher = forwardRef<HTMLInputElement, SwitcherProps>((props, ref) => {
             {isLoading ? (
                 <Spinner
                     className={classNames(
-                        'switcher-toggle-loading',
+                        "switcher-toggle-loading",
                         switcherChecked
-                            ? 'switcher-checked-loading'
-                            : 'switcher-uncheck-loading'
+                            ? "switcher-checked-loading"
+                            : "switcher-uncheck-loading"
                     )}
                 />
             ) : (
@@ -133,9 +132,9 @@ const Switcher = forwardRef<HTMLInputElement, SwitcherProps>((props, ref) => {
                 {switcherChecked ? checkedContent : unCheckedContent}
             </span>
         </label>
-    )
-})
+    );
+});
 
-Switcher.displayName = 'Switcher'
+Switcher.displayName = "Switcher";
 
-export default Switcher
+export default Switcher;
