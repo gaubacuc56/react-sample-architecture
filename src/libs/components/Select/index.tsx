@@ -190,6 +190,10 @@ function _Select<
                         },
                         boxShadow: getBoxShadow(state),
                         borderRadius: tw`rounded-md`.borderRadius,
+                        color:   mode === "dark"
+                        ? twColor.gray["400"]
+                        : twColor.gray["900"],
+                        fontSize: '14px',
                         ...(isInvalid
                             ? { borderColor: twColor.red["500"] }
                             : {}),
@@ -205,7 +209,7 @@ function _Select<
                         },
                     };
                 },
-                menu: (provided) => ({ ...provided, zIndex: 50 }),
+                menu: (provided) => ({ ...provided, zIndex: 50}),
                 ...style,
             }}
             theme={(theme) => ({

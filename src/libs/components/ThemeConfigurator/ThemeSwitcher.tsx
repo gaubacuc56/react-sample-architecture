@@ -1,4 +1,3 @@
-import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "../Select";
 import Badge from "../Badge";
@@ -105,7 +104,7 @@ const CustomControl = ({ children, ...props }: ControlProps<ColorList>) => {
             {selected && (
                 <ColorBadge
                     themeColor={themeColor}
-                    className="ltr:ml-4 rtl:mr-4"
+                    className="ml-4"
                 />
             )}
             {children}
@@ -138,7 +137,6 @@ const ThemeSwitcher = () => {
                 }}
                 value={colorList.filter((color) => color.value === themeColor)}
                 onChange={(opt) => onThemeColorChange(opt as ColorList)}
-                className="pl-2"
             />
             <Select
                 size="sm"

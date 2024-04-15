@@ -9,12 +9,12 @@ export type ThemeConfiguratorProps = {
 
 const ThemeConfigurator = ({ callBackClose }: ThemeConfiguratorProps) => {
     return (
-        <div className="flex flex-col h-screen justify-between">
+        <div className="flex flex-col h-full justify-between">
             <div className="flex flex-col gap-y-10 mb-6">
                 <div className="flex items-center justify-between">
                     <div>
                         <h6 className="dark:text-white">Dark Mode</h6>
-                        <span className="dark:text-gray-400">
+                        <span className="dark:text-gray-400 text-sm">
                             Switch theme to dark mode
                         </span>
                     </div>

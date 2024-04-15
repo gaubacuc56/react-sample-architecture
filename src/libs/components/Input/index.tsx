@@ -62,7 +62,7 @@ const Input = memo(forwardRef<HTMLInputElement, IInputProps>(
         _extraClass =
           "!border-none !bg-gray-100 dark:!bg-white/5 dark:placeholder:!text-[rgba(255,255,255,0.15)]";
 
-      let inputClasses = `mt-2 flex h-12 w-full items-center justify-center rounded-xl border bg-white/0 p-3 text-sm outline-none ${_extraClass}`;
+      let inputClasses = `mt-2 flex h-12 w-full items-center justify-center rounded-md border border-gray-300 bg-white/0 p-3 text-sm outline-none ${_extraClass}`;
       if (leftIcon) inputClasses += ` pl-[2.125rem]`;
       if (rightIcon) inputClasses += ` pr-[2.125rem]`;
       return inputClasses;

@@ -43,7 +43,7 @@ const _SidePanel = (props: SidePanelProps) => {
         <>
             <div
                 className={classNames(
-                    `fixed right-0 p-3 rounded-none rounded-tl-lg rounded-bl-lg text-white text-xl cursor-pointer select-none bg-${themeColor}-${primaryColorLevel}`,
+                    `fixed right-0 top-5 md:top-auto p-3 rounded-none rounded-tl-lg rounded-bl-lg text-white text-xl cursor-pointer select-none bg-${themeColor}-${primaryColorLevel}`,
                     className
                 )}
                 onClick={openPanel}

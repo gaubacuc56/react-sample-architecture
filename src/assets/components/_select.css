@@ -63,11 +63,11 @@
 }
 
 .select__menu {
-  @apply bg-white dark:bg-gray-700 dark:shadow-2xl;
+  @apply bg-white dark:bg-gray-700 dark:shadow-2xl cursor-pointer;
 }
 
 .select-option {
-  @apply flex items-center justify-between px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-default;
+  @apply flex items-center justify-between px-2 py-1.5 hover:bg-gray-50 dark:hover:bg-gray-600 cursor-pointer;
 
   &.selected {
     @apply bg-gray-100 dark:bg-gray-500;
