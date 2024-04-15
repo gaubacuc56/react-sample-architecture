@@ -1,13 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useCallback } from 'react'
 import type { ComponentType } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
-
+import { useAppDispatch, useAppSelector } from '../redux-manager/hooks'
 import {
     setLayout,
     setPreviousLayout,
-    layout
 } from '@libs/features/theme/theme.slice'
 import { LayoutType } from '../@types/theme'
 
@@ -24,10 +22,10 @@ const AppRoute = <T extends Record<string, unknown>>({
 }: AppRouteProps<T>) => {
     const location = useLocation()
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
-    const layoutType = useSelector(layout).type;
-    const previousLayout = useSelector(layout).previousType;
+    const layoutType = useAppSelector(state => state.themeReducer.layout).type;
+    const previousLayout = useAppSelector(state => state.themeReducer.layout).previousType;
 
     const handleLayoutChange = useCallback(() => {
 

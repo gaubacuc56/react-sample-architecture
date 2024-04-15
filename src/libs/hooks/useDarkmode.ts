@@ -1,20 +1,22 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import type { Mode } from '@app-core/@types/theme'
-import { THEME_ENUM } from '@/constant/theme.constant'
+import { THEME_ENUM } from '@constant/theme.constant'
 
-import {mode as AppMode, setMode } from '@libs/features/theme/theme.slice'
+import { setMode } from '@libs/features/theme/theme.slice'
+import { useAppSelector, useAppDispatch } from '@app-core/redux-manager/hooks'
 
 function useDarkMode(): [
     isEnabled: boolean,
     onModeChange: (mode: Mode) => void
 ] {
-    const mode = useSelector(AppMode)
+    const mode = useAppSelector(state => state.themeReducer.mode)
+    
     const { MODE_DARK, MODE_LIGHT } = THEME_ENUM
 
     const isEnabled = mode === MODE_DARK
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
+
     const onModeChange = (mode: Mode) => {
         dispatch(setMode(mode))
     }

@@ -6,7 +6,6 @@ import type {
     ColorLevel,
     Direction,
 } from '@app-core/@types/theme'
-import { RootState } from '@app-core/redux-manager/rootReducer'
 
 interface IThemeState  {
     themeColor: string
@@ -66,14 +65,6 @@ export const themeStore = createSlice({
         },
     },
 })
-
-// export state
-export const themeColor = (state: RootState) => state.themeReducer.themeColor;
-export const direction = (state: RootState) => state.themeReducer.direction;
-export const mode = (state: RootState) => state.themeReducer.mode;
-export const primaryColorLevel = (state: RootState) => state.themeReducer.primaryColorLevel;
-export const layout = (state: RootState) => state.themeReducer.layout;
-export const panelExpand = (state: RootState) => state.themeReducer.panelExpand;
 
 // export action
 export const {

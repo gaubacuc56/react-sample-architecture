@@ -1,8 +1,7 @@
 import { ComponentType, ForwardedRef, forwardRef } from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "@/app-core/redux-manager/hooks";
 
 import useAuthority from "@libs/hooks/useAuthority";
-import { userAuthority } from "@libs/features/auth/auth.slice";
 
 interface WithAuthorizationProps {
   authorities: [];
@@ -30,7 +29,7 @@ export const withAuthorization = <P extends object>(
     ref: ForwardedRef<any>
   ) => {
     const { authorities, ...otherProps } = props;
-    const _userAuthority = useSelector(userAuthority);
+    const _userAuthority = useAppSelector(state => state.authReducer.authority);
 
     const roleMatched = useAuthority(_userAuthority, authorities);
 

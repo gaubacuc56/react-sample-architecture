@@ -1,12 +1,11 @@
 import classNames from "classnames";
 import Drawer from "../../components/Drawer";
 import { HiOutlineCog } from "react-icons/hi";
-import { useSelector, useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@/app-core/redux-manager/hooks";
 import withHeaderItem from "@libs/utils/hoc/withHeaderItem";
 import {
     setPanelExpand,
-    panelExpand,
-    direction,
+ 
 } from "@libs/features/theme/theme.slice";
 import type { CommonProps } from "@app-core/@types/common";
 import ThemeConfigurator, {
@@ -17,13 +16,14 @@ import { useThemeConfig } from "@/libs/hooks/useThemeConfig";
 type SidePanelProps = ThemeConfiguratorProps & CommonProps;
 
 const _SidePanel = (props: SidePanelProps) => {
-    const dispatch = useDispatch();
-
+    
     const { className, ...rest } = props;
 
-    const _panelExpand = useSelector(panelExpand);
+    const dispatch = useAppDispatch();
 
-    const _direction = useSelector(direction);
+    const _panelExpand = useAppSelector(state => state.themeReducer.panelExpand);
+
+    const _direction = useAppSelector(state => state.themeReducer.direction);
 
     const { themeColor, primaryColorLevel } = useThemeConfig();
 

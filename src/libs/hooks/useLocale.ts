@@ -1,15 +1,13 @@
 import { useEffect } from "react";
 import i18n from "i18next";
 import dayjs from "dayjs";
-import { useSelector } from "react-redux";
 
+import { useAppSelector } from "@/app-core/redux-manager/hooks";
 import { LocaleType, dateLocales } from "@app-core/locale";
-
-import { appLanguage } from "@libs/features/locale/locale.slice";
 
 function useLocale(language?: LocaleType) {
 
-  const _appLanguage = useSelector(appLanguage);
+  const _appLanguage = useAppSelector(state => state.localeReducer.language);
   const currLanguage = language ?? _appLanguage;
 
   useEffect(() => {

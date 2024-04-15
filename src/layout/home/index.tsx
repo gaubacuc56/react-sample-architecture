@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/app-core/redux-manager/hooks";
 import { logout } from "@libs/features/auth/auth.slice";
 export const HomeLayout = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleLogout = () => {
     dispatch(logout())

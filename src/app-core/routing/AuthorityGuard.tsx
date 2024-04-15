@@ -1,9 +1,8 @@
 import { PropsWithChildren } from "react";
 import { Navigate} from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../redux-manager/hooks";
 
 import useAuthority from "@libs/hooks/useAuthority";
-import { userAuthority } from "@libs/features/auth/auth.slice";
 
 import {
   UNAUTHORIZED_ENTRY_PATH,
@@ -17,7 +16,7 @@ type AuthorityGuardProps = PropsWithChildren<{
 const AuthorityGuard = (props: AuthorityGuardProps) => {
   const { authority = [], children } = props;
 
-  const _userAuthority = useSelector(userAuthority);
+  const _userAuthority = useAppSelector(state => state.authReducer.authority);
 
   const roleMatched = useAuthority(_userAuthority, authority);
 

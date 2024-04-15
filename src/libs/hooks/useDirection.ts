@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 
 import type { Direction } from '@app-core/@types/theme'
-import { direction as SidebarDirection , setDirection} from '@libs/features/theme/theme.slice'
+import { setDirection} from '@libs/features/theme/theme.slice'
+import { useAppDispatch, useAppSelector } from '@/app-core/redux-manager/hooks'
 
 function useDirection(): [
     direction: Direction,
     updateDirection: (dir: Direction) => void
 ] {
-    const direction = useSelector(SidebarDirection)
+    const direction = useAppSelector(state => state.themeReducer.direction)
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const updateDirection = (dir: Direction) => {
         dispatch(setDirection(dir))

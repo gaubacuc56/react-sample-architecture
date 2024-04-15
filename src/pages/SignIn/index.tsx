@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "@/app-core/redux-manager/hooks";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 
 import { DEFAULT_URL_QUERY, RETURN_URL_QUERY } from "@constant/route.constant";
 
 import {
-  savedAccount,
   setAppToken,
   setSavedAccount,
 } from "@libs/features/auth/auth.slice";
@@ -24,7 +23,7 @@ import Checkbox from "@libs/ui/components/Checkbox";
 import ActionLink from "@libs/ui/components/ActionLink";
 
 export default function SignIn() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const {
@@ -34,8 +33,8 @@ export default function SignIn() {
     formState: { errors },
   } = useForm<ILoginRequest>({
     defaultValues: {
-      username: useSelector(savedAccount)?.username,
-      password: useSelector(savedAccount)?.password,
+      username: useAppSelector(state => state.authReducer.savedAccount)?.username,
+      password: useAppSelector(state => state.authReducer.savedAccount)?.password,
     },
   });
   const [
@@ -46,8 +45,9 @@ export default function SignIn() {
   const { errMsg } = useFetchError(error);
 
   const [isShowPassword, setIsShowPassword] = useState(false);
+
   const [isRememberAccount, setIsRememberAccount] = useState(
-    useSelector(savedAccount) !== undefined
+    useAppSelector(state => state.authReducer.savedAccount) !== undefined
   );
 
   const handleShowPassword = useCallback((show: boolean) => {
@@ -185,7 +185,7 @@ export default function SignIn() {
           </ActionLink>
         </div>
         <Button
-          className="w-full h-10 my-1"
+          className="w-full h-10 my-1 text-sm"
           variant="solid"
           loading={isLoading}
         >

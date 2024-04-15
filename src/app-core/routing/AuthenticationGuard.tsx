@@ -1,7 +1,6 @@
 import { PropsWithChildren, useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
-
+import { useAppDispatch } from "../redux-manager/hooks";
 import { logout } from "@libs/features/auth/auth.slice";
 import {
     RETURN_URL_QUERY,
@@ -12,7 +11,7 @@ import { useAuthentication } from "@/libs/hooks/useAuthentication";
 const AuthenticationGuard = (props: PropsWithChildren) => {
     const { children } = props;
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const { pathname } = useLocation();
 
     const { isAuthenticated } = useAuthentication();
