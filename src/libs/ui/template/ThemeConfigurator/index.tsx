@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import ModeSwitcher from "./ModeSwitcher";
-// import LayoutSwitcher from './LayoutSwitcher'
 import ThemeSwitcher from "./ThemeSwitcher";
+// import LayoutSwitcher from './LayoutSwitcher'
 // import DirectionSwitcher from './DirectionSwitcher'
 
 export type ThemeConfiguratorProps = {
     callBackClose?: () => void;
 };
 
-const ThemeConfigurator = ({ callBackClose }: ThemeConfiguratorProps) => {
+const ThemeConfigurator = (/* { callBackClose }: ThemeConfiguratorProps */) => {
     return (
         <div className="flex flex-col h-full justify-between">
             <div className="flex flex-col gap-y-10 mb-6">

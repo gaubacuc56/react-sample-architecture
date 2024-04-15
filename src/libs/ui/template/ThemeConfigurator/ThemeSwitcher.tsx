@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import Select from "../Select";
-import Badge from "../Badge";
+import Select from "../../components/Select";
+import Badge from "../../components/Badge";
 import {
     setThemeColor,
     setThemeColorLevel,

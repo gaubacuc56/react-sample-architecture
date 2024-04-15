@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import Drawer from "../Drawer";
+import Drawer from "../../components/Drawer";
 import { HiOutlineCog } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
 import withHeaderItem from "@libs/utils/hoc/withHeaderItem";
@@ -59,7 +59,7 @@ const _SidePanel = (props: SidePanelProps) => {
                 onClose={closePanel}
                 onRequestClose={closePanel}
             >
-                <ThemeConfigurator callBackClose={closePanel} />
+                <ThemeConfigurator /* callBackClose={closePanel} */ />
             </Drawer>
         </>
     );

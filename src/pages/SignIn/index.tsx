@@ -11,17 +11,17 @@ import {
   setSavedAccount,
 } from "@libs/features/auth/auth.slice";
 import { useLoginMutation } from "@libs/features/auth/auth.service";
-import Input from "@libs/components/Input";
-import Button from "@libs/components/Button";
+import Input from "@libs/ui/components/Input";
+import Button from "@libs/ui/components/Button";
 import { ILoginRequest } from "@libs/dtos/request/auth.request";
-import { FormError, FormLabel } from "@libs/components/FormElement";
+import { FormError, FormLabel } from "@libs/ui/components/FormElement";
 
 import appLogo from "@assets/img/logo.png";
 import { useFetchError } from "@libs/hooks/useFetchError";
-import Alert from "@libs/components/Alert";
+import Alert from "@libs/ui/components/Alert";
 import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
-import Checkbox from "@/libs/components/Checkbox";
-import ActionLink from "@/libs/components/ActionLink";
+import Checkbox from "@libs/ui/components/Checkbox";
+import ActionLink from "@libs/ui/components/ActionLink";
 
 export default function SignIn() {
   const dispatch = useDispatch();
@@ -66,8 +66,7 @@ export default function SignIn() {
   );
 
   useEffect(() => {
-    if (isLoginSuccess) {
-      console.log("ischecked", isRememberAccount);
+    if (isLoginSuccess && loginResponse ) {
       dispatch(setAppToken(loginResponse.token));
       if (isRememberAccount) {
         dispatch(
