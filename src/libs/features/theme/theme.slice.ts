@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { themeConfig } from '@app-core/theme/config'
+import { themeConfig } from '@config/theme.config'
 import type {
     LayoutType,
     Mode,
     ColorLevel,
     Direction,
+    NavMode,
 } from '@app-core/@types/theme'
 
 interface IThemeState  {
@@ -17,7 +18,8 @@ interface IThemeState  {
         sideNavCollapse: boolean
         previousType?: LayoutType
     },
-    panelExpand: boolean
+    panelExpand: boolean,
+    navMode: NavMode
 }
 
 const initialState: IThemeState = {
@@ -27,6 +29,7 @@ const initialState: IThemeState = {
     primaryColorLevel: themeConfig.primaryColorLevel,
     layout: themeConfig.layout,
     panelExpand: themeConfig.panelExpand,
+    navMode: themeConfig.navMode
 }
 
 export const themeStore = createSlice({
@@ -63,6 +66,7 @@ export const themeStore = createSlice({
         setPanelExpand: (state, action: PayloadAction<boolean>) => {
             state.panelExpand = action.payload
         },
+        //TODO: Add change Navmode action
     },
 })
 

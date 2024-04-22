@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import type { Direction } from '@app-core/@types/theme'
-import { setDirection} from '@libs/features/theme/theme.slice'
+import { setDirection} from '@libs/features/store'
 import { useAppDispatch, useAppSelector } from '@/app-core/redux-manager/hooks'
 
 function useDirection(): [

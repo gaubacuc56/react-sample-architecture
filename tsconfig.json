@@ -27,6 +27,7 @@
       "@assets/*": ["./src/assets/*"],
       "@layout/*": ["./src/layout/*"],
       "@constant/*": ["./src/constant/*"],
+      "@config/*": ["./src/config/*"],
     }
   },
   "include": ["src"],

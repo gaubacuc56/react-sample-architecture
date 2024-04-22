@@ -2,10 +2,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-import { StoreState, storeReducer } from './rootReducer';
+import { StoreState, _storeReducer } from './rootReducer';
 
 const ConfigureStore = configureStore({
-    reducer: storeReducer,
+    reducer: _storeReducer,
   })
 export type AppDispatch = typeof ConfigureStore.dispatch
   

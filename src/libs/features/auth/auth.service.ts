@@ -11,7 +11,6 @@ import {
 export const authService = createApi({
     reducerPath: "authService",
     baseQuery: baseQuery,
-    refetchOnMountOrArgChange: true,
     endpoints: (builder) => ({
         login: builder.mutation<ILoginResponse, ILoginRequest>({
             query: (data: ILoginRequest) => ({

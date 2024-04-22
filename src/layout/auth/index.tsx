@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import Card from "@libs/ui/components/Card";
-import SidePanel from "@/libs/ui/template/SidePanel";
+import Card from "@libs/components/ui/Card";
+import SidePanel from "@libs/components/template/SidePanel";
 
 export const AuthLayout = () => {
     return (

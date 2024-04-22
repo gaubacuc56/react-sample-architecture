@@ -17,6 +17,11 @@ export const THEME_ENUM = {
     HEADER_HEIGHT_CLASS : 'h-16',
     PAGE_CONTAINER_GUTTER_X : 'px-4 sm:px-6 md:px-8',
     PAGE_CONTAINER_GUTTER_Y : 'py-4 sm:py-6 md:px-8',
+    NAV_MODE_LIGHT:'light',
+    NAV_MODE_DARK:'dark',
+    NAV_MODE_THEMED:'themed',
+    NAV_MODE_TRANSPARENT:'transparent',
+    SIDE_NAV_CONTENT_GUTTER: 'px-4'
 } as const
 
 export enum THEME_COLOR  {

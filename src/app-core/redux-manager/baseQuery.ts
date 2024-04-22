@@ -2,7 +2,7 @@ import { BaseQueryApi, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query"
 import { API_PREFIX, APP_AUTHORIZATION_HEADER } from "../environment/http";
 import { RootState } from "./rootReducer";
 import { HttpStatus } from "../@types/http";
-import { logout } from "@libs/features/auth/auth.slice";
+import { logout } from "@libs/features/store";
 
 export const baseQuery = fetchBaseQuery({
     baseUrl: `${API_PREFIX}`,

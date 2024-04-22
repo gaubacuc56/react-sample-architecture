@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../redux-manager/hooks'
 import {
     setLayout,
     setPreviousLayout,
-} from '@libs/features/theme/theme.slice'
+} from '@libs/features/store'
 import { LayoutType } from '../@types/theme'
 
 export type AppRouteProps<T> = {

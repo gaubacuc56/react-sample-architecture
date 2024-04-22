@@ -23,6 +23,7 @@ export default defineConfig({
       '@assets': path.resolve(__dirname, './src/assets'),
       '@layout': path.resolve(__dirname, './src/layout'),
       '@constant': path.resolve(__dirname, './src/constant'),
+      '@config': path.resolve(__dirname, './src/config'),
     },
   },
   build: {

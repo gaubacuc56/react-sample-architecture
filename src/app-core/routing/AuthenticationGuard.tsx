@@ -1,7 +1,7 @@
 import { PropsWithChildren, useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAppDispatch } from "../redux-manager/hooks";
-import { logout } from "@libs/features/auth/auth.slice";
+import { logout } from "@libs/features/store";
 import {
     RETURN_URL_QUERY,
     UNAUTHENTICATED_ENTRY_PATH,

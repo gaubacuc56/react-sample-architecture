@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import ErrorBoundary from "@pages/Error/ErrorBoundary";
-import { routes } from "@/routes";
+import { routes } from "@config/routes.config";
 import { APP_ROUTE_PREFIX } from "@constant/route.constant";
 
 import AppRoute from "./AppRoute";

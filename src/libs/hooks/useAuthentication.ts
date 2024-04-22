@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 export const useAuthentication = () => {
     const { data, isError } = useGetUserQuery();
+
     const [isAuthenticated, setIsAuthenticated] = useState<null | boolean>(
         null
     );

@@ -8,19 +8,19 @@ import { DEFAULT_URL_QUERY, RETURN_URL_QUERY } from "@constant/route.constant";
 import {
   setAppToken,
   setSavedAccount,
-} from "@libs/features/auth/auth.slice";
+} from "@libs/features/store";
 import { useLoginMutation } from "@libs/features/auth/auth.service";
-import Input from "@libs/ui/components/Input";
-import Button from "@libs/ui/components/Button";
+import Input from "@libs/components/ui/Input";
+import Button from "@libs/components/ui/Button";
 import { ILoginRequest } from "@libs/dtos/request/auth.request";
-import { FormError, FormLabel } from "@libs/ui/components/FormElement";
+import { FormError, FormLabel } from "@libs/components/ui/FormElement";
 
 import appLogo from "@assets/img/logo.png";
 import { useFetchError } from "@libs/hooks/useFetchError";
-import Alert from "@libs/ui/components/Alert";
+import Alert from "@libs/components/ui/Alert";
 import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
-import Checkbox from "@libs/ui/components/Checkbox";
-import ActionLink from "@libs/ui/components/ActionLink";
+import Checkbox from "@libs/components/ui/Checkbox";
+import ActionLink from "@libs/components/ui/ActionLink";
 
 export default function SignIn() {
   const dispatch = useAppDispatch();

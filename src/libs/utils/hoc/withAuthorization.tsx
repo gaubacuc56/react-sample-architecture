@@ -4,7 +4,7 @@ import { useAppSelector } from "@/app-core/redux-manager/hooks";
 import useAuthority from "@libs/hooks/useAuthority";
 
 interface WithAuthorizationProps {
-  authorities: [];
+  authorities: string[];
 }
 
 /**

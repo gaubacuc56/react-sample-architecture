@@ -4,7 +4,7 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query';
 import { persistReducer } from 'redux-persist';
 
 import rootReducer from './rootReducer';
-import { fetchMiddleware } from '@libs/features/services';
+import { rtkQueryMiddleware } from '@libs/features/services';
 
 const persistConfig = {
     key: 'root',
@@ -18,7 +18,7 @@ const store = configureStore({
     reducer: persistedReducer,
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(
-            fetchMiddleware.map(item => item.middleware)),
+            rtkQueryMiddleware.map(item => item.middleware)),
     devTools: true,
 });
 setupListeners(store.dispatch);
