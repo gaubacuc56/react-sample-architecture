@@ -4,7 +4,7 @@ import {
     Mode,
     ColorLevel,
     LayoutType,
-    NavMode
+    NavMode,
 } from "@app-core/@types/theme";
 
 export type ThemeConfig = {
@@ -16,8 +16,8 @@ export type ThemeConfig = {
         type: LayoutType;
         sideNavCollapse: boolean;
     };
-    panelExpand: boolean,
-    navMode: NavMode
+    panelExpand: boolean;
+    navMode: NavMode;
 };
 
 export const themeConfig: ThemeConfig = {
@@ -26,9 +26,9 @@ export const themeConfig: ThemeConfig = {
     mode: THEME_ENUM.MODE_DARK,
     primaryColorLevel: 800,
     layout: {
-        type: THEME_ENUM.LAYOUT_TYPE_MODERN,
+        type: THEME_ENUM.LAYOUT_TYPE_CLASSIC,
         sideNavCollapse: false,
     },
     panelExpand: false,
-    navMode: THEME_ENUM.NAV_MODE_LIGHT,
+    navMode: THEME_ENUM.NAV_MODE_THEMED,
 };

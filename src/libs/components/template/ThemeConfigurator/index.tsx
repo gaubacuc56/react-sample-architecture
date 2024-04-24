@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import ModeSwitcher from "./ModeSwitcher";
+import NavModeSwitcher from "./NavModeSwitcher";
 import ThemeSwitcher from "./ThemeSwitcher";
 // import LayoutSwitcher from './LayoutSwitcher'
 // import DirectionSwitcher from './DirectionSwitcher'
@@ -20,6 +21,10 @@ const ThemeConfigurator = (/* { callBackClose }: ThemeConfiguratorProps */) => {
                         </span>
                     </div>
                     <ModeSwitcher />
+                </div>
+                <div>
+                    <h6 className="mb-3">Nav Mode</h6>
+                    <NavModeSwitcher />
                 </div>
                 {/*   <div className="flex items-center justify-between">
                     <div>

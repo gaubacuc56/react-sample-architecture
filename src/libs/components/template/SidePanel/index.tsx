@@ -5,11 +5,7 @@ import type { CommonProps } from "@app-core/@types/common";
 
 import Drawer from "@libs/components/ui/Drawer";
 import withHeaderItem from "@libs/utils/hoc/withHeaderItem";
-import {
-    setPanelExpand,
- 
-} from "@libs/features/store";
-import { useThemeConfig } from "@/libs/hooks/useThemeConfig";
+import { setPanelExpand } from "@libs/features/store";
 
 import ThemeConfigurator, {
     ThemeConfiguratorProps,
@@ -18,16 +14,15 @@ import ThemeConfigurator, {
 type SidePanelProps = ThemeConfiguratorProps & CommonProps;
 
 const _SidePanel = (props: SidePanelProps) => {
-    
     const { className, ...rest } = props;
 
     const dispatch = useAppDispatch();
 
-    const _panelExpand = useAppSelector(state => state.themeReducer.panelExpand);
+    const _panelExpand = useAppSelector(
+        (state) => state.themeReducer.panelExpand
+    );
 
-    const _direction = useAppSelector(state => state.themeReducer.direction);
-
-    const { themeColor, primaryColorLevel } = useThemeConfig();
+    const _direction = useAppSelector((state) => state.themeReducer.direction);
 
     const openPanel = () => {
         dispatch(setPanelExpand(true));
@@ -44,10 +39,7 @@ const _SidePanel = (props: SidePanelProps) => {
     return (
         <>
             <div
-                className={classNames(
-                    `fixed right-0 top-5 md:top-auto p-3 rounded-none rounded-tl-lg rounded-bl-lg text-white text-xl cursor-pointer select-none bg-${themeColor}-${primaryColorLevel}`,
-                    className
-                )}
+                className={classNames(className)}
                 onClick={openPanel}
                 {...rest}
             >

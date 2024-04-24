@@ -1,38 +1,39 @@
-import Avatar from '@libs/components/ui/Avatar'
-import Dropdown from '@libs/components/ui/Dropdown'
-import withHeaderItem from '@libs/utils/hoc/withHeaderItem'
-import { Link } from 'react-router-dom'
-import classNames from 'classnames'
-import { HiOutlineLogout, HiOutlineUser } from 'react-icons/hi'
-import type { CommonProps } from '@app-core/@types/common'
-import { useAppDispatch } from '@/app-core/redux-manager/hooks'
-import { logout } from '@/libs/features/auth/auth.slice'
-import { useDispatch } from 'react-redux'
-type DropdownList = {
-    label: string
-    path: string
-    icon: JSX.Element
-}
+import Avatar from "@libs/components/ui/Avatar";
+import Dropdown from "@libs/components/ui/Dropdown";
+import withHeaderItem from "@libs/utils/hoc/withHeaderItem";
+import { Link } from "react-router-dom";
+import classNames from "classnames";
+import { HiOutlineLogout, HiOutlineUser } from "react-icons/hi";
+import type { CommonProps } from "@app-core/@types/common";
+import { useAppDispatch, useAppSelector } from "@/app-core/redux-manager/hooks";
+import { logout } from "@/libs/features/auth/auth.slice";
 
-const dropdownItemList: DropdownList[] = []
+type DropdownList = {
+    label: string;
+    path: string;
+    icon: JSX.Element;
+};
+
+const dropdownItemList: DropdownList[] = [];
 
 const _UserDropdown = ({ className }: CommonProps) => {
+    const user = useAppSelector((state) => state.authReducer.savedAccount);
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const handleLogout = () => {
-        dispatch(logout())
-    }
+        dispatch(logout());
+    };
 
     const UserAvatar = (
-        <div className={classNames(className, 'flex items-center gap-2')}>
+        <div className={classNames(className, "flex items-center gap-2")}>
             <Avatar size={32} shape="circle" icon={<HiOutlineUser />} />
             <div className="hidden md:block">
                 <div className="text-xs capitalize">admin</div>
-                <div className="font-bold">User01</div>
+                <div className="font-bold">{user?.username}</div>
             </div>
         </div>
-    )
+    );
 
     return (
         <div>
@@ -46,9 +47,11 @@ const _UserDropdown = ({ className }: CommonProps) => {
                         <Avatar shape="circle" icon={<HiOutlineUser />} />
                         <div>
                             <div className="font-bold text-gray-900 dark:text-gray-100">
-                                User01
+                                {user?.username}
                             </div>
-                            <div className="text-xs">user01@mail.com</div>
+                            <div className="text-xs">
+                                {user?.username}@gmail.com
+                            </div>
                         </div>
                     </div>
                 </Dropdown.Item>
@@ -59,8 +62,8 @@ const _UserDropdown = ({ className }: CommonProps) => {
                         eventKey={item.label}
                         className="mb-1 px-0"
                     >
-                        <Link 
-                            className="flex h-full w-full px-2" 
+                        <Link
+                            className="flex h-full w-full px-2"
                             to={item.path}
                         >
                             <span className="flex gap-2 items-center w-full">
@@ -85,9 +88,9 @@ const _UserDropdown = ({ className }: CommonProps) => {
                 </Dropdown.Item>
             </Dropdown>
         </div>
-    )
-}
+    );
+};
 
-const UserDropdown = withHeaderItem(_UserDropdown)
+const UserDropdown = withHeaderItem(_UserDropdown);
 
-export default UserDropdown
+export default UserDropdown;
