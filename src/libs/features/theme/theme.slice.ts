@@ -70,11 +70,15 @@ export const themeStore = createSlice({
         setNavMode: (state, action: PayloadAction<NavMode | "default">) => {
             if (action.payload !== "default") {
                 state.navMode = action.payload;
-            } else {
+            }
+            // Classic Layout
+            /* else {
                 if (state.mode === THEME_ENUM.MODE_LIGHT)
                     state.navMode = THEME_ENUM.NAV_MODE_LIGHT;
                 else state.navMode = THEME_ENUM.NAV_MODE_DARK;
-            }
+            } */
+            // Modern layout
+            else state.navMode = THEME_ENUM.NAV_MODE_TRANSPARENT;
         },
     },
 });

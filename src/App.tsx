@@ -1,16 +1,13 @@
-import { Suspense } from "react";
 import { RouterProvider } from "react-router-dom";
-import { ProgressSpinner } from "primereact/progressspinner";
 import { router } from "@app-core/routing";
 import useDarkMode from "@libs/hooks/useDarkmode";
+import SuspenseLoading from "@libs/components/ui/SuspenseLoading";
 
 function App() {
-  useDarkMode()
-  return (
-    <Suspense fallback={<ProgressSpinner />}>
-      <RouterProvider router={router} fallbackElement={<ProgressSpinner />} />
-    </Suspense>
-  );
+    useDarkMode();
+    return (
+        <RouterProvider router={router} fallbackElement={<SuspenseLoading />} />
+    );
 }
 
 export default App;

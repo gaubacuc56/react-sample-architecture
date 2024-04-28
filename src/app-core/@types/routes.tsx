@@ -1,27 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { LayoutType } from './theme'
-import type { ComponentType, LazyExoticComponent, ReactNode } from 'react'
-
-export interface Meta {
-    pageContainerType?: 'default' | 'gutterless' | 'contained'
-    header?: string | ReactNode
-    headerContainer?: boolean
-    extraHeader?: LazyExoticComponent<() => JSX.Element>
-    footer?: boolean
-    layout?: LayoutType
-}
+import type { ComponentType, LazyExoticComponent } from "react";
 
 export type IRoute = {
-    key: string
-    path: string
-    component: LazyExoticComponent<ComponentType<any>>
-    authority: string[]
-    meta?: Meta
-}
+    key: string;
+    path: string;
+    component: LazyExoticComponent<ComponentType<any>>;
+    authority: string[];
+    crumb?: string;
+};
 
-export type IRouteLayout  = {
-    prefix: string,
-    layout: JSX.Element,
-    children: IRoute[],
-    isPrivate?: boolean
-}
+export type IRouteLayout = {
+    prefix: string;
+    layout: JSX.Element;
+    children: IRoute[];
+    isPrivate?: boolean;
+};

@@ -13,9 +13,6 @@ export const useThemeConfig = () => {
     );
     const navMode = useAppSelector((state) => state.themeReducer.navMode);
 
-    console.log("panelExpand", panelExpand);
-    console.log("navMode", navMode);
-
     return {
         themeColor,
         primaryColorLevel,

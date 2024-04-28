@@ -1,17 +1,17 @@
-import { useState, useEffect, useContext } from 'react'
-import { CollapseContextProvider } from './context/collapseContext'
-import classNames from 'classnames'
-import { motion } from 'framer-motion'
-import MenuContext from './context/menuContext'
-import { HiChevronDown } from 'react-icons/hi'
-import type { CommonProps } from '@app-core/@types/common'
-import type { ReactNode, MouseEvent } from 'react'
+import { useState, useEffect, useContext } from "react";
+import { CollapseContextProvider } from "./context/collapseContext";
+import classNames from "classnames";
+import { motion } from "framer-motion";
+import MenuContext from "./context/menuContext";
+import { HiChevronDown } from "react-icons/hi";
+import type { CommonProps } from "@app-core/@types/common";
+import type { ReactNode, MouseEvent } from "react";
 
 export interface MenuCollapseProps extends CommonProps {
-    eventKey?: string
-    expanded?: boolean
-    label?: string | ReactNode
-    onToggle?: (expanded: boolean, e: MouseEvent<HTMLDivElement>) => void
+    eventKey?: string;
+    expanded?: boolean;
+    label?: string | ReactNode;
+    onToggle?: (expanded: boolean, e: MouseEvent<HTMLDivElement>) => void;
 }
 
 const MenuCollapse = (props: MenuCollapseProps) => {
@@ -22,37 +22,37 @@ const MenuCollapse = (props: MenuCollapseProps) => {
         expanded = false,
         label = null,
         onToggle,
-    } = props
+    } = props;
 
-    const [isExpanded, setIsExpanded] = useState(expanded)
+    const [isExpanded, setIsExpanded] = useState(expanded);
 
     const { variant, sideCollapsed, defaultExpandedKeys } =
-        useContext(MenuContext)
+        useContext(MenuContext);
 
     // const { direction } = useThemeConfig()
 
     useEffect(() => {
         if ((defaultExpandedKeys as string[]).includes(eventKey as string)) {
-            setIsExpanded(true)
+            setIsExpanded(true);
         }
         if (expanded !== isExpanded) {
-            setIsExpanded(true)
+            setIsExpanded(true);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [expanded, onToggle, eventKey, defaultExpandedKeys])
+    }, [expanded, onToggle, eventKey, defaultExpandedKeys]);
 
     const toggleCollapse = (e: MouseEvent<HTMLDivElement>) => {
-        if (typeof onToggle === 'function') {
-            onToggle(!isExpanded, e)
+        if (typeof onToggle === "function") {
+            onToggle(!isExpanded, e);
         }
-        setIsExpanded(!isExpanded)
-    }
+        setIsExpanded(!isExpanded);
+    };
 
     const menuCollapseItemClass = classNames(
-        'menu-collapse-item',
+        "menu-collapse-item",
         `menu-collapse-item-${variant}`,
         className
-    )
+    );
 
     return (
         <div className="menu-collapse">
@@ -64,11 +64,11 @@ const MenuCollapse = (props: MenuCollapseProps) => {
                 <span className="flex items-center">{label}</span>
                 <motion.span
                     className="text-lg mt-1"
-                    initial={{ transform: 'rotate(0deg)' }}
+                    initial={{ transform: "rotate(0deg)" }}
                     animate={{
                         transform: isExpanded
-                            ? 'rotate(-180deg)'
-                            : 'rotate(0deg)',
+                            ? "rotate(-180deg)"
+                            : "rotate(0deg)",
                     }}
                     transition={{ duration: 0.15 }}
                 >
@@ -77,12 +77,10 @@ const MenuCollapse = (props: MenuCollapseProps) => {
             </div>
             <CollapseContextProvider value={isExpanded}>
                 <motion.ul
-                    // className={direction === 'rtl' ? 'mr-5' : 'ml-5'}
-                    className='ml-5'
-                    initial={{ opacity: 0, height: 0, overflow: 'hidden' }}
+                    initial={{ opacity: 0, height: 0, overflow: "hidden" }}
                     animate={{
                         opacity: isExpanded ? 1 : 0,
-                        height: isExpanded ? 'auto' : 0,
+                        height: isExpanded ? "auto" : 0,
                     }}
                     transition={{ duration: 0.15 }}
                 >
@@ -90,7 +88,7 @@ const MenuCollapse = (props: MenuCollapseProps) => {
                 </motion.ul>
             </CollapseContextProvider>
         </div>
-    )
-}
+    );
+};
 
-export default MenuCollapse
+export default MenuCollapse;

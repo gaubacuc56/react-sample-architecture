@@ -1,8 +1,8 @@
 import {
-  Navigate,
-  Route,
-  createBrowserRouter,
-  createRoutesFromElements,
+    Navigate,
+    Route,
+    createBrowserRouter,
+    createRoutesFromElements,
 } from "react-router-dom";
 
 import ErrorBoundary from "@pages/Error/ErrorBoundary";
@@ -14,43 +14,45 @@ import AuthorityGuard from "./AuthorityGuard";
 import AuthenticationGuard from "./AuthenticationGuard";
 
 export const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="*" errorElement={<ErrorBoundary />}>
-      <Route
-        path="*"
-        element={<Navigate to={APP_ROUTE_PREFIX} replace />}
-        errorElement={<ErrorBoundary />}
-      />
-      {routes.map((item) => (
-        <Route
-          key={item.prefix}
-          path={item.prefix}
-          errorElement={<ErrorBoundary />}
-          element={
-            item.isPrivate ? 
-            <AuthenticationGuard>
-              {item.layout}
-            </AuthenticationGuard>
-            :  item.layout
-          }
-        >
-          {item.children.map((child) => (
+    createRoutesFromElements(
+        <Route path="*" errorElement={<ErrorBoundary />}>
             <Route
-              key={child.key}
-              path={child.path}
-              element={
-                <AuthorityGuard authority={child.authority}>
-                  <AppRoute
-                    routeKey={child.key}
-                    component={child.component}
-                    {...child.meta}
-                  />
-                </AuthorityGuard>
-              }
+                path="*"
+                element={<Navigate to={APP_ROUTE_PREFIX} replace />}
+                errorElement={<ErrorBoundary />}
             />
-          ))}
+            {routes.map((item) => (
+                <Route
+                    key={item.prefix}
+                    path={item.prefix}
+                    errorElement={<ErrorBoundary />}
+                    element={
+                        item.isPrivate ? (
+                            <AuthenticationGuard>
+                                {item.layout}
+                            </AuthenticationGuard>
+                        ) : (
+                            item.layout
+                        )
+                    }
+                >
+                    {item.children.map((child) => (
+                        <Route
+                            key={child.key}
+                            path={child.path}
+                            handle={{ crumb: () => child.crumb }}
+                            element={
+                                <AuthorityGuard authority={child.authority}>
+                                    <AppRoute
+                                        routeKey={child.key}
+                                        component={child.component}
+                                    />
+                                </AuthorityGuard>
+                            }
+                        />
+                    ))}
+                </Route>
+            ))}
         </Route>
-      ))}
-    </Route>
-  )
+    )
 );
