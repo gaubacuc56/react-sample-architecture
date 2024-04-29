@@ -1,45 +1,61 @@
 .progress {
-  @apply inline-block;
+    @apply inline-block;
 
-  &.circle {
-    @apply relative w-full;
-  }
+    &.circle {
+        @apply relative w-full;
+    }
 
-  &.line {
-    @apply relative w-full flex items-center;
-  }
+    &.line {
+        @apply relative w-full flex items-center h-full;
+    }
 }
 
 .progress-bg {
-  @apply rounded-full transition-all duration-200;
+    @apply rounded-full transition-all duration-200;
 }
 
 .progress-info {
-  &.line {
-    @apply ltr:ml-2 rtl:mr-2;
-  }
+    &.line {
+        @apply ltr:ml-2 rtl:mr-2;
+    }
 }
 
 .progress-inner {
-  @apply relative w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-600;
+    @apply relative w-full overflow-hidden rounded-full bg-gray-100 dark:bg-gray-600;
 }
 
 .progress-wrapper {
-  @apply w-full;
+    @apply w-full;
 }
 
 .progress-circle {
-  @apply relative;
+    @apply relative;
 }
 
 .progress-circle-info {
-  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
 }
 
 .progress-circle-trail {
-  @apply stroke-current text-gray-100 dark:text-gray-600;
+    @apply stroke-current text-gray-100 dark:text-gray-600;
 }
 
 .progress-circle-stroke {
-  @apply stroke-current transition-all duration-200;
+    @apply stroke-current transition-all duration-200;
+}
+.progess-line-infinite-loop {
+    border-radius: 10px;
+    top: 0;
+    position: absolute;
+    height: 100%;
+    width: 50%;
+    animation: progress-bar-animation 2s infinite;
+}
+@keyframes progress-bar-animation {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
 }
