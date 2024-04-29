@@ -2,7 +2,9 @@ import { useGetUserQuery } from "@libs/features/auth/auth.service";
 import { useEffect, useState } from "react";
 
 export const useAuthentication = () => {
-    const { data, isError } = useGetUserQuery();
+    const { data, isError } = useGetUserQuery(undefined, {
+        refetchOnMountOrArgChange: true,
+    });
 
     const [isAuthenticated, setIsAuthenticated] = useState<null | boolean>(
         null

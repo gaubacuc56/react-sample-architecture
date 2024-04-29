@@ -56,7 +56,7 @@ const MenuItem = memo(
             <Component
                 ref={ref}
                 className={menuItemClass}
-                style={{ minHeight: `${menuItemHeight}px`, ...style }}
+                style={{ height: `${menuItemHeight}px`, ...style }}
                 onClick={hanldeOnClick}
                 {...rest}
             >

@@ -1,7 +1,7 @@
 import Avatar from "@libs/components/ui/Avatar";
 import Dropdown from "@libs/components/ui/Dropdown";
 import withHeaderItem from "@libs/utils/hoc/withHeaderItem";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { HiOutlineLogout, HiOutlineUser } from "react-icons/hi";
 import type { CommonProps } from "@app-core/@types/common";
@@ -21,25 +21,33 @@ const _UserDropdown = ({ className }: CommonProps) => {
 
     const dispatch = useAppDispatch();
 
+
     const handleLogout = () => {
         dispatch(logout());
     };
-
-    const UserAvatar = (
-        <div className={classNames(className, "flex items-center gap-2")}>
-            <Avatar size={32} shape="circle" icon={<HiOutlineUser />} />
-            <div className="hidden md:block">
-                <div className="text-xs capitalize">admin</div>
-                <div className="font-bold">{user?.username}</div>
-            </div>
-        </div>
-    );
 
     return (
         <div>
             <Dropdown
                 menuStyle={{ minWidth: 240 }}
-                renderTitle={UserAvatar}
+                renderTitle={
+                    <div
+                        className={classNames(
+                            className,
+                            "flex items-center gap-2"
+                        )}
+                    >
+                        <Avatar
+                            size={32}
+                            shape="circle"
+                            icon={<HiOutlineUser />}
+                        />
+                        <div className="hidden md:block">
+                            <div className="text-xs capitalize">admin</div>
+                            <div className="font-bold">{user?.username}</div>
+                        </div>
+                    </div>
+                }
                 placement="bottom-end"
             >
                 <Dropdown.Item variant="header">

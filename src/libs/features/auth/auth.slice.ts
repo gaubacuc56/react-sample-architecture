@@ -25,7 +25,7 @@ const authStore = createSlice({
         logout : (state) => {
             state.token = ""
             state.authority = []
-            window.location.reload(); 
+            window.location.reload();
         },
         setSavedAccount: (state, action: PayloadAction<ISavedAccount|undefined>) => {
             state.savedAccount = action.payload

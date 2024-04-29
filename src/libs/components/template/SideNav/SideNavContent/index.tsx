@@ -46,8 +46,6 @@ const SideNavContent = (props: SideNavContentProps) => {
 
     const [defaulExpandKey, setDefaulExpandKey] = useState<string[]>([]);
 
-    console.log("routeKey", routeKey);
-
     const { activedRoute } = useMenuActive(navigationTree, routeKey);
 
     useEffect(() => {

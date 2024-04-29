@@ -13,7 +13,6 @@ export const routeSlice = createSlice({
     initialState,
     reducers: {
         setCurrentRouteKey: (state, action: PayloadAction<string>) => {
-            console.log("action.payload", action.payload);
             state.currentRouteKey = action.payload;
         },
     },
