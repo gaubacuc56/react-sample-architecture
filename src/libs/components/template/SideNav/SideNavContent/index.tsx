@@ -1,21 +1,25 @@
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
-import Menu from "@libs/components/ui/Menu";
-import VerticalSingleMenuItem from "./VerticalSingleMenuItem";
-import VerticalCollapsedMenuItem from "./VerticalCollapsedMenuItem";
+import { Direction, NavMode } from "@app-core/@types/theme";
+import type { NavigationTree } from "@app-core/@types/navigation";
+
 import { themeConfig } from "@config/theme.config";
+
 import {
     NAV_ITEM_TYPE_TITLE,
     NAV_ITEM_TYPE_COLLAPSE,
     NAV_ITEM_TYPE_ITEM,
-} from "@/constant/navigation.constant";
-import useMenuActive from "@/libs/hooks/useMenuActive";
-import { Direction, NavMode } from "@app-core/@types/theme";
-import type { NavigationTree } from "@app-core/@types/navigation";
-import { withAuthorization } from "@/libs/utils/hoc/withAuthorization";
+} from "@constant/navigation.constant";
 
-export interface VerticalMenuContentProps {
+import { withAuthorization } from "@libs/utils/hoc/withAuthorization";
+import useMenuActive from "@libs/hooks/useMenuActive";
+import Menu from "@libs/components/ui/Menu";
+
+import SingleNavItem from "./SingleNavItem";
+import CollapsedNavItem from "./CollapsedNavItem";
+
+export interface SideNavContentProps {
     navMode: NavMode;
     collapsed?: boolean;
     routeKey: string;
@@ -27,7 +31,7 @@ export interface VerticalMenuContentProps {
 
 const MenuGroup = withAuthorization(Menu.MenuGroup);
 
-const VerticalMenuContent = (props: VerticalMenuContentProps) => {
+const SideNavContent = (props: SideNavContentProps) => {
     const {
         navMode = themeConfig.navMode,
         collapsed,
@@ -60,7 +64,7 @@ const VerticalMenuContent = (props: VerticalMenuContentProps) => {
     const getNavItem = (nav: NavigationTree) => {
         if (nav.subMenu.length === 0 && nav.type === NAV_ITEM_TYPE_ITEM) {
             return (
-                <VerticalSingleMenuItem
+                <SingleNavItem
                     key={nav.key}
                     nav={nav}
                     sideCollapsed={collapsed}
@@ -73,7 +77,7 @@ const VerticalMenuContent = (props: VerticalMenuContentProps) => {
 
         if (nav.subMenu.length > 0 && nav.type === NAV_ITEM_TYPE_COLLAPSE) {
             return (
-                <VerticalCollapsedMenuItem
+                <CollapsedNavItem
                     key={nav.key}
                     nav={nav}
                     sideCollapsed={collapsed}
@@ -93,7 +97,7 @@ const VerticalMenuContent = (props: VerticalMenuContentProps) => {
                     >
                         {nav.subMenu.map((subNav) =>
                             subNav.subMenu.length > 0 ? (
-                                <VerticalCollapsedMenuItem
+                                <CollapsedNavItem
                                     key={subNav.key}
                                     nav={subNav}
                                     sideCollapsed={collapsed}
@@ -102,7 +106,7 @@ const VerticalMenuContent = (props: VerticalMenuContentProps) => {
                                     onLinkClick={onMenuItemClick}
                                 />
                             ) : (
-                                <VerticalSingleMenuItem
+                                <SingleNavItem
                                     key={subNav.key}
                                     nav={subNav}
                                     sideCollapsed={collapsed}
@@ -133,4 +137,4 @@ const VerticalMenuContent = (props: VerticalMenuContentProps) => {
     );
 };
 
-export default VerticalMenuContent;
+export default SideNavContent;

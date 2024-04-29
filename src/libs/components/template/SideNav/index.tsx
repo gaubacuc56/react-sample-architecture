@@ -4,7 +4,7 @@ import classNames from "classnames";
 import { THEME_ENUM } from "@/constant/theme.constant";
 
 import navigationConfig from "@config/navigation.config";
-import VerticalMenuContent from "@libs/components/template/VerticalMenuContent";
+import SideNavContent from "@/libs/components/template/SideNav/SideNavContent";
 import useResponsive from "@libs//hooks/useResponsive";
 import { useAppSelector } from "@app-core/redux-manager/hooks";
 import { useThemeConfig } from "@/libs/hooks/useThemeConfig";
@@ -45,7 +45,7 @@ const SideNav = () => {
 
     const menuContent = useMemo(() => {
         return (
-            <VerticalMenuContent
+            <SideNavContent
                 navMode={navMode}
                 collapsed={sideNavCollapse}
                 navigationTree={navigationConfig}
@@ -77,7 +77,7 @@ const SideNav = () => {
                     ) : (
                         <div className="side-nav-content">
                             {/* <ScrollBar autoHide direction={direction}> */}
-                            <VerticalMenuContent
+                            <SideNavContent
                                 navMode={navMode}
                                 collapsed={sideNavCollapse}
                                 navigationTree={navigationConfig}

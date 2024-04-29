@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Menu from "@libs/components/ui/Menu";
 import Dropdown from "@libs/components/ui/Dropdown";
 
-import VerticalMenuIcon from "./VerticalMenuIcon";
 import { Trans } from "react-i18next";
 import type { CommonProps } from "@app-core/@types/common";
 import type { Direction } from "@app-core/@types/theme";
@@ -23,7 +22,7 @@ interface CollapsedItemProps extends DefaultItemProps {
     direction: Direction;
 }
 
-interface VerticalCollapsedMenuItemProps extends CollapsedItemProps {
+interface CollapsedNavItemProps extends CollapsedItemProps {
     sideCollapsed?: boolean;
 }
 
@@ -163,10 +162,10 @@ const CollapsedItem = ({ nav, onLinkClick, direction }: CollapsedItemProps) => {
     );
 };
 
-const VerticalCollapsedMenuItem = ({
+const CollapsedNavItem = ({
     sideCollapsed,
     ...rest
-}: VerticalCollapsedMenuItemProps) => {
+}: CollapsedNavItemProps) => {
     return sideCollapsed ? (
         <CollapsedItem {...rest} />
     ) : (
@@ -174,4 +173,4 @@ const VerticalCollapsedMenuItem = ({
     );
 };
 
-export default VerticalCollapsedMenuItem;
+export default CollapsedNavItem;

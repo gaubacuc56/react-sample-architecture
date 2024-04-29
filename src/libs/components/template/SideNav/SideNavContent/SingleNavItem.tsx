@@ -90,7 +90,7 @@ const DefaultItem = (props: DefaultItemProps) => {
     }
 };
 
-const VerticalSingleMenuItem = ({
+const SingleNavItem = ({
     nav,
     onLinkClick,
     sideCollapsed,
@@ -127,4 +127,4 @@ const VerticalSingleMenuItem = ({
     }
 };
 
-export default VerticalSingleMenuItem;
+export default SingleNavItem;
