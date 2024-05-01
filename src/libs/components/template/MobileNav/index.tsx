@@ -42,7 +42,7 @@ const MobileNav = () => {
     const sideNavCollapse = layout.sideNavCollapse;
 
     const currentRouteKey = useAppSelector(
-        (state) => state.routeReducer.currentRouteKey
+        (state) => state.appCommonReducer.currentRouteKey
     );
     const userAuthority = useAppSelector(
         (state) => state.authReducer.authority

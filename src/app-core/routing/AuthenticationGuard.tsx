@@ -15,7 +15,6 @@ const AuthenticationGuard = (props: PropsWithChildren) => {
     const { pathname } = useLocation();
 
     const { isAuthenticated } = useAuthentication();
-    console.log("isAuthenticated", isAuthenticated);
 
     useEffect(() => {
         if (isAuthenticated !== null && !isAuthenticated) dispatch(logout());

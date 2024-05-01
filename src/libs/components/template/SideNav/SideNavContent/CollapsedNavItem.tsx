@@ -10,7 +10,7 @@ import type { NavigationTree } from "@app-core/@types/navigation";
 import { withAuthorization } from "@/libs/utils/hoc/withAuthorization";
 import { useCallback, useMemo } from "react";
 import { useAppDispatch } from "@/app-core/redux-manager/hooks";
-import { setCurrentRouteKey } from "@/libs/features/route/route.slice";
+import { setCurrentRouteKey } from "@/libs/features/app-common/app-common.slice";
 
 interface DefaultItemProps extends CommonProps {
     nav: NavigationTree;

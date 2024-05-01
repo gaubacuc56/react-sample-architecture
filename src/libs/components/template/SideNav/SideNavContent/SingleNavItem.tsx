@@ -9,7 +9,7 @@ import Tooltip from "@libs/components/ui/Tooltip";
 import Menu from "@libs/components/ui/Menu";
 import { Trans, useTranslation } from "react-i18next";
 import { useAppDispatch } from "@/app-core/redux-manager/hooks";
-import { setCurrentRouteKey } from "@/libs/features/route/route.slice";
+import { setCurrentRouteKey } from "@/libs/features/app-common/app-common.slice";
 import { useCallback } from "react";
 
 const { MenuItem } = Menu;

@@ -1,7 +1,7 @@
 import Avatar from "@libs/components/ui/Avatar";
 import Dropdown from "@libs/components/ui/Dropdown";
 import withHeaderItem from "@libs/utils/hoc/withHeaderItem";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { HiOutlineLogout, HiOutlineUser } from "react-icons/hi";
 import type { CommonProps } from "@app-core/@types/common";
@@ -20,7 +20,6 @@ const _UserDropdown = ({ className }: CommonProps) => {
     const user = useAppSelector((state) => state.authReducer.savedAccount);
 
     const dispatch = useAppDispatch();
-
 
     const handleLogout = () => {
         dispatch(logout());
