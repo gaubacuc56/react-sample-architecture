@@ -4,7 +4,7 @@ import {
     NAV_ITEM_TYPE_COLLAPSE,
 } from "@constant/navigation.constant";
 import type { NavigationTree } from "@app-core/@types/navigation";
-import { HiChartBar, HiUser } from "react-icons/hi";
+import { BiCategoryAlt, BiBarChart } from "react-icons/bi";
 
 const navigationConfig: NavigationTree[] = [
     {
@@ -20,33 +20,24 @@ const navigationConfig: NavigationTree[] = [
                 path: "dashboard",
                 title: "Dashboard",
                 translateKey: "",
-                icon: <HiChartBar />,
+                icon: <BiBarChart />,
                 type: NAV_ITEM_TYPE_ITEM,
                 authority: [],
                 subMenu: [],
             },
             {
-                key: "user",
+                key: "product",
                 path: "",
-                title: "User Management",
+                title: "Product",
                 translateKey: "",
-                icon: <HiUser />,
+                icon: <BiCategoryAlt />,
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [],
                 subMenu: [
                     {
-                        key: "user/user-list",
-                        path: "user/user-list",
-                        title: "User List",
-                        translateKey: "",
-                        type: NAV_ITEM_TYPE_ITEM,
-                        authority: [],
-                        subMenu: [],
-                    },
-                    {
-                        key: "user/permission",
-                        path: "user/permission",
-                        title: "Permission",
+                        key: "product/product-list",
+                        path: "product/product-list",
+                        title: "Product List",
                         translateKey: "",
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [],

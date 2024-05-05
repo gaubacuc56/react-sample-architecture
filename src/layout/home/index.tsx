@@ -9,35 +9,40 @@ import FetchProgressBar from "@libs/components/template/FetchProgressBar";
 import Breadcrumbs from "@libs/components/ui/BreadCrumbs";
 
 export const HomeLayout = () => {
-	return (
-		<>
-			<FetchProgressBar />
-			<div className="app-layout-modern flex flex-auto flex-col">
-				<div className="flex flex-auto min-w-0">
-					<SideNav />
-					<div className="flex flex-col flex-auto min-h-screen min-w-0 relative w-full bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700">
-						<Header
-							className="border-b border-gray-200 dark:border-gray-700"
-							headerStart={
-								<>
-									<MobileNav />
-									<SideNavToggle />
-								</>
-							}
-							headerEnd={
-								<>
-									<SidePanel className="text-2xl" hoverable />
-									<UserDropdown hoverable={false} />
-								</>
-							}
-						/>
-						<div className="page-container relative h-full flex flex-auto flex-col px-4 sm:px-6 md:px-8 py-4 sm:py-6">
-							<Breadcrumbs />
-							<Outlet />
-						</div>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+    return (
+        <>
+            <FetchProgressBar />
+            <div className="app-layout-modern flex flex-auto flex-col">
+                <div className="flex flex-auto min-w-0">
+                    <SideNav />
+                    <div className="flex flex-col flex-auto min-h-screen min-w-0 relative w-full bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700">
+                        <Header
+                            className="border-b border-gray-200 dark:border-gray-700"
+                            headerStart={
+                                <>
+                                    <MobileNav />
+                                    <SideNavToggle />
+                                </>
+                            }
+                            headerEnd={
+                                <>
+                                    <SidePanel className="text-2xl" hoverable />
+                                    <UserDropdown hoverable={false} />
+                                </>
+                            }
+                        />
+                        <div className="page-container relative h-full flex flex-auto flex-col px-4 sm:px-6 md:px-8 py-4 sm:py-6">
+                            <div
+                                id="page-header"
+                                className="flex justify-between items-center"
+                            >
+                                <Breadcrumbs />
+                            </div>
+                            <Outlet />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 };
