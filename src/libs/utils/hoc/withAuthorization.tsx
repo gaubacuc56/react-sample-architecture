@@ -1,10 +1,10 @@
 import { ComponentType, ForwardedRef, forwardRef } from "react";
-import { useAppSelector } from "@/app-core/redux-manager/hooks";
+import { useAppSelector } from "@/app-core/redux-manager/method";
 
 import useAuthority from "@libs/hooks/useAuthority";
 
 interface WithAuthorizationProps {
-  authorities: string[];
+	authorities: string[];
 }
 
 /**
@@ -21,22 +21,24 @@ interface WithAuthorizationProps {
  * @returns A new functional component that conditionally renders the wrapped component based on authorization.
  */
 export const withAuthorization = <P extends object>(
-  WrappedComponent: ComponentType<P>
+	WrappedComponent: ComponentType<P>
 ) => {
-  const WithAuth = (
-    props: P & WithAuthorizationProps,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ref: ForwardedRef<any>
-  ) => {
-    const { authorities, ...otherProps } = props;
-    const _userAuthority = useAppSelector(state => state.authReducer.authority);
+	const WithAuth = (
+		props: P & WithAuthorizationProps,
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
+		ref: ForwardedRef<any>
+	) => {
+		const { authorities, ...otherProps } = props;
+		const _userAuthority = useAppSelector(
+			(state) => state.authReducer.authority
+		);
 
-    const roleMatched = useAuthority(_userAuthority, authorities);
+		const roleMatched = useAuthority(_userAuthority, authorities);
 
-    if (roleMatched)
-      return <WrappedComponent ref={ref} {...(otherProps as P)} />;
-    return null;
-  };
+		if (roleMatched)
+			return <WrappedComponent ref={ref} {...(otherProps as P)} />;
+		return null;
+	};
 
-  return forwardRef(WithAuth);
+	return forwardRef(WithAuth);
 };

@@ -3,16 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
 import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
 
-import { useAppDispatch, useAppSelector } from "@app-core/redux-manager/hooks";
+import {
+	getHttpError,
+	getMutationData,
+	useAppDispatch,
+	useAppSelector,
+} from "@/app-core/redux-manager/method";
 
 import { DEFAULT_URL_QUERY, RETURN_URL_QUERY } from "@constant/route.constant";
 
 import { setAppToken, setSavedAccount } from "@libs/features/store";
 import { useLoginMutation } from "@libs/features/auth/auth.service";
-
-import { useFetchError } from "@libs/hooks/useFetchError";
-
-import { getMutationData } from "@libs/utils/helper/getMutationData";
 
 import { ILoginRequest } from "@libs/dtos/request/auth.request";
 
@@ -44,7 +45,7 @@ export default function SignIn() {
 	});
 	const [login, { isLoading, error }] = useLoginMutation();
 
-	const { errMsg } = useFetchError(error);
+	const { errMsg } = getHttpError(error);
 
 	const [isShowPassword, setIsShowPassword] = useState(false);
 

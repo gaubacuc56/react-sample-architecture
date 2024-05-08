@@ -4,28 +4,28 @@ import { HttpProtocol } from "@app-core/@types/http";
 
 import { ILoginRequest } from "@libs/dtos/request/auth.request";
 import {
-    IGetUserResponse,
-    ILoginResponse,
+	IGetUserResponse,
+	ILoginResponse,
 } from "@libs/dtos/response/auth.response";
 
 export const authService = createApi({
-    reducerPath: "authService",
-    baseQuery: baseQuery,
-    endpoints: (builder) => ({
-        login: builder.mutation<ILoginResponse, ILoginRequest>({
-            query: (data: ILoginRequest) => ({
-                url: `auth/login`,
-                method: HttpProtocol.POST,
-                body: { ...data, expiresInMins: 1 },
-            }),
-        }),
-        getUser: builder.query<IGetUserResponse, void>({
-            query: () => ({
-                url: `auth/me`,
-                method: HttpProtocol.GET,
-            }),
-        }),
-    }),
+	reducerPath: "authService",
+	baseQuery: baseQuery,
+	endpoints: (builder) => ({
+		login: builder.mutation<ILoginResponse, ILoginRequest>({
+			query: (data: ILoginRequest) => ({
+				url: `auth/login`,
+				method: HttpProtocol.POST,
+				body: { ...data, expiresInMins: 1 },
+			}),
+		}),
+		getUser: builder.query<IGetUserResponse, void>({
+			query: () => ({
+				url: `auth/me`,
+				method: HttpProtocol.GET,
+			}),
+		}),
+	}),
 });
 
 export const { useLoginMutation, useGetUserQuery } = authService;

@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/app-core/redux-manager/hooks";
+import { useAppSelector } from "@/app-core/redux-manager/method";
 import Progress from "../../ui/Progress";
 
 export default function FetchProgressBar() {
