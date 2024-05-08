@@ -8,7 +8,7 @@ import { RootState } from "./rootReducer";
 import { HttpStatus } from "../@types/http";
 import { logout } from "@libs/features/store";
 
-export const baseHeader = fetchBaseQuery({
+export const baseQuery = fetchBaseQuery({
 	baseUrl: `${appConfig.apiDomain_dev}`,
 	prepareHeaders: (headers, { getState }) => {
 		// You can add or modify headers here based on your needs
@@ -29,27 +29,19 @@ export const baseQueryWithReAuth = async (
 	api: BaseQueryApi,
 	extraOptions: object
 ) => {
-	const result = await baseHeader(args, api, extraOptions);
+	const result = await baseQuery(args, api, extraOptions);
 	if (result?.error?.status === HttpStatus.FORBIDDEN) {
-		const refreshResult = await baseHeader(
+		const refreshResult = await baseQuery(
 			"auth/refresh",
 			api,
 			extraOptions
 		);
 		if (refreshResult?.data) {
 			//Retry the last query with new token
-			await baseHeader(args, api, extraOptions);
+			await baseQuery(args, api, extraOptions);
 		} else {
 			api.dispatch(logout());
 		}
 	}
 	return result;
-};
-
-export const baseQuery = async (
-	args: string | FetchArgs,
-	api: BaseQueryApi,
-	extraOptions: object
-) => {
-	return await baseHeader(args, api, extraOptions);
 };

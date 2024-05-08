@@ -21,7 +21,7 @@ interface ErrorContainer {
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<StoreState> = useSelector;
 
-export const getHttpError = (
+export const catchHttpError = (
 	error: FetchBaseQueryError | SerializedError | undefined
 ) => {
 	let errMsg = undefined;
@@ -33,7 +33,9 @@ export const getHttpError = (
 	return { errMsg, errStatus };
 };
 
-export const getMutationData = <T>(data: DataContainer<T> | ErrorContainer) => {
+export const catchMutationData = <T>(
+	data: DataContainer<T> | ErrorContainer
+) => {
 	let res: T | undefined = undefined;
 	if ("data" in data) {
 		res = data.data;

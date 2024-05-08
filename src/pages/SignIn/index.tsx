@@ -4,8 +4,8 @@ import { Controller, useForm } from "react-hook-form";
 import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
 
 import {
-	getHttpError,
-	getMutationData,
+	catchHttpError,
+	catchMutationData,
 	useAppDispatch,
 	useAppSelector,
 } from "@/app-core/redux-manager/method";
@@ -45,7 +45,7 @@ export default function SignIn() {
 	});
 	const [login, { isLoading, error }] = useLoginMutation();
 
-	const { errMsg } = getHttpError(error);
+	const { errMsg } = catchHttpError(error);
 
 	const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -63,7 +63,7 @@ export default function SignIn() {
 
 	const handleFormSubmit = useCallback(
 		async (data: ILoginRequest) => {
-			const response = getMutationData(await login(data));
+			const response = catchMutationData(await login(data));
 			if (response) {
 				dispatch(setAppToken(response.token));
 				if (isRememberAccount) {
