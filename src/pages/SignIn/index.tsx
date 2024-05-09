@@ -8,7 +8,7 @@ import {
 	catchMutationData,
 	useAppDispatch,
 	useAppSelector,
-} from "@/app-core/redux-manager/method";
+} from "@app-core/redux-manager/method";
 
 import { DEFAULT_URL_QUERY, RETURN_URL_QUERY } from "@constant/route.constant";
 
@@ -53,13 +53,13 @@ export default function SignIn() {
 		useAppSelector((state) => state.authReducer.savedAccount) !== undefined
 	);
 
-	const handleShowPassword = useCallback((show: boolean) => {
+	const handleShowPassword = (show: boolean) => {
 		setIsShowPassword(show);
-	}, []);
+	};
 
-	const handleRememberAccount = useCallback(() => {
+	const handleRememberAccount = () => {
 		setIsRememberAccount(!isRememberAccount);
-	}, [isRememberAccount]);
+	};
 
 	const handleFormSubmit = useCallback(
 		async (data: ILoginRequest) => {

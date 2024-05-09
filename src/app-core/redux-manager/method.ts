@@ -33,6 +33,8 @@ export const catchHttpError = (
 	return { errMsg, errStatus };
 };
 
+// Use when we need to get response data right after the Mutation request succeed.
+// Example: get token after login.
 export const catchMutationData = <T>(
 	data: DataContainer<T> | ErrorContainer
 ) => {

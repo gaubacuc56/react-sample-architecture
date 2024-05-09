@@ -20,7 +20,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@/*": ["./src/*"],
       "@libs/*": ["./src/libs/*"],
       "@app-core/*": ["./src/app-core/*"],
       "@pages/*": ["./src/pages/*"],
@@ -28,6 +27,7 @@
       "@layout/*": ["./src/layout/*"],
       "@constant/*": ["./src/constant/*"],
       "@config/*": ["./src/config/*"],
+      "@/*": ["./src/*"],
     }
   },
   "include": ["src",  "./src/**/*",],
