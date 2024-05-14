@@ -4,7 +4,6 @@ import { Controller, useForm } from "react-hook-form";
 import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
 
 import {
-	catchHttpError,
 	catchMutationData,
 	useAppDispatch,
 	useAppSelector,
@@ -20,7 +19,6 @@ import { ILoginRequest } from "@libs/dtos/request/auth.request";
 import Input from "@libs/components/ui/Input";
 import Button from "@libs/components/ui/Button";
 import { FormError, FormLabel } from "@libs/components/ui/FormElement";
-import Alert from "@libs/components/ui/Alert";
 import Checkbox from "@libs/components/ui/Checkbox";
 import ActionLink from "@libs/components/ui/ActionLink";
 
@@ -43,9 +41,7 @@ export default function SignIn() {
 				?.password,
 		},
 	});
-	const [login, { isLoading, error }] = useLoginMutation();
-
-	const { errMsg } = catchHttpError(error);
+	const [login, { isLoading }] = useLoginMutation();
 
 	const [isShowPassword, setIsShowPassword] = useState(false);
 
@@ -97,12 +93,6 @@ export default function SignIn() {
 			<p className="text-gray-400 text-center text-sm">
 				Please enter your credentials to sign in!
 			</p>
-
-			{errMsg !== undefined && (
-				<Alert showIcon className="my-5 !text-sm" type="danger">
-					{errMsg}
-				</Alert>
-			)}
 
 			<form
 				className="mt-4 flex flex-col"

@@ -56,4 +56,5 @@ export const AppService = createApi({
 export const rtkQueryService = {
 	[AppService.reducerPath]: AppService.reducer,
 };
+
 export const rtkQueryMiddleware = [AppService];

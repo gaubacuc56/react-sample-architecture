@@ -5,6 +5,7 @@ import { persistReducer } from "redux-persist";
 
 import rootReducer from "./rootReducer";
 import { rtkQueryMiddleware } from "./baseQuery";
+import { notifyRtkQueryOutcome } from "./middleware";
 
 const persistConfig = {
 	key: "root",
@@ -12,14 +13,15 @@ const persistConfig = {
 	storage,
 	blacklist: [""],
 };
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
 	reducer: persistedReducer,
 	middleware: (getDefaultMiddleware) =>
-		getDefaultMiddleware().concat(
-			rtkQueryMiddleware.map((item) => item.middleware)
-		),
+		getDefaultMiddleware()
+			.concat(rtkQueryMiddleware.map((item) => item.middleware))
+			.prepend(notifyRtkQueryOutcome),
 	devTools: true,
 });
 setupListeners(store.dispatch);
