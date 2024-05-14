@@ -13,7 +13,7 @@ const contextClass = {
 const ToastContainer = memo((props: ToastContainerProps) => {
 	const {
 		position = "top-right",
-		autoClose = false,
+		autoClose = 3000,
 		hideProgressBar = true,
 		theme = "colored",
 		...rest
