@@ -7,7 +7,7 @@ import { LocaleType, dateLocales } from "@app-core/locale";
 
 function useLocale(language?: LocaleType) {
 	const _appLanguage = useAppSelector(
-		(state) => state.localeReducer.language
+		(state) => state.appCommonReducer.language
 	);
 	const currLanguage = language ?? _appLanguage;
 
