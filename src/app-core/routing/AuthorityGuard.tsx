@@ -4,7 +4,7 @@ import { useAppSelector } from "../redux-manager/method";
 
 import useAuthority from "@libs/hooks/useAuthority";
 
-import { UNAUTHORIZED_ENTRY_PATH } from "@/constant/route.constant";
+import { UNAUTHORIZED_ENTRY_PATH } from "@constant/route.constant";
 
 type AuthorityGuardProps = PropsWithChildren<{
 	userAuthority?: string[];

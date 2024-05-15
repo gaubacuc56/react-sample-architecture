@@ -2,7 +2,7 @@ import { useState, Suspense, lazy } from "react";
 import classNames from "classnames";
 import navigationConfig from "@config/navigation.config";
 
-import { useAppSelector } from "@/app-core/redux-manager/method";
+import { useAppSelector } from "@app-core/redux-manager/method";
 
 import { THEME_ENUM } from "@constant/theme.constant.ts";
 
@@ -15,7 +15,7 @@ import useResponsive from "@libs/hooks/useResponsive";
 import { useThemeConfig } from "@libs/hooks/useThemeConfig";
 
 const SideNavContent = lazy(
-	() => import("@/libs/components/template/SideNav/SideNavContent")
+	() => import("@libs/components/template/SideNav/SideNavContent")
 );
 
 type MobileNavToggleProps = {

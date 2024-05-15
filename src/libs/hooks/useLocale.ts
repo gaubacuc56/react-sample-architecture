@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import i18n from "i18next";
 import dayjs from "dayjs";
 
-import { useAppSelector } from "@/app-core/redux-manager/method";
+import { useAppSelector } from "@app-core/redux-manager/method";
 import { LocaleType, dateLocales } from "@app-core/locale";
 
 function useLocale(language?: LocaleType) {

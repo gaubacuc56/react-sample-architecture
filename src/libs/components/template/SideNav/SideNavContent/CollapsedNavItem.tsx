@@ -7,10 +7,10 @@ import { Trans } from "react-i18next";
 import type { CommonProps } from "@app-core/@types/common";
 import type { Direction } from "@app-core/@types/theme";
 import type { NavigationTree } from "@app-core/@types/navigation";
-import { withAuthorization } from "@/libs/utils/hoc/withAuthorization";
+import { withAuthorization } from "@libs/utils/hoc/withAuthorization";
 import { useCallback, useMemo } from "react";
-import { useAppDispatch } from "@/app-core/redux-manager/method";
-import { setCurrentRouteKey } from "@/libs/features/app-common/app-common.slice";
+import { useAppDispatch } from "@app-core/redux-manager/method";
+import { setCurrentRouteKey } from "@libs/features/app-common/app-common.slice";
 
 interface DefaultItemProps extends CommonProps {
 	nav: NavigationTree;

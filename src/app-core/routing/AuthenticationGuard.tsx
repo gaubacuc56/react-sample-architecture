@@ -6,7 +6,7 @@ import {
 	RETURN_URL_QUERY,
 	UNAUTHENTICATED_ENTRY_PATH,
 } from "@constant/route.constant";
-import { useAuthentication } from "@/libs/hooks/useAuthentication";
+import { useAuthentication } from "@libs/hooks/useAuthentication";
 
 const AuthenticationGuard = (props: PropsWithChildren) => {
 	const { children } = props;

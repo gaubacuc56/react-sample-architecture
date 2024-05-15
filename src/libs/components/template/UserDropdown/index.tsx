@@ -5,11 +5,8 @@ import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { HiOutlineLogout, HiOutlineUser } from "react-icons/hi";
 import type { CommonProps } from "@app-core/@types/common";
-import {
-	useAppDispatch,
-	useAppSelector,
-} from "@/app-core/redux-manager/method";
-import { logout } from "@/libs/features/auth/auth.slice";
+import { useAppDispatch, useAppSelector } from "@app-core/redux-manager/method";
+import { logout } from "@libs/features/auth/auth.slice";
 
 type DropdownList = {
 	label: string;

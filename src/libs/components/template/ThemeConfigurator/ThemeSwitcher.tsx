@@ -2,10 +2,7 @@ import { HiCheck } from "react-icons/hi";
 import { components, ControlProps, OptionProps } from "react-select";
 
 import type { ColorLevel } from "@app-core/@types/theme";
-import {
-	useAppDispatch,
-	useAppSelector,
-} from "@/app-core/redux-manager/method";
+import { useAppDispatch, useAppSelector } from "@app-core/redux-manager/method";
 
 import Select from "@libs/components/ui/Select";
 import Badge from "@libs/components/ui/Badge";

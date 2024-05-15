@@ -1,8 +1,5 @@
 import Radio from "@libs/components/ui/Radio";
-import {
-	useAppDispatch,
-	useAppSelector,
-} from "@/app-core/redux-manager/method";
+import { useAppDispatch, useAppSelector } from "@app-core/redux-manager/method";
 import { THEME_ENUM } from "@constant/theme.constant";
 import { setNavMode } from "@libs/features/store";
 

@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 import classNames from "classnames";
-// import ScrollBar from '@/components/ui/ScrollBar'
-import { THEME_ENUM } from "@/constant/theme.constant";
+// import ScrollBar from '@components/ui/ScrollBar'
+import { THEME_ENUM } from "@constant/theme.constant";
 
 import navigationConfig from "@config/navigation.config";
-import SideNavContent from "@/libs/components/template/SideNav/SideNavContent";
+import SideNavContent from "@libs/components/template/SideNav/SideNavContent";
 import useResponsive from "@libs//hooks/useResponsive";
-import { useAppSelector } from "@/app-core/redux-manager/method";
-import { useThemeConfig } from "@/libs/hooks/useThemeConfig";
+import { useAppSelector } from "@app-core/redux-manager/method";
+import { useThemeConfig } from "@libs/hooks/useThemeConfig";
 
 import appLogo from "@assets/img/logo.png";
 

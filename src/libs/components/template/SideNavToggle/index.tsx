@@ -1,11 +1,11 @@
 import type { CommonProps } from "@app-core/@types/common";
-import { useAppDispatch } from "@/app-core/redux-manager/method";
+import { useAppDispatch } from "@app-core/redux-manager/method";
 
 import withHeaderItem from "@libs/utils/hoc/withHeaderItem";
 import { setSideNavCollapse } from "@libs/features/store";
 import useResponsive from "@libs/hooks/useResponsive";
 import NavToggle from "@libs/components/shared/NavToggle";
-import { useThemeConfig } from "@/libs/hooks/useThemeConfig";
+import { useThemeConfig } from "@libs/hooks/useThemeConfig";
 
 const _SideNavToggle = ({ className }: CommonProps) => {
 	const { layout } = useThemeConfig();

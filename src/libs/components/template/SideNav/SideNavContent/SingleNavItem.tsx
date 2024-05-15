@@ -8,8 +8,8 @@ import useAuthority from "@libs/hooks/useAuthority";
 import Tooltip from "@libs/components/ui/Tooltip";
 import Menu from "@libs/components/ui/Menu";
 import { Trans, useTranslation } from "react-i18next";
-import { useAppDispatch } from "@/app-core/redux-manager/method";
-import { setCurrentRouteKey } from "@/libs/features/app-common/app-common.slice";
+import { useAppDispatch } from "@app-core/redux-manager/method";
+import { setCurrentRouteKey } from "@libs/features/app-common/app-common.slice";
 import { useCallback } from "react";
 
 const { MenuItem } = Menu;

@@ -1,9 +1,6 @@
 import classNames from "classnames";
 import { HiOutlineCog } from "react-icons/hi";
-import {
-	useAppDispatch,
-	useAppSelector,
-} from "@/app-core/redux-manager/method";
+import { useAppDispatch, useAppSelector } from "@app-core/redux-manager/method";
 import type { CommonProps } from "@app-core/@types/common";
 
 import Drawer from "@libs/components/ui/Drawer";

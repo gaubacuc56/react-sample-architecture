@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGetUserQuery } from "@libs/features/auth/auth.service";
-import { useAppDispatch } from "@/app-core/redux-manager/method";
+import { useAppDispatch } from "@app-core/redux-manager/method";
 import { setAppIsFetching } from "../features/store";
 
 export const useAuthentication = () => {

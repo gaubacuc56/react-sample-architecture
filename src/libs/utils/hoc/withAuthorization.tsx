@@ -1,5 +1,5 @@
 import { ComponentType, ForwardedRef, forwardRef } from "react";
-import { useAppSelector } from "@/app-core/redux-manager/method";
+import { useAppSelector } from "@app-core/redux-manager/method";
 
 import useAuthority from "@libs/hooks/useAuthority";
 

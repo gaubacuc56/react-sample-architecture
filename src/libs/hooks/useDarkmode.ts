@@ -3,14 +3,11 @@ import type { Mode } from "@app-core/@types/theme";
 import { THEME_ENUM } from "@constant/theme.constant";
 
 import { setMode } from "@libs/features/store";
-import {
-	useAppSelector,
-	useAppDispatch,
-} from "@/app-core/redux-manager/method";
+import { useAppSelector, useAppDispatch } from "@app-core/redux-manager/method";
 
 function useDarkMode(): [
 	isEnabled: boolean,
-	onModeChange: (mode: Mode) => void
+	onModeChange: (mode: Mode) => void,
 ] {
 	const mode = useAppSelector((state) => state.themeReducer.mode);
 
