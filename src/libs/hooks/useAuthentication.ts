@@ -4,27 +4,29 @@ import { useAppDispatch } from "@app-core/redux-manager/method";
 import { setAppIsFetching } from "../features/store";
 
 export const useAuthentication = () => {
-	const { data, isError, isFetching } = useGetUserQuery(undefined, {
-		// Always check if current token is expired when window is reloaded
-		refetchOnMountOrArgChange: true,
-	});
+    const { data, isError, isFetching } = useGetUserQuery(undefined, {
+        // Always check if current token is expired when window is reloaded
+        refetchOnMountOrArgChange: true,
+    });
 
-	const dispatch = useAppDispatch();
+    console.log("data", data);
 
-	const [isAuthenticated, setIsAuthenticated] = useState<null | boolean>(
-		null
-	);
+    const dispatch = useAppDispatch();
 
-	useEffect(() => {
-		if (!isError && data !== undefined) setIsAuthenticated(true);
-		else if (isError) {
-			setIsAuthenticated(false);
-		} else setIsAuthenticated(null);
-	}, [data, isError]);
+    const [isAuthenticated, setIsAuthenticated] = useState<null | boolean>(
+        null
+    );
 
-	useEffect(() => {
-		dispatch(setAppIsFetching(isFetching));
-	}, [isFetching]);
+    useEffect(() => {
+        if (!isError && data !== undefined) setIsAuthenticated(true);
+        else if (isError) {
+            setIsAuthenticated(false);
+        } else setIsAuthenticated(null);
+    }, [data, isError]);
 
-	return { isAuthenticated };
+    useEffect(() => {
+        dispatch(setAppIsFetching(isFetching));
+    }, [isFetching]);
+
+    return { isAuthenticated };
 };
