@@ -28,7 +28,8 @@
 			"@constant/*": ["./src/constant/*"],
 			"@config/*": ["./src/config/*"],
 			"@*": ["./src/*"]
-		}
+		},
+		"types": ["@testing-library/jest-dom"],
 	},
 	"include": ["src", "./src/**/*"],
 	"references": [{ "path": "./tsconfig.node.json" }]
