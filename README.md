@@ -51,10 +51,10 @@ src\
 +---constant            # app constants such as definition of navigation, route, etc.
 +---layout              # determines how template are arranged together to form a page or section of the application.
 +---libs                # reusable libraries preconfigured for the application.
-|   +---components      # base on Atomic desgin pattern.
+|   +---components      # base on React Atomic desgin pattern.
 |   |   +---shared      # combine atoms together to form components with specific functions (Molecules).
 |   |   +---template    # independent interfaces capable of operating independently, consisting of Molecules and Atoms.
-|   |   +---ui (atoms)  # most basic UI components and cannot be divided into smaller parts (Atoms).
+|   |   +---ui          # most basic UI components and cannot be divided into smaller parts (Atoms).
 |   +---dtos            # models of api's request & response.
 |   +---features        # feature's data storage and api services.
 |   +---hooks           # shared hooks used across the entire application
