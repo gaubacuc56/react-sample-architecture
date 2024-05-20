@@ -1,7 +1,7 @@
 import { PropsWithChildren, useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAppDispatch } from "../redux-manager/method";
-import { logout } from "@libs/features/store";
+import { AuthActions } from "@libs/features/store";
 import {
 	RETURN_URL_QUERY,
 	UNAUTHENTICATED_ENTRY_PATH,
@@ -17,7 +17,8 @@ const AuthenticationGuard = (props: PropsWithChildren) => {
 	const { isAuthenticated } = useAuthentication();
 
 	useEffect(() => {
-		if (isAuthenticated !== null && !isAuthenticated) dispatch(logout());
+		if (isAuthenticated !== null && !isAuthenticated)
+			dispatch(AuthActions.logout());
 	}, [isAuthenticated, dispatch]);
 
 	if (isAuthenticated !== null && isAuthenticated) {

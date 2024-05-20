@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@app-core/redux-manager/method";
 
 import Select from "@libs/components/ui/Select";
 import Badge from "@libs/components/ui/Badge";
-import { setThemeColor, setThemeColorLevel } from "@libs/features/store";
+import { ThemeActions } from "@libs/features/store";
 
 const { Control } = components;
 
@@ -116,11 +116,11 @@ const ThemeSwitcher = () => {
 	);
 
 	const onThemeColorChange = ({ value }: ColorList) => {
-		dispatch(setThemeColor(value));
+		dispatch(ThemeActions.setThemeColor(value));
 	};
 
 	const onThemeColorLevelChange = ({ value }: ColorLevelList) => {
-		dispatch(setThemeColorLevel(value));
+		dispatch(ThemeActions.setThemeColorLevel(value));
 	};
 
 	return (

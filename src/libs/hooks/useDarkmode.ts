@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import type { Mode } from "@app-core/@types/theme";
 import { THEME_ENUM } from "@constant/theme.constant";
 
-import { setMode } from "@libs/features/store";
+import { ThemeActions } from "@libs/features/store";
 import { useAppSelector, useAppDispatch } from "@app-core/redux-manager/method";
 
 function useDarkMode(): [
@@ -18,7 +18,7 @@ function useDarkMode(): [
 	const dispatch = useAppDispatch();
 
 	const onModeChange = (mode: Mode) => {
-		dispatch(setMode(mode));
+		dispatch(ThemeActions.setMode(mode));
 	};
 
 	useEffect(() => {

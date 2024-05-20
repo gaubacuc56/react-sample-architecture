@@ -13,6 +13,7 @@ import withHeaderItem, {
 import NavToggle from "@libs/components/shared/NavToggle";
 import useResponsive from "@libs/hooks/useResponsive";
 import { useThemeConfig } from "@libs/hooks/useThemeConfig";
+import { AppCommonSelectors } from "@libs/features/store";
 
 const SideNavContent = lazy(
 	() => import("@libs/components/template/SideNav/SideNavContent")
@@ -41,9 +42,7 @@ const MobileNav = () => {
 		useThemeConfig();
 	const sideNavCollapse = layout.sideNavCollapse;
 
-	const currentRouteKey = useAppSelector(
-		(state) => state.appCommonReducer.currentRouteKey
-	);
+	const currentRouteKey = useAppSelector(AppCommonSelectors.currentRouteKey);
 	const userAuthority = useAppSelector(
 		(state) => state.authReducer.authority
 	);

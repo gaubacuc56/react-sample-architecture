@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { HiOutlineLogout, HiOutlineUser } from "react-icons/hi";
 import type { CommonProps } from "@app-core/@types/common";
 import { useAppDispatch, useAppSelector } from "@app-core/redux-manager/method";
-import { logout } from "@libs/features/auth/auth.slice";
+import { AuthActions } from "@libs/features/auth/auth.slice";
 
 type DropdownList = {
 	label: string;
@@ -22,7 +22,7 @@ const _UserDropdown = ({ className }: CommonProps) => {
 	const dispatch = useAppDispatch();
 
 	const handleLogout = () => {
-		dispatch(logout());
+		dispatch(AuthActions.logout());
 	};
 
 	return (

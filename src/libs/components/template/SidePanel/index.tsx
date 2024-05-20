@@ -5,7 +5,7 @@ import type { CommonProps } from "@app-core/@types/common";
 
 import Drawer from "@libs/components/ui/Drawer";
 import withHeaderItem from "@libs/utils/hoc/withHeaderItem";
-import { setPanelExpand } from "@libs/features/store";
+import { ThemeActions } from "@libs/features/store";
 
 import ThemeConfigurator, {
 	ThemeConfiguratorProps,
@@ -25,11 +25,11 @@ const _SidePanel = (props: SidePanelProps) => {
 	const _direction = useAppSelector((state) => state.themeReducer.direction);
 
 	const openPanel = () => {
-		dispatch(setPanelExpand(true));
+		dispatch(ThemeActions.setPanelExpand(true));
 	};
 
 	const closePanel = () => {
-		dispatch(setPanelExpand(false));
+		dispatch(ThemeActions.setPanelExpand(false));
 		const bodyClassList = document.body.classList;
 		if (bodyClassList.contains("drawer-lock-scroll")) {
 			bodyClassList.remove("drawer-lock-scroll", "drawer-open");

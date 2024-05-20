@@ -1,19 +1,19 @@
 import { Locales, LocaleType } from "@app-core/locale";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface IAppCommonState {
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { StoreState } from "@app-core/redux-manager/rootReducer";
+interface IAppCommonState {
 	currentRouteKey: string;
 	appIsFetching: boolean;
 	language: LocaleType;
 }
 
-export const initialState: IAppCommonState = {
+const initialState: IAppCommonState = {
 	currentRouteKey: "",
 	appIsFetching: false,
 	language: Locales.ENGLISH,
 };
 
-export const appCommonSlice = createSlice({
+const appCommonStore = createSlice({
 	name: "app-common",
 	initialState,
 	reducers: {
@@ -29,7 +29,26 @@ export const appCommonSlice = createSlice({
 	},
 });
 
-export const { setCurrentRouteKey, setAppIsFetching, setAppLanguage } =
-	appCommonSlice.actions;
+export const AppCommonActions = {
+	...appCommonStore.actions,
+};
 
-export default appCommonSlice.reducer;
+const selectSelf = (state: StoreState): IAppCommonState =>
+	state.appCommonReducer;
+
+export const AppCommonSelectors = {
+	currentRouteKey: createSelector(
+		selectSelf,
+		(state: IAppCommonState) => state.currentRouteKey
+	),
+	appIsFetching: createSelector(
+		selectSelf,
+		(state: IAppCommonState) => state.appIsFetching
+	),
+	language: createSelector(
+		selectSelf,
+		(state: IAppCommonState) => state.language
+	),
+};
+
+export default appCommonStore.reducer;

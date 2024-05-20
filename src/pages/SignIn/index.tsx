@@ -11,7 +11,7 @@ import {
 
 import { DEFAULT_URL_QUERY, RETURN_URL_QUERY } from "@constant/route.constant";
 
-import { setAppToken, setSavedAccount } from "@libs/features/store";
+import { AuthActions } from "@libs/features/store";
 import { useLoginMutation } from "@libs/features/auth/auth.service";
 
 import { ILoginRequest } from "@libs/dtos/request/auth.request";
@@ -61,15 +61,15 @@ export default function SignIn() {
 		async (data: ILoginRequest) => {
 			const response = catchMutationData(await login(data));
 			if (response) {
-				dispatch(setAppToken(response.token));
+				dispatch(AuthActions.setAppToken(response.token));
 				if (isRememberAccount) {
 					dispatch(
-						setSavedAccount({
+						AuthActions.setSavedAccount({
 							username: getValues("username"),
 							password: getValues("password"),
 						})
 					);
-				} else dispatch(setSavedAccount(undefined));
+				} else dispatch(AuthActions.setSavedAccount(undefined));
 				// Get last url where user is logged out
 				const returnUrl =
 					new URLSearchParams(window.location.search).get(

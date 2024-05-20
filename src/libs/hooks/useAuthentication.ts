@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useGetUserQuery } from "@libs/features/auth/auth.service";
 import { useAppDispatch } from "@app-core/redux-manager/method";
-import { setAppIsFetching } from "../features/store";
+import { AppCommonActions } from "../features/store";
 
 export const useAuthentication = () => {
 	const { data, isError, isFetching } = useGetUserQuery(undefined, {
@@ -23,7 +23,7 @@ export const useAuthentication = () => {
 	}, [data, isError]);
 
 	useEffect(() => {
-		dispatch(setAppIsFetching(isFetching));
+		dispatch(AppCommonActions.setAppIsFetching(isFetching));
 	}, [isFetching]);
 
 	return { isAuthenticated };

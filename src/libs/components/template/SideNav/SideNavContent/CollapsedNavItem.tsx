@@ -10,7 +10,7 @@ import type { NavigationTree } from "@app-core/@types/navigation";
 import { withAuthorization } from "@libs/utils/hoc/withAuthorization";
 import { useCallback, useMemo } from "react";
 import { useAppDispatch } from "@app-core/redux-manager/method";
-import { setCurrentRouteKey } from "@libs/features/app-common/app-common.slice";
+import { AppCommonActions } from "@libs/features/store";
 
 interface DefaultItemProps extends CommonProps {
 	nav: NavigationTree;
@@ -37,7 +37,7 @@ const DefaultItem = ({ nav, onLinkClick }: DefaultItemProps) => {
 
 	const handleNavItemClick = useCallback(
 		(subNav: NavigationTree) => {
-			dispatch(setCurrentRouteKey(subNav.path));
+			dispatch(AppCommonActions.setCurrentRouteKey(subNav.path));
 			onLinkClick?.({
 				key: subNav.key,
 				title: subNav.title,
@@ -101,7 +101,7 @@ const CollapsedItem = ({ nav, onLinkClick, direction }: CollapsedItemProps) => {
 
 	const handleNavItemClick = useCallback(
 		(subNav: NavigationTree) => {
-			dispatch(setCurrentRouteKey(subNav.path));
+			dispatch(AppCommonActions.setCurrentRouteKey(subNav.path));
 			onLinkClick?.({
 				key: subNav.key,
 				title: subNav.title,

@@ -1,10 +1,9 @@
 import { useAppSelector } from "@app-core/redux-manager/method";
 import Progress from "../../ui/Progress";
+import { AppCommonSelectors } from "@libs/features/store";
 
 export default function FetchProgressBar() {
-	const appIsFetching = useAppSelector(
-		(state) => state.appCommonReducer.appIsFetching
-	);
+	const appIsFetching = useAppSelector(AppCommonSelectors.appIsFetching);
 	return (
 		<div>
 			{appIsFetching && (

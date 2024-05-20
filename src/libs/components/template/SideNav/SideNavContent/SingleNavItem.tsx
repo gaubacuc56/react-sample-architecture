@@ -1,16 +1,16 @@
+import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import { Trans, useTranslation } from "react-i18next";
 
+import { useAppDispatch } from "@app-core/redux-manager/method";
 import type { CommonProps } from "@app-core/@types/common";
 import type { Direction } from "@app-core/@types/theme";
 import type { NavigationTree } from "@app-core/@types/navigation";
-import useAuthority from "@libs/hooks/useAuthority";
 
+import useAuthority from "@libs/hooks/useAuthority";
 import Tooltip from "@libs/components/ui/Tooltip";
 import Menu from "@libs/components/ui/Menu";
-import { Trans, useTranslation } from "react-i18next";
-import { useAppDispatch } from "@app-core/redux-manager/method";
-import { setCurrentRouteKey } from "@libs/features/app-common/app-common.slice";
-import { useCallback } from "react";
+import { AppCommonActions } from "@libs/features/store";
 
 const { MenuItem } = Menu;
 
@@ -55,7 +55,7 @@ const DefaultItem = (props: DefaultItemProps) => {
 
 	const handleNavItemClick = useCallback(
 		(subNav: NavigationTree) => {
-			dispatch(setCurrentRouteKey(subNav.path));
+			dispatch(AppCommonActions.setCurrentRouteKey(subNav.path));
 			onLinkClick?.({
 				key: subNav.key,
 				title: subNav.title,

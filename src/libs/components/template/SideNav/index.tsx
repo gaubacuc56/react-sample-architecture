@@ -10,6 +10,7 @@ import { useAppSelector } from "@app-core/redux-manager/method";
 import { useThemeConfig } from "@libs/hooks/useThemeConfig";
 
 import appLogo from "@assets/img/logo.png";
+import { AppCommonSelectors } from "@libs/features/store";
 
 const sideNavStyle = {
 	width: THEME_ENUM.SIDE_NAV_WIDTH,
@@ -26,9 +27,7 @@ const SideNav = () => {
 		useThemeConfig();
 
 	const sideNavCollapse = layout.sideNavCollapse;
-	const currentRouteKey = useAppSelector(
-		(state) => state.appCommonReducer.currentRouteKey
-	);
+	const currentRouteKey = useAppSelector(AppCommonSelectors.currentRouteKey);
 
 	const userAuthority = useAppSelector(
 		(state) => state.authReducer.authority

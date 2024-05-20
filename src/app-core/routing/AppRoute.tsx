@@ -3,7 +3,7 @@ import { useEffect, useCallback } from "react";
 import type { ComponentType } from "react";
 import { useLocation } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux-manager/method";
-import { setLayout, setPreviousLayout } from "@libs/features/store";
+import { ThemeActions } from "@libs/features/store";
 import { LayoutType } from "../@types/theme";
 
 export type AppRouteProps<T> = {
@@ -30,13 +30,13 @@ const AppRoute = <T extends Record<string, unknown>>({
 
 	const handleLayoutChange = useCallback(() => {
 		if (props.layout && props.layout !== layoutType) {
-			dispatch(setPreviousLayout(layoutType));
-			dispatch(setLayout(props.layout));
+			dispatch(ThemeActions.setPreviousLayout(layoutType));
+			dispatch(ThemeActions.setLayout(props.layout));
 		}
 
 		if (!props.layout && previousLayout && layoutType !== previousLayout) {
-			dispatch(setLayout(previousLayout));
-			dispatch(setPreviousLayout(""));
+			dispatch(ThemeActions.setLayout(previousLayout));
+			dispatch(ThemeActions.setPreviousLayout(""));
 		}
 	}, [dispatch, layoutType, previousLayout, props.layout]);
 

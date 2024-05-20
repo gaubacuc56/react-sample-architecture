@@ -1,7 +1,7 @@
 import Radio from "@libs/components/ui/Radio";
 import { useAppDispatch, useAppSelector } from "@app-core/redux-manager/method";
 import { THEME_ENUM } from "@constant/theme.constant";
-import { setNavMode } from "@libs/features/store";
+import { ThemeActions } from "@libs/features/store";
 
 type NavModeParam = "default" | "themed";
 
@@ -10,7 +10,7 @@ const NavModeSwitcher = () => {
 	const dispatch = useAppDispatch();
 
 	const onSetNavMode = (val: NavModeParam) => {
-		dispatch(setNavMode(val));
+		dispatch(ThemeActions.setNavMode(val));
 	};
 
 	return (

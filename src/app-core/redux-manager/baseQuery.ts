@@ -7,7 +7,7 @@ import {
 import { appConfig } from "@config/app.config";
 import { RootState } from "./rootReducer";
 import { HttpStatus } from "../@types/http";
-import { logout } from "@libs/features/store";
+import { AuthActions } from "@libs/features/store";
 
 const baseQuery = fetchBaseQuery({
 	baseUrl: `${appConfig.apiDomain_dev}`,
@@ -41,7 +41,7 @@ const baseQueryWithReAuth = async (
 			//Retry the last query with new token
 			await baseQuery(args, api, extraOptions);
 		} else {
-			api.dispatch(logout());
+			api.dispatch(AuthActions.logout());
 		}
 	}
 	return result;
