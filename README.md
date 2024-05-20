@@ -13,9 +13,9 @@ A simple, scalable, and powerful architecture for any React applications.
 -   Scalability in terms of codebase and team size
 -   Issues detectable as early as possible
 
-## Installation:
+## Installation
 
-### Pre-requisites:.
+### Pre-requisites
 
 1. Node.js v21.xx.
 2. Download from [here](https://nodejs.org/en/download/) or use nvm.
