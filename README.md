@@ -38,5 +38,5 @@ npm install
 3. Start application:
 
 ```bash
-npm start`
+npm start
 ```
