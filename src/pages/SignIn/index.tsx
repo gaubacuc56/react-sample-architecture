@@ -11,7 +11,7 @@ import {
 
 import { DEFAULT_URL_QUERY, RETURN_URL_QUERY } from "@constant/route.constant";
 
-import { AuthActions } from "@libs/features/store";
+import { AuthActions, AuthSelectors } from "@libs/features/store";
 import { useLoginMutation } from "@libs/features/auth/auth.service";
 
 import { ILoginRequest } from "@libs/dtos/request/auth.request";
@@ -35,10 +35,8 @@ export default function SignIn() {
 		formState: { errors },
 	} = useForm<ILoginRequest>({
 		defaultValues: {
-			username: useAppSelector((state) => state.authReducer.savedAccount)
-				?.username,
-			password: useAppSelector((state) => state.authReducer.savedAccount)
-				?.password,
+			username: useAppSelector(AuthSelectors.savedAccount)?.username,
+			password: useAppSelector(AuthSelectors.savedAccount)?.password,
 		},
 	});
 	const [login, { isLoading }] = useLoginMutation();
@@ -46,7 +44,7 @@ export default function SignIn() {
 	const [isShowPassword, setIsShowPassword] = useState(false);
 
 	const [isRememberAccount, setIsRememberAccount] = useState(
-		useAppSelector((state) => state.authReducer.savedAccount) !== undefined
+		useAppSelector(AuthSelectors.savedAccount) !== undefined
 	);
 
 	const handleShowPassword = (show: boolean) => {
