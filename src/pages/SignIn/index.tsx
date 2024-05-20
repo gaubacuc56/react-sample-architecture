@@ -12,7 +12,7 @@ import {
 import { DEFAULT_URL_QUERY, RETURN_URL_QUERY } from "@constant/route.constant";
 
 import { AuthActions, AuthSelectors } from "@libs/features/store";
-import { useLoginMutation } from "@libs/features/auth/auth.service";
+import { useLoginMutation } from "@libs/features/auth/service";
 
 import { ILoginRequest } from "@libs/dtos/request/auth.request";
 

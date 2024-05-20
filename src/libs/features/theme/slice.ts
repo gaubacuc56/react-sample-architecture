@@ -1,4 +1,4 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { themeConfig } from "@config/theme.config";
 import type {
 	LayoutType,
@@ -8,9 +8,8 @@ import type {
 	NavMode,
 } from "@app-core/@types/theme";
 import { THEME_ENUM } from "@constant/theme.constant";
-import { StoreState } from "@app-core/redux-manager/rootReducer";
 
-interface IThemeState {
+export interface IThemeState {
 	themeColor: string;
 	direction: Direction;
 	mode: Mode;
@@ -34,7 +33,7 @@ const initialState: IThemeState = {
 	navMode: themeConfig.navMode,
 };
 
-const themeStore = createSlice({
+export const themeStore = createSlice({
 	name: "theme",
 	initialState,
 	reducers: {
@@ -83,33 +82,5 @@ const themeStore = createSlice({
 		},
 	},
 });
-
-export const ThemeActions = {
-	...themeStore.actions,
-};
-
-const selectSelf = (state: StoreState): IThemeState => state.themeReducer;
-
-export const ThemeSelectors = {
-	themeColor: createSelector(
-		selectSelf,
-		(state: IThemeState) => state.themeColor
-	),
-	direction: createSelector(
-		selectSelf,
-		(state: IThemeState) => state.direction
-	),
-	mode: createSelector(selectSelf, (state: IThemeState) => state.mode),
-	primaryColorLevel: createSelector(
-		selectSelf,
-		(state: IThemeState) => state.primaryColorLevel
-	),
-	layout: createSelector(selectSelf, (state: IThemeState) => state.layout),
-	panelExpand: createSelector(
-		selectSelf,
-		(state: IThemeState) => state.panelExpand
-	),
-	navMode: createSelector(selectSelf, (state: IThemeState) => state.navMode),
-};
 
 export default themeStore.reducer;

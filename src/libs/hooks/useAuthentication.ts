@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useGetUserQuery } from "@libs/features/auth/auth.service";
+import { useGetUserQuery } from "@libs/features/auth/service";
 import { useAppDispatch } from "@app-core/redux-manager/method";
 import { AppCommonActions } from "../features/store";
 
