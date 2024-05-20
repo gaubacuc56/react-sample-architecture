@@ -11,10 +11,11 @@ import { useAuthentication } from "@libs/hooks/useAuthentication";
 const AuthenticationGuard = (props: PropsWithChildren) => {
 	const { children } = props;
 
-	const dispatch = useAppDispatch();
 	const { pathname } = useLocation();
 
 	const { isAuthenticated } = useAuthentication();
+
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		if (isAuthenticated !== null && !isAuthenticated)
@@ -23,12 +24,13 @@ const AuthenticationGuard = (props: PropsWithChildren) => {
 
 	if (isAuthenticated !== null && isAuthenticated) {
 		return <>{children}</>;
-	} else if (isAuthenticated !== null && !isAuthenticated)
+	} else if (isAuthenticated !== null && !isAuthenticated) {
 		return (
 			<Navigate
 				to={`${UNAUTHENTICATED_ENTRY_PATH}?${RETURN_URL_QUERY}=${pathname}`}
 			/>
 		);
+	}
 };
 
 export default AuthenticationGuard;

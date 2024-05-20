@@ -9,6 +9,8 @@ export const useAuthentication = () => {
 		refetchOnMountOrArgChange: true,
 	});
 
+	console.log("data", data);
+
 	const dispatch = useAppDispatch();
 
 	const [isAuthenticated, setIsAuthenticated] = useState<null | boolean>(
@@ -16,15 +18,15 @@ export const useAuthentication = () => {
 	);
 
 	useEffect(() => {
+		dispatch(AppCommonActions.setAppIsFetching(isFetching));
+	}, [isFetching]);
+
+	useEffect(() => {
 		if (!isError && data !== undefined) setIsAuthenticated(true);
 		else if (isError) {
 			setIsAuthenticated(false);
 		} else setIsAuthenticated(null);
 	}, [data, isError]);
-
-	useEffect(() => {
-		dispatch(AppCommonActions.setAppIsFetching(isFetching));
-	}, [isFetching]);
 
 	return { isAuthenticated };
 };
