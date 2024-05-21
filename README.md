@@ -45,19 +45,19 @@ npm start
 
 ```
 src\
-+---app-core            # global configurations.
++---app-core        # global configurations.
 |
-+---assets              # assets folder can contain all the static files such as css, images, fonts, etc.
++---assets          # assets folder can contain all the static files such as css, images, fonts, etc.
 |
-+---config              # app configurations such as env, routes, sidebar, etc.
++---config          # app configurations such as env, routes, sidebar, etc.
 |
-+---constant            # app constant variables.
++---constant        # app constant variables.
 |
-+---layout              # determines how template are arranged together to form a page or section of the application.
++---layout          # determines how template are arranged together to form a page or section of the application.
 |
-+---libs                # reusable libraries preconfigured for the application.
++---libs            # reusable libraries preconfigured for the application.
 |
-+---pages               # application specific pages.
++---pages           # application specific pages.
 ```
 
 ```
