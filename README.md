@@ -51,7 +51,7 @@ src\
 |
 +---config              # app configurations such as env, routes, sidebar, etc.
 |
-+---constant            # app constants such as definition of navigation, route, etc.
++---constant            # app constant variables.
 |
 +---layout              # determines how template are arranged together to form a page or section of the application.
 |
@@ -62,7 +62,7 @@ src\
 
 ```
 src\libs
-+---components      # base on React Atomic desgin pattern.
++---components      # base on React Atomic design pattern.
 |
 |   +---shared      # combine atoms together to form components with specific functions (Molecules).
 |
@@ -79,7 +79,8 @@ src\libs
 +---translation     # i18next dictionary.
 |
 +---utils
+|
     +---helper      # shared utility functions.
 |
-    +---hoc         # app hoc component.
+    +---hoc         # app hoc components.
 ```
