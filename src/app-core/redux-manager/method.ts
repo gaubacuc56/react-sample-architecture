@@ -22,7 +22,7 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<StoreState> = useSelector;
 
 // Use to get error message for specific purpose.
-export const catchHttpError = (
+export const CatchHttpError = (
 	error: FetchBaseQueryError | SerializedError | undefined
 ) => {
 	let errMsg = undefined;
@@ -36,7 +36,7 @@ export const catchHttpError = (
 
 // Use to get response data right after the Mutation request succeed.
 // Example: get token after login.
-export const catchMutationData = <T>(
+export const CatchMutationData = <T>(
 	data: DataContainer<T> | ErrorContainer
 ) => {
 	let res: T | undefined = undefined;

@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import { HiOutlineEyeOff, HiOutlineEye } from "react-icons/hi";
 
 import {
-	catchMutationData,
+	CatchMutationData,
 	useAppDispatch,
 	useAppSelector,
 } from "@app-core/redux-manager/method";
@@ -57,7 +57,7 @@ export default function SignIn() {
 
 	const handleFormSubmit = useCallback(
 		async (data: ILoginRequest) => {
-			const response = catchMutationData(await login(data));
+			const response = CatchMutationData(await login(data));
 			if (response) {
 				dispatch(AuthActions.setAppToken(response.token));
 				if (isRememberAccount) {

@@ -25,7 +25,6 @@ export const authStore = createSlice({
 		logout: (state) => {
 			state.token = "";
 			state.authority = [];
-			window.location.reload();
 		},
 		setSavedAccount: (
 			state,

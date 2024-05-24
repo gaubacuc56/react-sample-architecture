@@ -6,6 +6,7 @@ import {
 	IGetUserResponse,
 	ILoginResponse,
 } from "@libs/dtos/response/auth.response";
+import { TOKEN_LIFETIME } from "@constant/common.constant";
 
 const authService = AppService.injectEndpoints({
 	endpoints: (builder) => ({
@@ -13,7 +14,7 @@ const authService = AppService.injectEndpoints({
 			query: (data: ILoginRequest) => ({
 				url: `auth/login`,
 				method: HttpProtocol.POST,
-				body: { ...data, expiresInMins: 1 },
+				body: { ...data, expiresInMins: TOKEN_LIFETIME },
 			}),
 		}),
 		getUser: builder.query<IGetUserResponse, void>({
