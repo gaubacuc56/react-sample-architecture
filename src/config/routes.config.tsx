@@ -27,9 +27,9 @@ export const routes: AppRoutesConfig[] = [
                 crumb: "Dashboarddddd",
             },
             {
-                key: "product",
-                path: "product/product-list",
-                component: lazy(() => import("@pages/UserList")),
+                key: "league",
+                path: "league/league-list",
+                component: lazy(() => import("@pages/LeagueList")),
                 authority: [],
                 crumb: "User List",
             },

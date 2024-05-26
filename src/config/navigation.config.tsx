@@ -26,18 +26,18 @@ const navigationConfig: NavigationTree[] = [
                 subMenu: [],
             },
             {
-                key: "product",
+                key: "league",
                 path: "",
-                title: "Product",
+                title: "Leagues",
                 translateKey: "",
                 icon: <BiCategoryAlt />,
                 type: NAV_ITEM_TYPE_COLLAPSE,
                 authority: [],
                 subMenu: [
                     {
-                        key: "product/product-list",
-                        path: "product/product-list",
-                        title: "Product List",
+                        key: "league/league-list",
+                        path: "league/league-list",
+                        title: "League List",
                         translateKey: "",
                         type: NAV_ITEM_TYPE_ITEM,
                         authority: [],

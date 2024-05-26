@@ -1,17 +1,17 @@
 import { combineReducers } from "@reduxjs/toolkit";
 
 import { storeReducer } from "@libs/features/store";
-import { rtkQueryService } from "./baseQuery";
+import { rtkQueryService } from "../http-gateway";
 
 export const _storeReducer = combineReducers({
-	...storeReducer,
+    ...storeReducer,
 });
 
 export type StoreState = ReturnType<typeof _storeReducer>;
 
 const rootReducer = combineReducers({
-	...storeReducer,
-	...rtkQueryService,
+    ...storeReducer,
+    ...rtkQueryService,
 });
 
 export default rootReducer;
