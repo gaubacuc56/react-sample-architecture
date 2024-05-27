@@ -1,16 +1,20 @@
-import { HttpProtocol } from "@app-core/@types/http";
+import { HttpProtocol, HttpResponse } from "@app-core/@types/http";
 import { LiveScoreService } from "@app-core/http-gateway";
+import { ISearchLeagueResponse } from "@libs/dtos/response/league.response";
 
 const liveScoreService = LiveScoreService.injectEndpoints({
-    endpoints: (builder) => ({
-        getAllLeagues: builder.query<any, void>({
-            query: () => ({
-                url: `leagues`,
-                method: HttpProtocol.GET,
-            }),
-        }),
-    }),
-    overrideExisting: false,
+	endpoints: (builder) => ({
+		getAllLeagues: builder.query<
+			HttpResponse<ISearchLeagueResponse[]>,
+			string
+		>({
+			query: (query) => ({
+				url: `leagues?${query}`,
+				method: HttpProtocol.GET,
+			}),
+		}),
+	}),
+	overrideExisting: false,
 });
 
 export const { useGetAllLeaguesQuery } = liveScoreService;

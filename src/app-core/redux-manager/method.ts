@@ -4,7 +4,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 
 import { StoreState, _storeReducer } from "./rootReducer";
-import { HttpResponse } from "../@types/http";
+import { HttpError } from "../@types/http";
 
 const ConfigureStore = configureStore({
 	reducer: _storeReducer,
@@ -28,7 +28,7 @@ export const CatchHttpError = (
 	let errMsg = undefined;
 	let errStatus = undefined;
 	if (error && "data" in error && "status" in error) {
-		errMsg = (error.data as HttpResponse).message;
+		errMsg = (error.data as HttpError).message;
 		errStatus = error.status;
 	}
 	return { errMsg, errStatus };
