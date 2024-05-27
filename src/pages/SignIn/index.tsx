@@ -117,6 +117,7 @@ export default function SignIn() {
 										errors.username?.message ? "error" : ""
 									}
 									value={value}
+									extra="mt-2"
 								/>
 								<FormError>
 									{errors.username?.message ?? ""}
@@ -158,6 +159,7 @@ export default function SignIn() {
 											/>
 										)
 									}
+									extra="mt-2"
 								/>
 								<FormError>
 									{errors.password?.message ?? ""}
