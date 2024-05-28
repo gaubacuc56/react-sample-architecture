@@ -1,4 +1,4 @@
-import { memo, forwardRef } from "react";
+import { memo, forwardRef, useMemo } from "react";
 import classNames from "classnames";
 import type { ComponentPropsWithRef, ElementType } from "react";
 
@@ -15,10 +15,9 @@ const THead = memo(
 			...rest
 		} = props;
 
-		const tHeadClass = classNames(
-			Component !== "thead" && "thead",
-			className
-		);
+		const tHeadClass = useMemo(() => {
+			return classNames(Component !== "thead" && "thead", className);
+		}, [Component, className]);
 
 		return (
 			<Component className={tHeadClass} {...rest} ref={ref}>

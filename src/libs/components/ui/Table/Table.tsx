@@ -39,11 +39,7 @@ const Table = memo(
 		}, [Component, borderlessRow, className, compact, hoverable]);
 
 		return (
-			<div
-				className={classNames(
-					overflow && "overflow-x-auto h-[75vh] mt-5"
-				)}
-			>
+			<div className={classNames(overflow && "overflow-auto h-[74vh]")}>
 				<Component className={tableClass} {...rest} ref={ref}>
 					{children}
 				</Component>

@@ -1,4 +1,4 @@
-import { memo, forwardRef } from "react";
+import { memo, forwardRef, useMemo } from "react";
 import classNames from "classnames";
 import type { ComponentPropsWithRef, ElementType } from "react";
 
@@ -15,10 +15,9 @@ const TBody = memo(
 			...rest
 		} = props;
 
-		const tBodyClass = classNames(
-			Component !== "tbody" && "tbody",
-			className
-		);
+		const tBodyClass = useMemo(() => {
+			return classNames(Component !== "tbody" && "tbody", className);
+		}, [Component, className]);
 
 		return (
 			<Component className={tBodyClass} {...rest} ref={ref}>
