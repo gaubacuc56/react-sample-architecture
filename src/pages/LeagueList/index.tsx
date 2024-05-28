@@ -578,7 +578,7 @@ export default function LeagueList() {
 
 	return (
 		<div>
-			<PagePortal>
+			<PagePortal container="page-header">
 				<div className="flex items-center gap-3">
 					<DebounceInput
 						value=""
