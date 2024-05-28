@@ -1,11 +1,20 @@
-import { Portal } from "react-portal";
+import { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import { CommonProps } from "@app-core/@types/common";
 
-export const PagePortal = (props: CommonProps) => {
-    const { children } = props;
-    return (
-        <Portal node={document && document.getElementById("page-header")}>
-            {children}
-        </Portal>
-    );
+interface IPagePortal extends CommonProps {
+	container: string;
+}
+
+export const PagePortal = (props: IPagePortal) => {
+	const { children, container } = props;
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	return mounted
+		? ReactDOM.createPortal(children, document.getElementById(container)!)
+		: null;
 };
