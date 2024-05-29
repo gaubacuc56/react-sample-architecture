@@ -1,4 +1,4 @@
-import { forwardRef, Ref, ForwardedRef } from "react";
+import { forwardRef, Ref, ForwardedRef, useMemo } from "react";
 import classNames from "classnames";
 import ReactSelect, {
 	ControlProps,
@@ -24,6 +24,11 @@ import Spinner from "../Spinner";
 
 // import { useForm } from "../Form/context";
 // import { useInputGroup } from "../InputGroup/context";
+
+export interface ISelectOption {
+	label: string;
+	value: string;
+}
 
 interface DefaultOptionProps {
 	innerProps: JSX.IntrinsicElements["div"];
@@ -171,7 +176,9 @@ function _Select<
 		return "none";
 	};
 
-	const selectClass = classNames("select", `select-${selectSize}`, className);
+	const selectClass = useMemo(() => {
+		return classNames("select", `select-${selectSize}`, className);
+	}, [className, selectSize]);
 
 	return (
 		<Component<Option, IsMulti, Group>

@@ -1,0 +1,13 @@
+@keyframes spin-360 {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* Apply the animation to the div */
+.spin-360 {
+	animation: spin-360 1.5s linear infinite;
+}
