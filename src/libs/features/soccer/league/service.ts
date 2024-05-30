@@ -1,6 +1,6 @@
 import { HttpProtocol, HttpResponse } from "@app-core/@types/http";
 import { LiveScoreService } from "@app-core/http-gateway";
-import { ISearchLeagueResponse } from "@libs/dtos/response/league.response";
+import { ISearchLeagueResponse } from "@libs/dtos/response/soccer";
 
 const liveScoreService = LiveScoreService.injectEndpoints({
 	endpoints: (builder) => ({
