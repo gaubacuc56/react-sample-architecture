@@ -10,7 +10,7 @@ import classNames from "classnames";
 import cloneDeep from "lodash/cloneDeep";
 import remove from "lodash/remove";
 
-import shallowEqual from "@libs/utils/helper/shallowEqual";
+import { shallowEqual } from "@libs/utils/helper/common";
 import type { CommonProps } from "@app-core/@types/common";
 
 import {

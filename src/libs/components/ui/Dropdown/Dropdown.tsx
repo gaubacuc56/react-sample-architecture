@@ -3,9 +3,9 @@ import { forwardRef, useRef, useCallback, SyntheticEvent, CSSProperties } from '
 import type { CommonProps } from '@app-core/@types/common'
 import type { DropdownPlacement } from '@app-core/@types/placement'
 
-import chainedFunction from '@libs/utils//helper/chainedFunction'
+import { chainedFunction } from '@libs/utils//helper/common'
 import useRootClose from '@libs/hooks/useRootClose'
-import arrayIndexOf from '@libs/utils//helper/arrayIndexOf'
+import {arrayIndexOf} from '@libs/utils//helper/common'
 import { PLACEMENT } from '@constant/theme.constant'
 
 import DropdownMenu from './DropdownMenu'

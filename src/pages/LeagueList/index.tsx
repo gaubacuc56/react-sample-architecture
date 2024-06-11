@@ -10,8 +10,7 @@ import Tooltip from "@libs/components/ui/Tooltip";
 import Avatar from "@libs/components/ui/Avatar";
 import { ILeague } from "@libs/features/soccer/league/interface";
 import { useGetAllLeaguesQuery } from "@libs/features/services";
-import { removeAttribute } from "@libs/utils/helper/removeAttribute";
-import { toQueryString } from "@libs/utils/helper/toQueryString";
+import { toQueryString , removeAttribute} from "@libs/utils/helper/common";
 import { ISearchLeagueRequest } from "@libs/dtos/request/soccer";
 
 export default function LeagueList() {
