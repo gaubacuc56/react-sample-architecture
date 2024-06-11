@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import uniqueId from 'lodash/uniqueId'
-import createUID from '../utils/helper/createUid'
+import { createUID } from '../utils/helper/common'
 
 export default function useUniqueId(prefix = '', len = 10) {
     const idRef = useRef<string>()

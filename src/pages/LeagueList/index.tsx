@@ -2,13 +2,13 @@ import { PagePortal } from "@libs/components/template/PageHeaderPortal";
 import { useGetAllLeaguesQuery } from "@libs/features/services";
 import { useEffect, useMemo, useState } from "react";
 import { ISearchLeagueRequest } from "@libs/dtos/request/leauge.request";
-import { toQueryString } from "@libs/utils/helper/toQueryString";
+import { toQueryString } from "@libs/utils/helper/common";
 import Select from "@libs/components/ui/Select";
 import DataTable from "@libs/components/shared/DataTable";
 import { ILeague } from "@libs/features/leagues/interface";
 import { DebounceInput } from "@libs/components/shared/DebounceInput";
 import { FiSearch } from "react-icons/fi";
-import { removeAttribute } from "@libs/utils/helper/removeAttribute";
+import { removeAttribute } from "@libs/utils/helper/common";
 
 const leagueTypes = [
 	{ label: "Cup", value: "cup" },

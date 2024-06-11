@@ -20,7 +20,7 @@ import { DROPDOWN_ITEM_TYPE } from '@constant/theme.constant'
 import useUncertainRef from '@libs/hooks/useUncertainRef'
 import useUniqueId from '@libs/hooks/useUniqueId'
 import { useThemeConfig } from '@libs/hooks/useThemeConfig'
-import chainedFunction from '@libs/utils//helper/chainedFunction'
+import { chainedFunction } from '@libs/utils//helper/common'
 
 import DropdownContext from './context/dropdownContext'
 import MenuContext from './context/menuContext'
