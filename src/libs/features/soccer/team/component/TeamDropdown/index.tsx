@@ -5,7 +5,7 @@ import Select from "@libs/components/ui/Select";
 import { useGetAllTeamsQuery } from "../../service";
 import { ITeamOption } from "../../interface";
 import { ISearchTeamRequest } from "@libs/dtos/request/soccer";
-import { toQueryString } from "@libs/utils/helper/toQueryString";
+import { toQueryString } from "@libs/utils/helper/common";
 
 const { Control } = components;
 
