@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { Link } from 'react-router-dom'
 import type { CommonProps } from '@app-core/@types/common'
 import type { ComponentPropsWithoutRef } from 'react'
-import { useThemeConfig } from '@libs/hooks/useThemeConfig'
+import { useTheme } from '@libs/hooks/useTheme'
 
 interface ActionLink extends CommonProps, ComponentPropsWithoutRef<'a'> {
     themeColor?: boolean
@@ -22,7 +22,7 @@ const ActionLink = (props: ActionLink) => {
         ...rest
     } = props
 
-    const { themeColor: defaultThemeColor, primaryColorLevel } = useThemeConfig()
+    const { themeColor: defaultThemeColor, primaryColorLevel } = useTheme()
 
     const classNameProps = {
         className: classNames(

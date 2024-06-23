@@ -14,7 +14,7 @@ import { ColorLevel, Shape, Size } from "@app-core/@types/theme";
 
 import { CONTROL_SIZES, SIZES } from "@constant/theme.constant";
 
-import { useThemeConfig } from "@libs/hooks/useThemeConfig";
+import { useTheme } from "@libs/hooks/useTheme";
 import { useColorLevel } from "@libs/hooks/useColorLevel";
 
 import Spinner from "../Spinner";
@@ -60,7 +60,7 @@ const Button = memo(
       loadingReplaceContent = true,
       ...rest
     } = props;
-    const { themeColor, primaryColorLevel } = useThemeConfig();
+    const { themeColor, primaryColorLevel } = useTheme();
 
     const defaultClass = "button";
     const sizeIconClass = "inline-flex items-center justify-center";

@@ -1,172 +1,172 @@
 import {
-	forwardRef,
-	useContext,
-	useCallback,
-	useState,
-	ChangeEvent,
+    forwardRef,
+    useContext,
+    useCallback,
+    useState,
+    ChangeEvent,
 } from "react";
 import classNames from "classnames";
-import { useThemeConfig } from "@libs/hooks/useThemeConfig";
+import { useTheme } from "@libs/hooks/useTheme";
 import type { CommonProps } from "@app-core/@types/common";
 import type { CheckboxValue } from "./context";
 import CheckboxGroupContext from "./context";
 
 export interface CheckboxProps extends CommonProps {
-	checked?: boolean;
-	color?: string;
-	defaultChecked?: boolean;
-	disabled?: boolean;
-	labelRef?: string;
-	name?: string;
-	onChange?: (values: boolean, e: ChangeEvent<HTMLInputElement>) => void;
-	readOnly?: boolean;
-	value?: CheckboxValue;
-	// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-	field?: any;
+    checked?: boolean;
+    color?: string;
+    defaultChecked?: boolean;
+    disabled?: boolean;
+    labelRef?: string;
+    name?: string;
+    onChange?: (values: boolean, e: ChangeEvent<HTMLInputElement>) => void;
+    readOnly?: boolean;
+    value?: CheckboxValue;
+    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+    field?: any;
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
-	const {
-		name: nameContext,
-		value: groupValue,
-		onChange: onGroupChange,
-		color: colorContext,
-	} = useContext(CheckboxGroupContext);
+    const {
+        name: nameContext,
+        value: groupValue,
+        onChange: onGroupChange,
+        color: colorContext,
+    } = useContext(CheckboxGroupContext);
 
-	const {
-		color,
-		className,
-		onChange,
-		children,
-		disabled,
-		readOnly,
-		name = nameContext,
-		defaultChecked,
-		value,
-		checked: controlledChecked,
-		labelRef,
-		field,
-		...rest
-	} = props;
+    const {
+        color,
+        className,
+        onChange,
+        children,
+        disabled,
+        readOnly,
+        name = nameContext,
+        defaultChecked,
+        value,
+        checked: controlledChecked,
+        labelRef,
+        field,
+        ...rest
+    } = props;
 
-	const { themeColor, primaryColorLevel } = useThemeConfig();
+    const { themeColor, primaryColorLevel } = useTheme();
 
-	const isChecked = useCallback(() => {
-		if (typeof groupValue !== "undefined" && typeof value !== "undefined") {
-			return groupValue.some((i) => i === value);
-		}
-		return controlledChecked || defaultChecked;
-	}, [controlledChecked, groupValue, value, defaultChecked]);
+    const isChecked = useCallback(() => {
+        if (typeof groupValue !== "undefined" && typeof value !== "undefined") {
+            return groupValue.some((i) => i === value);
+        }
+        return controlledChecked || defaultChecked;
+    }, [controlledChecked, groupValue, value, defaultChecked]);
 
-	const [checkboxChecked, setCheckboxChecked] = useState(isChecked());
+    const [checkboxChecked, setCheckboxChecked] = useState(isChecked());
 
-	const getControlProps = () => {
-		let checkedValue = checkboxChecked;
+    const getControlProps = () => {
+        let checkedValue = checkboxChecked;
 
-		let groupChecked = { checked: checkedValue };
-		let singleChecked: {
-			value: boolean;
-			defaultChecked?: boolean;
-			checked?: boolean;
-		} = {
-			value: checkedValue as boolean,
-		};
+        let groupChecked = { checked: checkedValue };
+        let singleChecked: {
+            value: boolean;
+            defaultChecked?: boolean;
+            checked?: boolean;
+        } = {
+            value: checkedValue as boolean,
+        };
 
-		if (typeof controlledChecked !== "undefined") {
-			singleChecked.checked = controlledChecked;
-		}
+        if (typeof controlledChecked !== "undefined") {
+            singleChecked.checked = controlledChecked;
+        }
 
-		if (field) {
-			checkedValue =
-				typeof field.value === "boolean" ? field.value : defaultChecked;
-			singleChecked = {
-				value: checkedValue as boolean,
-				checked: checkedValue,
-			};
-		}
+        if (field) {
+            checkedValue =
+                typeof field.value === "boolean" ? field.value : defaultChecked;
+            singleChecked = {
+                value: checkedValue as boolean,
+                checked: checkedValue,
+            };
+        }
 
-		if (typeof groupValue !== "undefined") {
-			groupChecked = { checked: groupValue.includes(value as never) };
-		}
+        if (typeof groupValue !== "undefined") {
+            groupChecked = { checked: groupValue.includes(value as never) };
+        }
 
-		if (defaultChecked) {
-			singleChecked.defaultChecked = defaultChecked;
-		}
-		return typeof groupValue !== "undefined" ? groupChecked : singleChecked;
-	};
+        if (defaultChecked) {
+            singleChecked.defaultChecked = defaultChecked;
+        }
+        return typeof groupValue !== "undefined" ? groupChecked : singleChecked;
+    };
 
-	const controlProps = getControlProps();
+    const controlProps = getControlProps();
 
-	const onCheckboxChange = useCallback(
-		(e: ChangeEvent<HTMLInputElement>) => {
-			let nextChecked = !checkboxChecked;
+    const onCheckboxChange = useCallback(
+        (e: ChangeEvent<HTMLInputElement>) => {
+            let nextChecked = !checkboxChecked;
 
-			if (typeof groupValue !== "undefined") {
-				nextChecked = !groupValue.includes(value as never);
-			}
+            if (typeof groupValue !== "undefined") {
+                nextChecked = !groupValue.includes(value as never);
+            }
 
-			if (disabled || readOnly) {
-				return;
-			}
+            if (disabled || readOnly) {
+                return;
+            }
 
-			setCheckboxChecked(nextChecked);
-			onChange?.(nextChecked, e);
-			onGroupChange?.(value as CheckboxValue, nextChecked, e);
-		},
-		[
-			checkboxChecked,
-			disabled,
-			readOnly,
-			setCheckboxChecked,
-			onChange,
-			value,
-			onGroupChange,
-			groupValue,
-		]
-	);
+            setCheckboxChecked(nextChecked);
+            onChange?.(nextChecked, e);
+            onGroupChange?.(value as CheckboxValue, nextChecked, e);
+        },
+        [
+            checkboxChecked,
+            disabled,
+            readOnly,
+            setCheckboxChecked,
+            onChange,
+            value,
+            onGroupChange,
+            groupValue,
+        ]
+    );
 
-	const checkboxColor =
-		color || colorContext || `${themeColor}-${primaryColorLevel}`;
+    const checkboxColor =
+        color || colorContext || `${themeColor}-${primaryColorLevel}`;
 
-	const checkboxDefaultClass = `checkbox text-${checkboxColor}`;
-	const checkboxColorClass = disabled && "disabled";
-	const labelDefaultClass = `checkbox-label flex items-center gap-2`;
-	const labelDisabledClass = disabled && "disabled";
+    const checkboxDefaultClass = `checkbox text-${checkboxColor}`;
+    const checkboxColorClass = disabled && "disabled";
+    const labelDefaultClass = `checkbox-label flex items-center gap-2`;
+    const labelDisabledClass = disabled && "disabled";
 
-	const checkBoxClass = classNames(checkboxDefaultClass, checkboxColorClass);
+    const checkBoxClass = classNames(checkboxDefaultClass, checkboxColorClass);
 
-	const labelClass = classNames(
-		labelDefaultClass,
-		labelDisabledClass,
-		className
-	);
+    const labelClass = classNames(
+        labelDefaultClass,
+        labelDisabledClass,
+        className
+    );
 
-	return (
-		<label ref={labelRef} className={labelClass}>
-			<input
-				ref={ref}
-				className={checkBoxClass}
-				type="checkbox"
-				disabled={disabled}
-				readOnly={readOnly}
-				name={name}
-				onChange={onCheckboxChange}
-				{...controlProps}
-				{...field}
-				{...rest}
-			/>
-			{children ? (
-				<span
-					className={classNames(
-						"ltr:ml-2 rtl:mr-2",
-						disabled ? "opacity-50" : ""
-					)}
-				>
-					{children}
-				</span>
-			) : null}
-		</label>
-	);
+    return (
+        <label ref={labelRef} className={labelClass}>
+            <input
+                ref={ref}
+                className={checkBoxClass}
+                type="checkbox"
+                disabled={disabled}
+                readOnly={readOnly}
+                name={name}
+                onChange={onCheckboxChange}
+                {...controlProps}
+                {...field}
+                {...rest}
+            />
+            {children ? (
+                <span
+                    className={classNames(
+                        "ltr:ml-2 rtl:mr-2",
+                        disabled ? "opacity-50" : ""
+                    )}
+                >
+                    {children}
+                </span>
+            ) : null}
+        </label>
+    );
 });
 
 Checkbox.displayName = "Checkbox";

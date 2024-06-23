@@ -29,7 +29,7 @@ const MenuCollapse = (props: MenuCollapseProps) => {
     const { variant, sideCollapsed, defaultExpandedKeys } =
         useContext(MenuContext);
 
-    // const { direction } = useThemeConfig()
+    // const { direction } = useTheme()
 
     useEffect(() => {
         if ((defaultExpandedKeys as string[]).includes(eventKey as string)) {

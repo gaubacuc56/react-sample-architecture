@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import classNames from "classnames";
 import Line from "./Line";
 import Circle from "./Circle";
-import { useThemeConfig } from "@libs/hooks/useThemeConfig";
+import { useTheme } from "@libs/hooks/useTheme";
 import { SIZES, DIRECTIONS } from "@constant/theme.constant";
 import type { CommonProps } from "@app-core/@types/common";
 import type { StrokeLinecap, GapPosition } from "./Circle";
@@ -39,7 +39,7 @@ const Progress = forwardRef<HTMLDivElement, ProgressProps>((props, ref) => {
         variant = "line",
     } = props;
 
-    const { themeColor, primaryColorLevel } = useThemeConfig();
+    const { themeColor, primaryColorLevel } = useTheme();
 
     const renderProcessInfo = () => {
         if (!showInfo) {
