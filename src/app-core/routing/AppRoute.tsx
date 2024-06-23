@@ -2,7 +2,6 @@
 import { useEffect, useCallback } from "react";
 import type { ComponentType } from "react";
 import { useLocation } from "react-router-dom";
-import { useAppSelector } from "../redux-manager/method";
 import { useTheme } from "@libs/hooks/useTheme";
 import { LayoutType } from "../@types/theme";
 
