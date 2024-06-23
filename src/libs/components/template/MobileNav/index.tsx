@@ -12,7 +12,7 @@ import withHeaderItem, {
 } from "@libs/utils/hoc/withHeaderItem";
 import NavToggle from "@libs/components/shared/NavToggle";
 import useResponsive from "@libs/hooks/useResponsive";
-import { useThemeConfig } from "@libs/hooks/useThemeConfig";
+import { useTheme } from "@libs/hooks/useTheme";
 import { AppCommonSelectors } from "@libs/features/store";
 
 const SideNavContent = lazy(
@@ -39,7 +39,7 @@ const MobileNav = () => {
 	};
 
 	const { themeColor, primaryColorLevel, mode, direction, layout, navMode } =
-		useThemeConfig();
+		useTheme();
 	const sideNavCollapse = layout.sideNavCollapse;
 
 	const currentRouteKey = useAppSelector(AppCommonSelectors.currentRouteKey);

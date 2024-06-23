@@ -2,49 +2,45 @@
 import { useEffect, useCallback } from "react";
 import type { ComponentType } from "react";
 import { useLocation } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../redux-manager/method";
-import { ThemeActions } from "@libs/features/store";
+import { useAppSelector } from "../redux-manager/method";
+import { useTheme } from "@libs/hooks/useTheme";
 import { LayoutType } from "../@types/theme";
 
 export type AppRouteProps<T> = {
-	component: ComponentType<T>;
-	routeKey: string;
-	layout?: LayoutType;
+    component: ComponentType<T>;
+    routeKey: string;
+    layout?: LayoutType;
 };
 
 const AppRoute = <T extends Record<string, unknown>>({
-	component: Component,
-	routeKey,
-	...props
+    component: Component,
+    routeKey,
+    ...props
 }: AppRouteProps<T>) => {
-	const location = useLocation();
+    const { ThemeActions, layout } = useTheme();
 
-	const dispatch = useAppDispatch();
+    const location = useLocation();
 
-	const layoutType = useAppSelector(
-		(state) => state.themeReducer.layout
-	).type;
-	const previousLayout = useAppSelector(
-		(state) => state.themeReducer.layout
-	).previousType;
+    const layoutType = layout.type;
+    const previousLayout = layout.previousType;
 
-	const handleLayoutChange = useCallback(() => {
-		if (props.layout && props.layout !== layoutType) {
-			dispatch(ThemeActions.setPreviousLayout(layoutType));
-			dispatch(ThemeActions.setLayout(props.layout));
-		}
+    const handleLayoutChange = useCallback(() => {
+        if (props.layout && props.layout !== layoutType) {
+            ThemeActions.setPreviousLayout(layoutType);
+            ThemeActions.setLayout(props.layout);
+        }
 
-		if (!props.layout && previousLayout && layoutType !== previousLayout) {
-			dispatch(ThemeActions.setLayout(previousLayout));
-			dispatch(ThemeActions.setPreviousLayout(""));
-		}
-	}, [dispatch, layoutType, previousLayout, props.layout]);
+        if (!props.layout && previousLayout && layoutType !== previousLayout) {
+            ThemeActions.setLayout(previousLayout);
+            // ThemeActions.setPreviousLayout("")
+        }
+    }, [layoutType, previousLayout, props.layout]);
 
-	useEffect(() => {
-		handleLayoutChange();
-	}, [location, handleLayoutChange]);
+    useEffect(() => {
+        handleLayoutChange();
+    }, [location, handleLayoutChange]);
 
-	return <Component {...(props as T)} />;
+    return <Component {...(props as T)} />;
 };
 
 export default AppRoute;

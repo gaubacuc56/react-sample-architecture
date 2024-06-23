@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 import type { CommonProps } from "@app-core/@types/common";
 
-import { useThemeConfig } from "@libs/hooks/useThemeConfig";
+import { useTheme } from "@libs/hooks/useTheme";
 
 import Spinner from "../Spinner";
 
@@ -41,7 +41,7 @@ const Switcher = forwardRef<HTMLInputElement, SwitcherProps>((props, ref) => {
         ...rest
     } = props;
 
-    const { themeColor, primaryColorLevel } = useThemeConfig();
+    const { themeColor, primaryColorLevel } = useTheme();
 
     const [switcherChecked, setSwitcherChecked] = useState(
         defaultChecked || checked
