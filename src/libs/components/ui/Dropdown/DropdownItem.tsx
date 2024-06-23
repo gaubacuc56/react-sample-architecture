@@ -10,44 +10,44 @@ import {
     RefObject,
     ElementType,
     ReactElement,
-} from 'react'
-import isNil from 'lodash/isNil'
-import { HiChevronRight, HiChevronLeft } from 'react-icons/hi'
+} from "react";
+import isNil from "lodash/isNil";
+import { HiChevronRight, HiChevronLeft } from "react-icons/hi";
 
-import type { CommonProps } from '@app-core/@types/common'
-import { DROPDOWN_ITEM_TYPE } from '@constant/theme.constant'
+import type { CommonProps } from "@app-core/@types/common";
+import { DROPDOWN_ITEM_TYPE } from "@constant/theme.constant";
 
-import useUncertainRef from '@libs/hooks/useUncertainRef'
-import useUniqueId from '@libs/hooks/useUniqueId'
-import { useThemeConfig } from '@libs/hooks/useThemeConfig'
-import { chainedFunction } from '@libs/utils//helper/common'
+import useUncertainRef from "@libs/hooks/useUncertainRef";
+import useUniqueId from "@libs/hooks/useUniqueId";
+import { useTheme } from "@libs/hooks/useTheme";
+import { chainedFunction } from "@libs/utils//helper/common";
 
-import DropdownContext from './context/dropdownContext'
-import MenuContext from './context/menuContext'
+import DropdownContext from "./context/dropdownContext";
+import MenuContext from "./context/menuContext";
 import DropdownMenuContext, {
     useDropdownMenuContext,
     DropdownMenuContextProvider,
-} from './context/dropdownMenuContext'
-import classNames from 'classnames'
-import MenuItem from '../MenuItem'
+} from "./context/dropdownMenuContext";
+import classNames from "classnames";
+import MenuItem from "../MenuItem";
 
 export interface DropdownItemProps extends CommonProps {
-    asElement?: ElementType
-    active?: boolean
-    disabled?: boolean
-    submenu?: ReactElement
-    eventKey?: string
-    onClick?: () => void
-    onSelect?: (eventKey: string, e: SyntheticEvent) => void
-    variant?: 'default' | 'header' | 'divider' | 'custom'
+    asElement?: ElementType;
+    active?: boolean;
+    disabled?: boolean;
+    submenu?: ReactElement;
+    eventKey?: string;
+    onClick?: () => void;
+    onSelect?: (eventKey: string, e: SyntheticEvent) => void;
+    variant?: "default" | "header" | "divider" | "custom";
 }
 
-const { DEFAULT, DIVIDER, HEADER, CUSTOM } = DROPDOWN_ITEM_TYPE
+const { DEFAULT, DIVIDER, HEADER, CUSTOM } = DROPDOWN_ITEM_TYPE;
 
 const DropdownItem = forwardRef<HTMLElement, DropdownItemProps>(
     (props, ref) => {
         const {
-            asElement: Component = 'li',
+            asElement: Component = "li",
             children,
             active: activeProp,
             disabled,
@@ -59,94 +59,94 @@ const DropdownItem = forwardRef<HTMLElement, DropdownItemProps>(
             onSelect,
             variant = DEFAULT,
             ...rest
-        } = props
+        } = props;
 
-        const { mode, direction } = useThemeConfig()
+        const { mode, direction } = useTheme();
 
         const menuitemRef = useUncertainRef<HTMLElement>(
             ref
-        ) as RefObject<HTMLElement>
-        const menuitemId = useUniqueId('menu-item-')
-        const submenuRef = useRef(null)
+        ) as RefObject<HTMLElement>;
+        const menuitemId = useUniqueId("menu-item-");
+        const submenuRef = useRef(null);
 
-        const dropdown = useContext(DropdownContext)
-        const menu = useContext(MenuContext)
-        const menuControl = useContext(DropdownMenuContext)
-        const submenuControl = useDropdownMenuContext(submenuRef)
+        const dropdown = useContext(DropdownContext);
+        const menu = useContext(MenuContext);
+        const menuControl = useContext(DropdownMenuContext);
+        const submenuControl = useDropdownMenuContext(submenuRef);
 
-        const open = submenuControl.open
+        const open = submenuControl.open;
 
         const active =
             activeProp ||
             (!isNil(menu?.activeKey) && menu?.activeKey === eventKey) ||
-            (!isNil(dropdown?.activeKey) && dropdown?.activeKey === eventKey)
+            (!isNil(dropdown?.activeKey) && dropdown?.activeKey === eventKey);
 
         const openSubmenuIfExists = useCallback(() => {
             if (!submenu) {
-                return
+                return;
             }
-            submenuControl.openMenu()
-            submenuControl.focusItemAt(0)
-        }, [submenu, submenuControl])
+            submenuControl.openMenu();
+            submenuControl.focusItemAt(0);
+        }, [submenu, submenuControl]);
 
         const activate = useCallback(
             (e: SyntheticEvent) => {
-                onSelect?.(eventKey as string, e)
-                menu?.onSelect?.(eventKey as string, e)
+                onSelect?.(eventKey as string, e);
+                menu?.onSelect?.(eventKey as string, e);
             },
             [eventKey, onSelect, menu]
-        )
+        );
 
         const handleClick = useCallback(
             (e: SyntheticEvent) => {
                 if (disabled) {
-                    return
+                    return;
                 }
 
                 if (submenu) {
-                    openSubmenuIfExists()
+                    openSubmenuIfExists();
                 } else {
-                    activate(e)
+                    activate(e);
                 }
             },
             [disabled, submenu, openSubmenuIfExists, activate]
-        )
+        );
 
         const handleMouseOver = useCallback(() => {
             if (submenu) {
-                submenuControl.openMenu()
+                submenuControl.openMenu();
             }
-        }, [submenu, submenuControl])
+        }, [submenu, submenuControl]);
 
         const handleMouseOut = useCallback(() => {
             if (submenu) {
-                submenuControl.closeMenu()
+                submenuControl.closeMenu();
             }
-        }, [submenu, submenuControl])
+        }, [submenu, submenuControl]);
 
         const menuitemEventHandlers: {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            onClick: any
-            onMouseOver?: () => void
-            onMouseOut?: () => void
+            onClick: any;
+            onMouseOver?: () => void;
+            onMouseOut?: () => void;
         } = {
             onClick: chainedFunction(handleClick, onClick),
-        }
+        };
 
-        const { registerItem, unregisterItem } = menuControl ?? {}
+        const { registerItem, unregisterItem } = menuControl ?? {};
 
         if (submenu) {
-            menuitemEventHandlers.onMouseOver = handleMouseOver
-            menuitemEventHandlers.onMouseOut = handleMouseOut
+            menuitemEventHandlers.onMouseOver = handleMouseOver;
+            menuitemEventHandlers.onMouseOut = handleMouseOut;
         }
 
         useEffect(() => {
             if (variant !== DIVIDER && variant !== HEADER) {
-                registerItem?.(menuitemRef.current, { disabled })
+                registerItem?.(menuitemRef.current, { disabled });
             }
             return () => {
-                unregisterItem?.(menuitemId)
-            }
+                unregisterItem?.(menuitemId);
+            };
         }, [
             registerItem,
             unregisterItem,
@@ -154,7 +154,7 @@ const DropdownItem = forwardRef<HTMLElement, DropdownItemProps>(
             menuitemId,
             disabled,
             variant,
-        ])
+        ]);
 
         if (variant === DIVIDER || variant === HEADER || variant === CUSTOM) {
             return (
@@ -168,19 +168,19 @@ const DropdownItem = forwardRef<HTMLElement, DropdownItemProps>(
                 >
                     {(variant === HEADER || variant === CUSTOM) && children}
                 </Component>
-            )
+            );
         }
 
         function renderChildren() {
             if (!isValidElement(children)) {
-                return children
+                return children;
             }
-            return cloneElement(children)
+            return cloneElement(children);
         }
 
         function renderSubmenu() {
             if (!submenu) {
-                return null
+                return null;
             }
 
             return (
@@ -190,7 +190,7 @@ const DropdownItem = forwardRef<HTMLElement, DropdownItemProps>(
                         hidden: !open,
                     })}
                 </DropdownMenuContextProvider>
-            )
+            );
         }
 
         if (submenu) {
@@ -209,12 +209,12 @@ const DropdownItem = forwardRef<HTMLElement, DropdownItemProps>(
                         eventKey={eventKey}
                         variant={mode}
                         className={classNames(
-                            'dropdown-submenu-item',
+                            "dropdown-submenu-item",
                             className
                         )}
                     >
                         <span>{children}</span>
-                        {direction === 'rtl' ? (
+                        {direction === "rtl" ? (
                             <HiChevronLeft />
                         ) : (
                             <HiChevronRight />
@@ -222,7 +222,7 @@ const DropdownItem = forwardRef<HTMLElement, DropdownItemProps>(
                     </MenuItem>
                     {renderSubmenu()}
                 </li>
-            )
+            );
         }
 
         return (
@@ -241,8 +241,8 @@ const DropdownItem = forwardRef<HTMLElement, DropdownItemProps>(
                 {renderChildren()}
                 {renderSubmenu()}
             </MenuItem>
-        )
+        );
     }
-)
+);
 
-export default DropdownItem
+export default DropdownItem;

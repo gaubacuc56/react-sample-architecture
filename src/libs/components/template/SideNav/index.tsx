@@ -7,7 +7,7 @@ import navigationConfig from "@config/navigation.config";
 import SideNavContent from "@libs/components/template/SideNav/SideNavContent";
 import useResponsive from "@libs//hooks/useResponsive";
 import { useAppSelector } from "@app-core/redux-manager/method";
-import { useThemeConfig } from "@libs/hooks/useThemeConfig";
+import { useTheme } from "@libs/hooks/useTheme";
 
 import appLogo from "@assets/img/logo.png";
 import { AppCommonSelectors } from "@libs/features/store";
@@ -24,7 +24,7 @@ const sideNavCollapseStyle = {
 
 const SideNav = () => {
 	const { themeColor, primaryColorLevel, direction, layout, navMode } =
-		useThemeConfig();
+		useTheme();
 
 	const sideNavCollapse = layout.sideNavCollapse;
 	const currentRouteKey = useAppSelector(AppCommonSelectors.currentRouteKey);

@@ -1,62 +1,55 @@
 import classNames from "classnames";
 import { HiOutlineCog } from "react-icons/hi";
-import { useAppDispatch, useAppSelector } from "@app-core/redux-manager/method";
 import type { CommonProps } from "@app-core/@types/common";
 
 import Drawer from "@libs/components/ui/Drawer";
 import withHeaderItem from "@libs/utils/hoc/withHeaderItem";
-import { ThemeActions } from "@libs/features/store";
 
 import ThemeConfigurator, {
-	ThemeConfiguratorProps,
+    ThemeConfiguratorProps,
 } from "../ThemeConfigurator";
+import { useTheme } from "@libs/hooks/useTheme";
 
 type SidePanelProps = ThemeConfiguratorProps & CommonProps;
 
 const _SidePanel = (props: SidePanelProps) => {
-	const { className, ...rest } = props;
+    const { className, ...rest } = props;
 
-	const dispatch = useAppDispatch();
+    const { ThemeActions, panelExpand, direction } = useTheme();
 
-	const _panelExpand = useAppSelector(
-		(state) => state.themeReducer.panelExpand
-	);
+    const openPanel = () => {
+        ThemeActions.setPanelExpand(true);
+    };
 
-	const _direction = useAppSelector((state) => state.themeReducer.direction);
+    const closePanel = () => {
+        ThemeActions.setPanelExpand(false);
+        const bodyClassList = document.body.classList;
+        if (bodyClassList.contains("drawer-lock-scroll")) {
+            bodyClassList.remove("drawer-lock-scroll", "drawer-open");
+        }
+    };
 
-	const openPanel = () => {
-		dispatch(ThemeActions.setPanelExpand(true));
-	};
-
-	const closePanel = () => {
-		dispatch(ThemeActions.setPanelExpand(false));
-		const bodyClassList = document.body.classList;
-		if (bodyClassList.contains("drawer-lock-scroll")) {
-			bodyClassList.remove("drawer-lock-scroll", "drawer-open");
-		}
-	};
-
-	return (
-		<>
-			<div
-				className={classNames(className)}
-				onClick={openPanel}
-				{...rest}
-			>
-				<HiOutlineCog />
-			</div>
-			<Drawer
-				title="Theme Config"
-				isOpen={_panelExpand}
-				placement={_direction === "rtl" ? "left" : "right"}
-				width={375}
-				onClose={closePanel}
-				onRequestClose={closePanel}
-			>
-				<ThemeConfigurator /* callBackClose={closePanel} */ />
-			</Drawer>
-		</>
-	);
+    return (
+        <>
+            <div
+                className={classNames(className)}
+                onClick={openPanel}
+                {...rest}
+            >
+                <HiOutlineCog />
+            </div>
+            <Drawer
+                title="Theme Config"
+                isOpen={panelExpand}
+                placement={direction === "rtl" ? "left" : "right"}
+                width={375}
+                onClose={closePanel}
+                onRequestClose={closePanel}
+            >
+                <ThemeConfigurator /* callBackClose={closePanel} */ />
+            </Drawer>
+        </>
+    );
 };
 
 const SidePanel = withHeaderItem(_SidePanel);
