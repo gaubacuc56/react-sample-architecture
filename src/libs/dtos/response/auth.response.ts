@@ -1,5 +1,6 @@
 export interface ILoginResponse {
   token: string
+  refreshToken: string;
 }
 export interface IGetUserResponse {
   id: number,

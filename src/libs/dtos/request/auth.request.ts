@@ -1,5 +1,12 @@
 export interface ILoginRequest {
-    username: string;
+    email: string;
     password: string;
-    expiresInMins?: number;
+}
+export interface IForgetPasswordRequest {
+    email: string;
+}
+
+export interface IResetPasswordRequest {
+    resetKey: string;
+    newPassword: string;
 }

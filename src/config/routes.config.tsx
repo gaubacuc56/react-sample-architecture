@@ -45,6 +45,18 @@ export const routes: AppRoutesConfig[] = [
                 component: lazy(() => import("@pages/SignIn")),
                 authority: [],
             },
+            {
+                key: "forget-password",
+                path: "forget-password",
+                component: lazy(() => import("@pages/ForgetPassword")),
+                authority: [],
+            },
+            {
+                key: "reset-password",
+                path: "reset-password",
+                component: lazy(() => import("@pages/ResetPassword")),
+                authority: [],
+            },
         ],
     },
     {

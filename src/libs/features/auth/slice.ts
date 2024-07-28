@@ -4,12 +4,14 @@ import { ISavedAccount } from "./interface";
 // define state
 export interface IAuthState {
 	token: string;
+	refreshToken: string;
 	authority: string[];
 	savedAccount?: ISavedAccount;
 }
 
 const initialState: IAuthState = {
 	token: "",
+	refreshToken: "",
 	authority: [],
 	savedAccount: undefined,
 };
@@ -19,11 +21,13 @@ export const authStore = createSlice({
 	name: "auth",
 	initialState,
 	reducers: {
-		setAppToken: (state, action: PayloadAction<string>) => {
-			state.token = action.payload;
+		setAppToken: (state, action: PayloadAction<{token: string, refreshToken: string}>) => {
+			state.token = action.payload.token;
+			state.refreshToken = action.payload.refreshToken;
 		},
 		logout: (state) => {
 			state.token = "";
+			state.refreshToken = "";
 			state.authority = [];
 		},
 		setSavedAccount: (

@@ -4,7 +4,7 @@ export const appConfig = {
     // appDomain_dev: "/api",
     // apiDomain_production: "/api",
     // apiDomain_staging: "/api",
-    apiDomain_dev: "https://dummyjson.com/",
+    apiDomain_dev: "http://52.77.243.157:3000/api/",
     jwtSecret: "JWT_SECRET",
     authorizationHeader: "Bearer",
 };
