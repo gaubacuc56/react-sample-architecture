@@ -1,10 +1,5 @@
 export const appConfig = {
-    // appDomain_production: "/api",
-    // appDomain_staging: "/api",
-    // appDomain_dev: "/api",
-    // apiDomain_production: "/api",
-    // apiDomain_staging: "/api",
-    apiDomain_dev: "http://52.77.243.157:3000/api/",
-    jwtSecret: "JWT_SECRET",
-    authorizationHeader: "Bearer",
+  apiDomain_dev: import.meta.env.APP_API_DOMAIN,
+  jwtSecret: import.meta.env.APP_JWT_SECRET,
+  authorizationHeader: import.meta.env.APP_AUTHORIZATION_HEADER,
 };

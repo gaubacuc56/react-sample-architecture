@@ -29,3 +29,9 @@ build/*
 !build/build.xml
 **/.build
 **/build
+
+.env
+.env.*
+!.env.sample
+
+nginx.*

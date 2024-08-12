@@ -1,0 +1,10 @@
+version: "1"
+
+services:
+  app:
+    image: fe-dev
+    build:
+      args:
+        MODE: development
+    environment:
+      - NODE_ENV=development

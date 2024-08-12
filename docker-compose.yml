@@ -1,0 +1,13 @@
+version: "1"
+
+services:
+  app:
+    container_name: fe
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3000:80"

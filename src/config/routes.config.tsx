@@ -25,14 +25,7 @@ export const routes: AppRoutesConfig[] = [
                 component: lazy(() => import("@pages/Dashboard")),
                 authority: [],
                 crumb: "Dashboarddddd",
-            },
-            {
-                key: "league",
-                path: "league/league-list",
-                component: lazy(() => import("@pages/LeagueList")),
-                authority: [],
-                crumb: "User List",
-            },
+            }
         ],
     },
     {

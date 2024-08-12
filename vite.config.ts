@@ -2,6 +2,9 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import dynamicImport from "vite-plugin-dynamic-import";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -13,6 +16,12 @@ export default defineConfig({
 		}),
 		dynamicImport(),
 	],
+	envPrefix: "APP_",
+ 	server: {
+		port: 3000,
+		strictPort: true,
+    	host: true
+	},
 	assetsInclude: ["**/*.md"],
 	resolve: {
 		alias: {
@@ -25,8 +34,5 @@ export default defineConfig({
 			"@config": path.resolve(__dirname, "./src/config"),
 			"@": path.resolve(__dirname, "./src"),
 		},
-	},
-	build: {
-		outDir: "build",
 	},
 });

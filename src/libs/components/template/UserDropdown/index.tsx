@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "@app-core/redux-manager/method";
 import Avatar from "@libs/components/ui/Avatar";
 import Dropdown from "@libs/components/ui/Dropdown";
 import withHeaderItem from "@libs/utils/hoc/withHeaderItem";
-import { AuthActions } from "@libs/features/store";
+import { AuthActions, AuthSelectors } from "@libs/features/store";
 
 type DropdownList = {
 	label: string;
@@ -19,7 +19,7 @@ type DropdownList = {
 const dropdownItemList: DropdownList[] = [];
 
 const _UserDropdown = ({ className }: CommonProps) => {
-	const user = useAppSelector((state) => state.authReducer.savedAccount);
+	const user = useAppSelector(AuthSelectors.savedAccount);
 
 	const dispatch = useAppDispatch();
 
@@ -45,7 +45,7 @@ const _UserDropdown = ({ className }: CommonProps) => {
 						/>
 						<div className="hidden md:block">
 							<div className="text-xs capitalize">admin</div>
-							<div className="font-bold">{user?.username}</div>
+							<div className="font-bold">{user?.email}</div>
 						</div>
 					</div>
 				}
@@ -56,10 +56,10 @@ const _UserDropdown = ({ className }: CommonProps) => {
 						<Avatar shape="circle" icon={<HiOutlineUser />} />
 						<div>
 							<div className="font-bold text-gray-900 dark:text-gray-100">
-								{user?.username}
+								{user?.email}
 							</div>
 							<div className="text-xs">
-								{user?.username}@gmail.com
+								{user?.email}
 							</div>
 						</div>
 					</div>

@@ -1,0 +1,10 @@
+version: "1"
+
+services:
+  app:
+    image: fe-prod
+    build:
+      args:
+        MODE: production
+    environment:
+      - NODE_ENV=production
