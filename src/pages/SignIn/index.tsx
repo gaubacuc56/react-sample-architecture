@@ -57,9 +57,8 @@ export default function SignIn() {
 
     const handleFormSubmit = useCallback(
         async (data: ILoginRequest) => {
-            const response = CatchMutationData(await login(data));
-            if (response) {
-                dispatch(AuthActions.setAppToken(response));
+            const res = CatchMutationData(await login(data));
+            if (res) {
                 if (isRememberAccount) {
                     dispatch(
                         AuthActions.setSavedAccount({

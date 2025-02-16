@@ -74,29 +74,16 @@ export enum HttpProtocol {
  * HTTP response object
  * Will be modified base on each project needs
  */
-// export type HttpResponse<T = unknown> = {
-// 	data: T;
-// 	code: HttpStatus;
-// 	exception?: any;
-// 	message?: string;
-// 	currentPage?: number;
-// 	totalPages?: number;
-// 	totalCount?: number;
-// 	pageSize?: number;
-// 	hasPreviousPage?: boolean;
-// 	hasNextPage?: boolean;
-// };
-
 export type HttpResponse<T = unknown> = {
-	get: string;
-	parameter: Record<string, string> | [];
-	result: number;
-	paging: {
-		current: number;
-		total: number;
-	};
-	response: T;
-	errors: Record<string, string> | [];
+	data: T;
+	statusCode: HttpStatus;
+	message?: string;
+	pageSize?: number;
+	pageNumber?: number;
+	totalPages?: number;
+	totalCount?: number;
+	hasPreviousPage?: boolean;
+	hasNextPage?: boolean;
 };
 
 export type HttpError = {

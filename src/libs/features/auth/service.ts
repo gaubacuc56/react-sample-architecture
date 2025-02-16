@@ -1,4 +1,4 @@
-import { HttpProtocol } from "@app-core/@types/http";
+import { HttpProtocol, HttpResponse } from "@app-core/@types/http";
 import { AuthService } from "@app-core/http-gateway";
 import { TOKEN_LIFETIME } from "@constant/common.constant";
 import {
@@ -11,13 +11,13 @@ import {
     ILoginResponse,
 } from "@libs/dtos/response/auth.response";
 
-const authService = AuthService.injectEndpoints({
+export const authService = AuthService.injectEndpoints({
     endpoints: (builder) => ({
-        login: builder.mutation<ILoginResponse, ILoginRequest>({
+        login: builder.mutation<HttpResponse<ILoginResponse>, ILoginRequest>({
             query: (data: ILoginRequest) => ({
                 url: `auth/login`,
                 method: HttpProtocol.POST,
-                body: { ...data, expiresInMins: TOKEN_LIFETIME },
+                body: data,
             }),
         }),
         getUser: builder.query<IGetUserResponse, void>({
